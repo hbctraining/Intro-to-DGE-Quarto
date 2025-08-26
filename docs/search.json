@@ -1,0 +1,152 @@
+[
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html",
+    "href": "lessons/01a_RNAseq_processing_workflow.html",
+    "title": "From raw sequence reads to count matrix",
+    "section": "",
+    "text": "Approximate time: 40 minutes",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#learning-objectives",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#learning-objectives",
+    "title": "From raw sequence reads to count matrix",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nUnderstand the different steps of the RNA-seq workflow, from RNA extraction to assessing the expression levels of genes.",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#rna-extraction-and-library-preparation",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#rna-extraction-and-library-preparation",
+    "title": "From raw sequence reads to count matrix",
+    "section": "1. RNA extraction and library preparation",
+    "text": "1. RNA extraction and library preparation\nBefore RNA can be sequenced, it must first be extracted and separated from its cellular environment and prepared into a cDNA library. There are a number of steps involved which are outlined in the figure below, and in parallel there are various quality checks implemented to make sure we have good quality RNA to move forward with. We briefly describe some of these steps below.\na. Enriching for RNA. Once the sample has been treated with DNAse to remove any contaminating DNA sequence, the sample undergoes either selection of the mRNA (polyA selection) or depletion of the rRNA.\nGenerally, ribosomal RNA represents the majority of the RNAs present in a cell, while messenger RNAs represent a small percentage of total RNA (~2% in humans). Therefore, if we want to study the protein-coding genes, we need to enrich for mRNA or deplete the rRNA. For differential gene expression analysis, it is best to enrich for Poly(A)+, unless you are aiming to obtain information about long non-coding RNAs, in which case ribosomal RNA depletion is recommended.\n\n\n\n\n\n\nRNA Quality check\n\n\n\nIt is essential to check for the integrity of the extracted RNA prior to starting the cDNA library prepation. Traditionally, RNA integrity was assessed via gel electrophoresis by visual inspection of the ribosomal RNA bands, but that method is time-consuming and imprecise. The Bioanalyzer system from Agilent will rapidly assess RNA integrity and calculate an RNA Integrity Number (RIN), which facilitates the interpretation and reproducibility of RNA quality. RIN, essentially, provides a means by which RNA quality from different samples can be compared to each other in a standardized manner.\n\n\nb. Fragmentation and size selection. The remaining RNA molecules are then fragmented. This is done either via chemical, enzymatic (e.g., RNAses), or physical processes (e.g., chemical/mechanical shearing). These fragments then undergo size selection to retain only those fragments within a size range that Illumina sequencing machines can handle best, i.e., between 150 to 300 bp.\n\n\n\n\n\n\nFragment size quality check\n\n\n\nAfter size selection/exclusion, the fragment size distribution should be assesed to ensure that it is unimodal and well-defined.\n\n\nc. Reverse transcribe RNA into double-stranded cDNA. Information about which strand a fragment originated from can be preserved by creating stranded libraries. The most commonly used method incorporates deoxy-UTP during the synthesis of the second cDNA strand (Levin JZ et al., 2010). Once double-stranded cDNA fragments are generated, sequence adapters are ligated to the ends. (Size selection can be performed here instead of at the RNA level.)\nd. PCR amplification. If the amount of starting material is low and/or to increase the number of cDNA molecules to an amount sufficient for sequencing, libraries are usually PCR amplified. Run as few amplification cycles as possible to avoid PCR artefacts.\n\n\n\nImage source: Zeng W and Mortazavi A, 2012",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#sequencing-illumina",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#sequencing-illumina",
+    "title": "From raw sequence reads to count matrix",
+    "section": "2. Sequencing (Illumina)",
+    "text": "2. Sequencing (Illumina)\nSequencing of the cDNA libraries will generate reads. Reads correspond to the nucleotide sequences of the ends of each of the cDNA fragements in the library. You will have the choice of sequencing either a single end of the cDNA fragments (single-end reads) or both ends of the fragments (paired-end reads).\n\n\n\n\nSE - Single end dataset =&gt; Only Read1\nPE - Paired-end dataset =&gt; Read1 + Read2\n\ncan be 2 separate FastQ files or just one with interleaved pairs\n\n\nGenerally single-end sequencing is sufficient unless it is expected that the reads will match multiple locations on the genome (e.g. organisms with many paralogous genes), assemblies are being performed, or for splice isoform differentiation. Be aware that paired-end reads are generally 2x more expensive.\n\nSequencing-by-synthesis\nIllumina sequencing technology uses a sequencing-by-synthesis approach. To explore sequencing by synthesis in more depth, please watch this linked video on Illumina’s YouTube channel.\nWe have privided a brief explanation of the steps below:\nCluster growth: The DNA fragments in the cDNA library are denatured and hybridized to the glass flowcell (adapter complementarity). Each fragment is then clonally amplified, forming a cluster of double-stranded DNA. This step is necessary to ensure that the sequencing signal will be strong enough to be detected/captured unambiguously for each base of each fragment.\n\nNumber of clusters ~= Number of reads\n\nSequencing: The sequencing of the fragment ends is based on fluorophore-labelled dNTPs with reversible terminator elements. In each sequencing cycle, a base is incorporated into every cluster and excited by a laser.\nImage acquisition: Each dNTP has a distinct excitatory signal emission that is captured by cameras.\nBase calling: The Base calling program will then generate the sequence of bases, i.e. reads, for each fragement/cluster by assessing the images captured during the many sequencing cycles. In addition to calling the base in every position, the base caller will also report the certainty with which it was able to make the call (quality information).\n\nNumber of sequencing cycles = Length of reads",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#quality-control-of-raw-sequencing-data-fastqc",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#quality-control-of-raw-sequencing-data-fastqc",
+    "title": "From raw sequence reads to count matrix",
+    "section": "3. Quality control of raw sequencing data (FastQC)",
+    "text": "3. Quality control of raw sequencing data (FastQC)\nThe raw reads obtained from the sequencer are stored as FASTQ files. The FASTQ file format is the de facto file format for sequence reads generated from next-generation sequencing technologies.\nEach FASTQ file is a text file that represents sequence readouts for a sample. Each read is represented by 4 lines as shown below:\n@HWI-ST330:304:H045HADXX:1:1101:1111:61397\nCACTTGTAAGGGCAGGCCCCCTTCACCCTCCCGCTCCTGGGGGANNNNNNNNNNANNNCGAGGCCCTGGGGTAGAGGGNNNNNNNNNNNNNNGATCTTGG\n+\n@?@DDDDDDHHH?GH:?FCBGGB@C?DBEGIIIIAEF;FCGGI#########################################################\n\n\n\n\n\n\n\nLine\nDescription\n\n\n\n\n1\nAlways begins with ‘@’ and then information about the read\n\n\n2\nThe actual DNA sequence\n\n\n3\nAlways begins with a ‘+’ and sometimes the same info as in line 1\n\n\n4\nHas a string of characters which represent the quality scores; must have same number of characters as line 2\n\n\n\nFastQC is a commonly used software that provides a simple way to do some quality control checks on raw sequence data.\nThe main functions include:\n\nProviding a quick overview to tell you in which areas there may be problems\nSummary graphs and tables to quickly assess your data\nExport of results to an HTML-based permanent report",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#quantify-expression",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#quantify-expression",
+    "title": "From raw sequence reads to count matrix",
+    "section": "4. Quantify expression",
+    "text": "4. Quantify expression\nOnce we have explored the quality of our raw reads, we can move on to quantifying expression at the transcript level. The goal of this step is to identify from which transcript each of the reads originated from and the total number of reads associated with each transcript.\nTools that have been found to be most accurate for this step in the analysis are referred to as lightweight alignment tools, which include:\n\nKallisto,\nSailfish and\nSalmon\n\nEach of the tools in the list above work slightly differently from one another. However, common to all of them is that they avoid base-to-base genomic alignment of the reads. Genomic alignment is a step performed by older splice-aware alignment tools such as STAR and HISAT2. In comparison to these tools, the lightweight alignment tools not only provide quantification estimates faster (typically more than 20 times faster), but also prove improvements in accuracy (Robert C and Watson M, 2015).\nWe will use the expression estimates, often referred to as ‘pseudocounts’, obtained from Salmon as the starting point for the differential gene expression analysis.",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#quality-control-of-aligned-sequence-reads-starqualimap",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#quality-control-of-aligned-sequence-reads-starqualimap",
+    "title": "From raw sequence reads to count matrix",
+    "section": "5. Quality control of aligned sequence reads (STAR/Qualimap)",
+    "text": "5. Quality control of aligned sequence reads (STAR/Qualimap)\nAs mentioned above, the differential gene expression analysis will use transcript/gene pseudocounts generated by Salmon. However, to perform some basic quality checks on the sequencing data, it is important to align the reads to the whole genome. Either STAR or HiSAT2 are able to perform this step and generate a BAM file that can be used for QC.\nA tool called Qualimap explores the features of aligned reads in the context of the genomic region they map to, hence providing an overall view of the data quality (as an HTML file). Various quality metrics assessed by Qualimap include:\n\nDNA or rRNA contamination\n5’-3’ biases\nCoverage biases",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "lessons/01a_RNAseq_processing_workflow.html#quality-control-aggregating-results-with-multiqc",
+    "href": "lessons/01a_RNAseq_processing_workflow.html#quality-control-aggregating-results-with-multiqc",
+    "title": "From raw sequence reads to count matrix",
+    "section": "6. Quality control: aggregating results with MultiQC",
+    "text": "6. Quality control: aggregating results with MultiQC\nThroughout the workflow we have performed various steps of quality checks on our data. You will need to do this for every sample in your dataset, making sure these metrics are consistent across the samples for a given experiment. Outlier samples should be flagged for further investigation and potential removal.\nManually tracking these metrics and browsing through multiple HTML reports (FastQC, Qualimap) and log files (Salmon, STAR) for each samples is tedious and prone to errors. MultiQC is a tool that aggregates results from several tools and generates a single HTML report with plots to visualize and compare various QC metrics between the samples. Assessment of the QC metrics may result in the removal of samples before proceeding to the next step, if necessary.\n\nOnce the QC has been performed on all the samples, we are ready to get started with Differential Gene Expression analysis with DESeq2!",
+    "crumbs": [
+      "Pre-reading:",
+      "From raw sequence reads to count matrix"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\nIntroduction to Differential Gene Expression Analysis\n\n\n\nAudience\nComputational skills required\nDuration\n\n\n\n\nBiologists\nIntroduction to R\n4-session online workshop (~8 hours of trainer-led time)\n\n\n\n\nDescription\nThis repository has teaching materials for a hands-on Introduction to Differential Gene Expression Analysis workshop. The workshop will lead participants through performing a differential gene expression analysis workflow on RNA-seq count data using R/RStudio. Working knowledge of R is required or completion of the Introduction to R workshop.\nNote for Trainers: Please note that the schedule linked below assumes that learners will spend between 3-4 hours on reading through, and completing exercises from selected lessons between classes. The online component of the workshop focuses on more exercises and discussion/Q & A.\n\n\n\n\n\n\nNote\n\n\n\nThese materials were developed for a trainer-led workshop, but are also amenable to self-guided learning.\n\n\n\n\nLearning Objectives\n\nQC on count data using Principal Component Analysis (PCA) and hierarchical clustering\nUsing DESeq2 to obtain a list of significantly different genes\nVisualizing expression patterns of differentially expressed genes\nPerforming functional analysis on gene lists with R-based tools\n\n\n\nLessons\n\nWorkshop schedule (trainer-led learning)\nSelf-learning\n\n\n\nInstallation Requirements\n\nApplications\nDownload the most recent versions of R and RStudio for your laptop:\n\nR (version 4.0.0 or above)\nRStudio\n\n\n\nPackages for R\n\n\n\n\n\n\nNotes\n\n\n\nNote 1: Install the packages in the order listed below.\nNote 2:  All the package names listed below are case sensitive!\nNote 3: If you have a Mac with an M1 chip, download and install this tool before installing your packages: https://mac.r-project.org/tools/gfortran-12.2-universal.pkg\nNote 4: At any point (especially if you’ve used R/Bioconductor in the past), in the console R may ask you if you want to update any old packages by asking Update all/some/none? [a/s/n]:. If you see this, type “a” at the prompt and hit Enter to update any old packages. Updating packages can sometimes take quite a bit of time to run, so please account for that before you start with these installations.\nNote 5: If you see a message in your console along the lines of “binary version available but the source version is later”, followed by a question, “Do you want to install from sources the package which needs compilation? y/n”, type n for no, and hit enter.\n\n\n(1) Install the 6 packages listed below from CRAN using the install.packages() function. You DO NOT have to go to the CRAN webpage; you can use the following function to install them one by one.\n\nBiocManager\ntidyverse\nRColorBrewer\npheatmap\nggrepel\ncowplot\n\nPlease install them one-by-one as follows:\n\ninstall.packages(\"BiocManager\")\ninstall.packages(\"tidyverse\")\n# & so on ...\n\n(2) Install the 10 packages listed below from Bioconductor using the the BiocManager::install() function.\n\nDESeq2\nclusterProfiler\nDOSE\norg.Hs.eg.db\npathview\nDEGreport\ntximport\nAnnotationHub\nensembldb\napeglm\n\n\n\n\n\n\n\nNote\n\n\n\nNOTE: The library used for the annotations associated with genes (here we are using org.Hs.eg.db) will change based on organism (e.g. if studying mouse, would need to install and load org.Mm.eg.db). The list of different organism packages are given here.\n\n\nPlease install them one-by-one as follows:\n\nBiocManager::install(\"DESeq2\")\nBiocManager::install(\"clusterProfiler\")\n# & so on ...\n\n(3) Finally, please check that all the packages were installed successfully by loading them one at a time using the library() function.\n\nlibrary(DESeq2)\nlibrary(tidyverse)\nlibrary(RColorBrewer)\nlibrary(pheatmap)\nlibrary(ggrepel)\nlibrary(cowplot)\nlibrary(clusterProfiler)\nlibrary(DEGreport)\nlibrary(org.Hs.eg.db)\nlibrary(DOSE)\nlibrary(pathview)\nlibrary(tximport)\nlibrary(AnnotationHub)\nlibrary(ensembldb)\nlibrary(apeglm)\n\n(4) Once all packages have been loaded, run sessionInfo().\n\nsessionInfo()\n\n\n\n\n\nCitation\nTo cite material from this course in your publications, please use:\n\n\n\n\n\n\nCitation\n\n\n\nMeeta Mistry, Mary Piper, Jihe Liu, & Radhika Khetani. (2021, May 24). hbctraining/DGE_workshop_salmon_online: Differential Gene Expression Workshop Lessons from HCBC (first release). Zenodo. https://doi.org/10.5281/zenodo.4783481. RRID:SCR_025373.\n\n\nA lot of time and effort went into the preparation of these materials. Citations help us understand the needs of the community, gain recognition for our work, and attract further funding to support our teaching activities. Thank you for citing this material if it helped you in your data analysis."
+  },
+  {
+    "objectID": "lessons/experimental_planning_considerations.html",
+    "href": "lessons/experimental_planning_considerations.html",
+    "title": "Experimental design considerations",
+    "section": "",
+    "text": "Approximate time: 50 minutes",
+    "crumbs": [
+      "Pre-reading:",
+      "Experimental design considerations"
+    ]
+  },
+  {
+    "objectID": "lessons/experimental_planning_considerations.html#learning-objectives",
+    "href": "lessons/experimental_planning_considerations.html#learning-objectives",
+    "title": "Experimental design considerations",
+    "section": "Learning Objectives:",
+    "text": "Learning Objectives:\n\nDescribe the importance of replicates for RNA-seq differential expression experiments\nExplain the relationship between the number of biological replicates, sequencing depth, and the differentially expressed genes identified\nDemonstrate how to design an RNA-seq experiment that avoids confounding and batch effects",
+    "crumbs": [
+      "Pre-reading:",
+      "Experimental design considerations"
+    ]
+  },
+  {
+    "objectID": "lessons/experimental_planning_considerations.html#replicates",
+    "href": "lessons/experimental_planning_considerations.html#replicates",
+    "title": "Experimental design considerations",
+    "section": "Replicates",
+    "text": "Replicates\nExperimental replicates can be performed as technical replicates or biological replicates.\n\nImage credit: Klaus B, 2015\n\nTechnical replicates: use the same biological sample to repeat the technical or experimental steps in order to accurately measure technical variation and remove it during analysis.\nBiological replicates use different biological samples of the same condition to measure the biological variation between samples.\n\nIn the days of microarrays, technical replicates were considered a necessity; however, with the current RNA-seq technologies, technical variation is much lower than biological variation and technical replicates are unneccessary.\nIn contrast, biological replicates are absolutely essential for differential expression analysis. For mice or rats, this might be easy to determine what constitutes a different biological sample, but it’s a bit more difficult to determine for cell lines. This article gives some great recommendations for cell line replicates.\nFor differential expression analysis, the more biological replicates, the better the estimates of biological variation and the more precise our estimates of the mean expression levels. This leads to more accurate modeling of our data and identification of more differentially expressed genes.\n\nImage credit: Liu Y et al., 2014\nAs the figure above illustrates, biological replicates are of greater importance than sequencing depth, which is the total number of reads sequenced per sample. The figure shows the relationship between sequencing depth and number of replicates on the number of differentially expressed genes identified [1]. Note that an increase in the number of replicates tends to return more DE genes than increasing the sequencing depth. Therefore, generally more replicates are better than higher sequencing depth, with the caveat that higher depth is required for detection of lowly expressed DE genes and for performing isoform-level differential expression.\n\n\n\n\n\n\nSample pooling\n\n\n\nTry to avoid pooling of individuals/experiments, if possible; however, if absolutely necessary, then each pooled set of samples would count as a single replicate. To ensure similar amounts of variation between replicates, you would want to pool the same number of individuals for each pooled set of samples.\nFor example, if you need at least 3 individuals to get enough material for your control replicate and at least 5 individuals to get enough material for your treatment replicate, you would pool 5 individuals for the control and 5 individuals for the treatment condition. You would also make sure that the individuals that are pooled in both conditions are similar in sex, age, etc.\n\n\nReplicates are almost always preferred to greater sequencing depth for bulk RNA-seq. However, guidelines depend on the experiment performed and the desired analysis. Below we list some general guidelines for replicates and sequencing depth to help with experimental planning:\n\nGeneral gene-level differential expression:\n\nENCODE guidelines suggest 30 million SE reads per sample (stranded).\n15 million reads per sample is often sufficient, if there are a good number of replicates (&gt;3).\nSpend money on more biological replicates, if possible.\nGenerally recommended to have read length &gt;= 50 bp.\n\nGene-level differential expression with detection of lowly-expressed genes:\n\nSimilarly benefits from replicates more than sequencing depth.\nSequence deeper with at least 30-60 million reads depending on level of expression (start with 30 million with a good number of replicates).\nGenerally recommended to have read length &gt;= 50 bp.\n\nIsoform-level differential expression:\n\nFor known isoforms, suggested to have a depth of at least 30 million reads per sample and paired-end reads.\nFor novel isoforms, should have more depth (&gt; 60 million reads per sample).\nChoose biological replicates over paired/deeper sequencing.\nGenerally recommended to have read length &gt;= 50 bp, but longer is better as the reads will be more likely to cross exon junctions.\nPerform careful QC of RNA quality. Be careful to use high quality preparation methods and restrict analysis to high quality RIN # samples.\n\nOther types of RNA analyses (intron retention, small RNA-Seq, etc.):\n\nDifferent recommendations depending on the analysis.\nAlmost always more biological replicates are better!\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe factor used to estimate the depth of sequencing for genomes is “coverage” - how many times do the number of nucleotides sequenced “cover” the genome. This metric is not exact for genomes (whole genome sequencing), but it is good enough and is used extensively. However, the metric does not work for transcriptomes because even though you may know what % of the genome has transcriptional activity, the expression of the genes is highly variable.",
+    "crumbs": [
+      "Pre-reading:",
+      "Experimental design considerations"
+    ]
+  },
+  {
+    "objectID": "lessons/experimental_planning_considerations.html#confounding",
+    "href": "lessons/experimental_planning_considerations.html#confounding",
+    "title": "Experimental design considerations",
+    "section": "Confounding",
+    "text": "Confounding\nA confounded RNA-seq experiment is one where you cannot distinguish the separate effects of two different sources of variation in the data.\nFor example, we know that sex has large effects on gene expression, and if all of our control mice were female and all of the treatment mice were male, then our treatment effect would be confounded by sex. We could not differentiate the effect of treatment from the effect of sex.\n\nTo AVOID confounding:\n\nEnsure animals in each condition are all the same sex, age, litter, and batch, if possible.\nIf not possible, then ensure to split the animals equally between conditions",
+    "crumbs": [
+      "Pre-reading:",
+      "Experimental design considerations"
+    ]
+  },
+  {
+    "objectID": "lessons/experimental_planning_considerations.html#batch-effects",
+    "href": "lessons/experimental_planning_considerations.html#batch-effects",
+    "title": "Experimental design considerations",
+    "section": "Batch effects",
+    "text": "Batch effects\nBatch effects are a significant issue for RNA-seq analyses, since you can see significant differences in expression due solely to the batch effect.\n\nImage credit: Hicks SC et al., 2015\nThe issues generated by poor batch study design are highlighted nicely in Gilad Y & Mizrahi-Man O, 2015.\n\nHow to know whether you have batches?\n\nWere all RNA isolations performed on the same day?\nWere all library preparations performed on the same day?\nDid the same person perform the RNA isolation/library preparation for all samples?\nDid you use the same reagents for all samples?\nDid you perform the RNA isolation/library preparation in the same location?\n\nIf any of the answers is ‘No’, then you have batches.\n\n\nBest practices regarding batches:\n\nDesign the experiment in a way to avoid batches, if possible.\nIf unable to avoid batches:\n\nDo NOT confound your experiment by batch:\n\nImage credit: Hicks SC et al., 2015\nDO split replicates of the different sample groups across batches. The more replicates, the better (definitely more than 2).\n\nImage credit: Hicks SC et al., 2015\nDO include batch information in your experimental metadata. During the analysis, we can regress out the variation due to batch if not confounded so it doesn’t affect our results – if we have that information.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe sample preparation of cell line “biological” replicates “should be performed as independently as possible” (as batches), “meaning that cell culture media should be prepared freshly for each experiment, different frozen cell stocks and growth factor batches, etc. should be used [2].” However, preparation across all conditions should be performed at the same time.\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nYour experiment has three different treatment groups, A, B, and C. Due to the lengthy process of tissue extraction, you can only isolate the RNA from two samples at the same time. You plan to have 4 replicates per group. Your metadata table is as follows:\n\n\n\nsample\ntreatment\nsex\nreplicate\nRNA isolation\n\n\n\n\nsample1\nA\nF\n1\n\n\n\nsample2\nA\nF\n2\n\n\n\nsample3\nA\nM\n3\n\n\n\nsample4\nA\nM\n4\n\n\n\nsample5\nB\nF\n1\n\n\n\nsample6\nB\nF\n2\n\n\n\nsample7\nB\nM\n3\n\n\n\nsample8\nB\nM\n4\n\n\n\nsample9\nC\nF\n1\n\n\n\nsample10\nC\nF\n2\n\n\n\nsample11\nC\nM\n3\n\n\n\nsample12\nC\nM\n4\n\n\n\n\nClick here to download the above table as an Excel file.\n\nFill in the RNA isolation column of the metadata table. Since we can only prepare 2 samples at a time and we have 12 samples total, you will need to isolate RNA in 6 batches. In the RNA isolation column, enter one of the following values for each sample: group1, group2, group3, group4, group5, group6. Make sure to fill in the table so as to avoid confounding by batch of RNA isolation.\nBONUS: To perform the RNA isolations more quickly, you devote two researchers to perform the RNA isolations. Create a researcher column and fill in the researchers’ initials for the samples they will prepare: use initials AB or CD.\n\nAnswer Key",
+    "crumbs": [
+      "Pre-reading:",
+      "Experimental design considerations"
+    ]
+  }
+]

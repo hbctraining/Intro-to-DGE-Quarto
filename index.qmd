@@ -1,0 +1,140 @@
+---
+sidebar: false
+toc: false
+execute: 
+  eval: false
+---
+
+# Introduction to Differential Gene Expression Analysis
+
+| Audience | Computational skills required| Duration |
+:----------|:----------|:----------|
+| Biologists | [Introduction to R](https://hbctraining.github.io/Intro-to-R-flipped/) | 4-session online workshop (~8 hours of trainer-led time) |
+
+### Description
+
+This repository has teaching materials for a hands-on **Introduction to Differential Gene Expression Analysis** workshop. The workshop will lead participants through performing a differential gene expression analysis workflow on RNA-seq count data using R/RStudio. Working knowledge of R is required or completion of the [Introduction to R workshop](https://hbctraining.github.io/Intro-to-R-flipped/). 
+
+**Note for Trainers:** Please note that the schedule linked below assumes that learners will spend between 3-4 hours on reading through, and completing exercises from selected lessons between classes. The online component of the workshop focuses on more exercises and discussion/Q & A.
+
+::: callout-note
+These materials were developed for a trainer-led workshop, but are also amenable to self-guided learning.
+:::
+
+### Learning Objectives
+
+- QC on count data using Principal Component Analysis (PCA) and hierarchical clustering
+- Using DESeq2 to obtain a list of significantly different genes
+- Visualizing expression patterns of differentially expressed genes
+- Performing functional analysis on gene lists with R-based tools
+
+### Lessons
+
+* [Workshop schedule (trainer-led learning)](lessons/schedule.qmd)
+* [Self-learning](lessons/links-to-lessons.qmd)
+
+### Installation Requirements
+
+#### Applications
+
+Download the most recent versions of R and RStudio for your laptop:
+
+ - [R](http://lib.stat.cmu.edu/R/CRAN/) **(version 4.0.0 or above)**
+ - [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
+
+#### Packages for R
+
+::: callout-note
+# Notes
+
+**Note 1: Install the packages in the order listed below.**
+
+**Note 2:  All the package names listed below are case sensitive!**
+
+**Note 3**: If you have a Mac with an M1 chip, download and install this tool before installing your packages: https://mac.r-project.org/tools/gfortran-12.2-universal.pkg
+
+**Note 4**: At any point (especially if you’ve used R/Bioconductor in the past), in the console **R may ask you if you want to update any old packages by asking Update all/some/none? [a/s/n]:**. If you see this, **type "a" at the prompt and hit Enter** to update any old packages. _Updating packages can sometimes take quite a bit of time to run, so please account for that before you start with these installations._  
+
+**Note 5:** If you see a message in your console along the lines of “binary version available but the source version is later”, followed by a question, **“Do you want to install from sources the package which needs compilation? y/n”, type n for no, and hit enter**.
+:::
+
+**(1)** Install the 6 packages listed below from **CRAN** using the `install.packages()` function. You DO NOT have to go to the CRAN webpage; you can use the following function to install them one by one.
+
+1. `BiocManager`
+2. `tidyverse`
+3. `RColorBrewer`
+4. `pheatmap`
+5. `ggrepel`
+6. `cowplot`
+
+**Please install them one-by-one as follows:**
+
+```{r}
+install.packages("BiocManager")
+install.packages("tidyverse")
+# & so on ...
+```
+
+**(2)** Install the 10 packages listed below from **Bioconductor** using the the `BiocManager::install()` function.
+
+1. `DESeq2`
+2. `clusterProfiler`
+3. `DOSE`
+4. `org.Hs.eg.db`
+5. `pathview`
+6. `DEGreport`
+7. `tximport`
+8. `AnnotationHub`
+9. `ensembldb`
+10. `apeglm`
+
+::: callout-note
+NOTE: The library used for the annotations associated with genes (here we are using `org.Hs.eg.db`) will change based on organism (e.g. if studying mouse, would need to install and load `org.Mm.eg.db`). The list of different organism packages are given [here](https://github.com/hbctraining/Training-modules/raw/master/DGE-functional-analysis/img/available_annotations.png).
+:::
+
+**Please install them one-by-one as follows:**
+
+```{r}
+BiocManager::install("DESeq2")
+BiocManager::install("clusterProfiler")
+# & so on ...
+```
+
+**(3)** Finally, please check that all the packages were installed successfully by **loading them one at a time** using the `library()` function.  
+
+```{r}
+library(DESeq2)
+library(tidyverse)
+library(RColorBrewer)
+library(pheatmap)
+library(ggrepel)
+library(cowplot)
+library(clusterProfiler)
+library(DEGreport)
+library(org.Hs.eg.db)
+library(DOSE)
+library(pathview)
+library(tximport)
+library(AnnotationHub)
+library(ensembldb)
+library(apeglm)
+```
+
+**(4)** Once all packages have been loaded, run sessionInfo().  
+
+```{r}
+sessionInfo()
+```
+
+---
+
+### Citation
+
+To cite material from this course in your publications, please use:
+
+::: callout-important
+# Citation
+Meeta Mistry, Mary Piper, Jihe Liu, & Radhika Khetani. (2021, May 24). hbctraining/DGE_workshop_salmon_online: Differential Gene Expression Workshop Lessons from HCBC (first release). Zenodo. https://doi.org/10.5281/zenodo.4783481. RRID:SCR_025373.
+:::
+
+A lot of time and effort went into the preparation of these materials. Citations help us understand the needs of the community, gain recognition for our work, and attract further funding to support our teaching activities. Thank you for citing this material if it helped you in your data analysis.

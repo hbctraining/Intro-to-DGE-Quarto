@@ -1,0 +1,97 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - img/
+    - css/
+    - slides/
+
+
+website:
+  title: "Introduction to Differential Gene Expression Analysis"
+  page-footer: >
+      This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/) RRID:SCR_025373. <br>
+      These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  
+  navbar:
+    left:
+      - text: "Schedule"
+        href: lessons/schedule.qmd
+    right:
+      - text: "HBC"
+        href: https://bioinformatics.sph.harvard.edu/
+      - text: "GitHub"
+        href: https://github.com/hbctraining/Intro-to-DGE-Quarto
+      - text: "Contact us"
+        href: mailto:hbctraining@hsph.harvard.edu
+  
+  
+  sidebar:
+    title: "Lessons"      # Optional title above the sidebar
+    style: "docked"       # Sidebar is docked to the left
+    collapse-level: 1     # At what header level to start collapsing
+    # contents: auto      # Creates automatic TOC from page headers (no sections)
+    contents:
+      - section: "Pre-reading:"
+        contents:
+        - lessons/01a_RNAseq_processing_workflow.qmd
+        - lessons/experimental_planning_considerations.qmd
+
+      - section: "Day 1:"
+        contents:
+          - lessons/01b_DGE_setup_and_overview.qmd
+      - section: "Day 1 Self-learning:"
+        contents:
+          - lessons/01c_RNAseq_count_distribution.qmd
+          - lessons/02_DGE_count_normalization.qmd
+          - lessons/03_DGE_QC_analysis.qmd
+          
+      - section: "Day 2:"
+        contents:
+          - lessons/04a_design_formulas.qmd
+          - lessons/05a_hypothesis_testing.qmd
+      - section: "Day 2 Self-learning"
+        contents:
+          - lessons/04b_DGE_DESeq2_analysis.qmd
+          - lessons/05b_wald_test_results.qmd
+          - lessons/05c_summarizing_results.qmd
+          - lessons/06_DGE_visualizing_results.qmd
+          
+      - section: "Day 3:"
+        contents:
+          - lessons/08a_DGE_LRT_results.qmd
+      - section: "Day 3 Self-learning"
+        contents:
+          - lessons/08b_time_course_analyses.qmd
+          - lessons/genomic_annotation.qmd
+          - lessons/10_FA_over-representation_analysis.qmd
+          - lessons/11_FA_functional_class_scoring.qmd
+          
+      - section: "Day 4:"
+        contents:
+          - lessons/07_DGE_summarizing_workflow.qmd
+          
+
+format:
+  html:
+    theme: simplex
+    css: css/styles.css
+    fig-align: "center"
+    toc: true
+    number-sections: false
+    code-block-bg: true
+    code-copy: true      # enables copy button (default in most themes)
+    code-tools: true     # enables the copy button!
+    code-line-wrap: wrap
+    google-analytics: UA-150953419-1
+    prompt: true         
+
+# Global Execution Defaults
+execute:
+  echo: true               # show code
+  eval: true               # run code
+  warning: false           # show warnings
+  error: false             # show errors
+  message: false           # show messages
+  prompt: true
