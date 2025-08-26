@@ -9,13 +9,6 @@ date: "May 12, 2017"
 
 Approximate time: 60 minutes
 
-```{r data_setup}
-#| echo: false
-
-# Load libraries
-
-```
-
 ## Learning Objectives 
 
 * Describe the RNA-seq and differential gene expression analysis workflows
@@ -45,13 +38,15 @@ Using these data, we will evaluate transcriptional patterns associated with pert
 <img src="../img/dataset.png" width="400">
 </p>
 
-***What is the purpose of these datasets? What does Mov10 do?***
+::: callout-note
+# What is the purpose of these datasets? What does Mov10 do?
 
 The authors are investigating interactions between various genes involved in Fragile X syndrome, a disease in which there is aberrant production of the FMRP protein. 
 
-> **FMRP**, which is “most commonly found in the brain, is essential for normal cognitive development and female reproductive function. Mutations of this gene can lead to fragile X syndrome, intellectual disability, premature ovarian failure, autism, Parkinson's disease, developmental delays and other cognitive deficits.” - from [Wikipedia](https://en.wikipedia.org/wiki/FMR1)
+**FMRP**, a protein that is “most commonly found in the brain, is essential for normal cognitive development and female reproductive function. Mutations of this gene can lead to fragile X syndrome, intellectual disability, premature ovarian failure, autism, Parkinson's disease, developmental delays and other cognitive deficits.” - from [Wikipedia](https://en.wikipedia.org/wiki/FMR1)
 
-> **MOV10** is a putative RNA helicase that is also associated with **FMRP** in the context of the microRNA pathway.
+**MOV10** is a putative RNA helicase that is also associated with **FMRP** in the context of the microRNA pathway.
+:::
 
 **The hypothesis [the paper](http://www.ncbi.nlm.nih.gov/pubmed/25464849) is testing is that FMRP and MOV10 associate and regulate the translation of a subset of RNAs.**
 
@@ -60,8 +55,9 @@ The authors are investigating interactions between various genes involved in Fra
 </p>
 
 **Our questions:**
-* What patterns of expression can we identify with the loss or gain of MOV10? 
-* Are there any genes shared between the two conditions?
+
+- What patterns of expression can we identify with the loss or gain of MOV10? 
+- Are there any genes shared between the two conditions?
 
 ## RNA-seq workflow
 
@@ -81,19 +77,19 @@ Let's get started by opening up RStudio and setting up a new project for this an
 <img src="../img/Create_RStudio_Project.gif" width="900">
 </p>
 
-To check whether or not you are in the correct working directory, use `getwd()`. The path `Desktop/DEanalysis` should be returned to you in the console. Within your working directory use the `New folder` button in the bottom right panel to create two new directories:  `meta` and `results`. Remember the key to a good analysis is keeping organized from the start! (*NOTE: we will be downloading our `data` folder.*)
+To check whether or not you are in the correct working directory, use `getwd()`. The path `Desktop/DEanalysis` should be returned to you in the console. Within your working directory, use the `New folder` button in the bottom right panel to create three new directories: `scripts`, `meta`, and `results`. Remember the key to a good analysis is keeping organized from the start! (*NOTE: we will be downloading our `data` folder.*)
 
 Now we need to grab the files that we will be working with for the analysis. There are two things we need to download. 
 
 1. First we need the **Salmon results for the full dataset**. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory:*
 
-* [Salmon data](https://www.dropbox.com/s/oz9yralwbtphw8u/data.zip?dl=1) for the Mov10 full dataset
+  * [Salmon data](https://www.dropbox.com/s/oz9yralwbtphw8u/data.zip?dl=1) for the Mov10 full dataset
 
-Once you have the zip file downloaded you will want to decompress it. This will create a `data` directory with sub-directories that correspond to each of the samples in our dataset.
+  Once you have the zip file downloaded you will want to decompress it. This will create a `data` directory with sub-directories that correspond to each of the samples in our dataset.
 
-2. Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html). For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory.*
+2. Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html). For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory, into the data folder.*
 
-* [Annotation file](https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt)
+  * [Annotation file](https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt)
 
 Finally, go to the `File` menu and select `New File`, then select `R Script`. This should open up a script editor in the top left hand corner. This is where we will be typing and saving all commands required for this analysis. In the script editor, type in header lines:
 
@@ -102,7 +98,7 @@ Finally, go to the `File` menu and select `New File`, then select `R Script`. Th
 # Gene-level differential expression analysis using DESeq2
 ```
 
-Now save the file as `de_script.R`. When finished, your working directory should now look similar to this:
+Now save the file as `de_script.R` within the `scripts` directory. When finished, your working directory should now look similar to this:
 
 ![setup](../img/settingup.png)
 
@@ -112,6 +108,7 @@ For this analysis we will be using several R packages, some which have been inst
 
 ```{r load_libraries}
 #| warning: false
+#| message: false
 
 # Setup
 # Bioconductor and CRAN libraries used
@@ -148,13 +145,13 @@ We will be using the R Bioconductor package `tximport` to prepare the `quant.sf`
 
 ```{r load_data}
 # List all directories containing data  
-samples <- list.files(path = "./data", full.names = TRUE, pattern = "salmon$")
+samples <- list.files(path = "../data", full.names = TRUE, pattern = "salmon$")
 
 # Obtain a vector of all filenames including the path
 files <- file.path(samples, "quant.sf")
 
 # Since all quant files have the same name, it is useful to have names for each element
-names(files) <- str_replace(samples, "./data/", "") %>% 
+names(files) <- str_replace(samples, "../data/", "") %>% 
                 str_replace(".salmon", "")
 ```
 
@@ -162,7 +159,7 @@ Our Salmon index was generated with transcript sequences listed by Ensembl IDs, 
 
 ```{r load_annotations}
 # Load the annotation table for GrCh38
-tx2gene <- read.delim("tx2gene_grch38_ens94.txt")
+tx2gene <- read.delim("../data/tx2gene_grch38_ens94.txt")
 
 # Take a look at it 
 tx2gene %>% View()
@@ -173,6 +170,8 @@ tx2gene %>% View()
 Now we are ready to **run `tximport`**. 
 
 ```{r tximport_about}
+#| eval: false
+
 ?tximport # let's take a look at the arguments for the tximport function
 ```
 

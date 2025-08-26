@@ -70,6 +70,8 @@ Download the most recent versions of R and RStudio for your laptop:
 **Please install them one-by-one as follows:**
 
 ```{r}
+#| eval: false
+
 install.packages("BiocManager")
 install.packages("tidyverse")
 # & so on ...
@@ -95,6 +97,8 @@ NOTE: The library used for the annotations associated with genes (here we are us
 **Please install them one-by-one as follows:**
 
 ```{r}
+#| eval: false
+
 BiocManager::install("DESeq2")
 BiocManager::install("clusterProfiler")
 # & so on ...
@@ -103,6 +107,9 @@ BiocManager::install("clusterProfiler")
 **(3)** Finally, please check that all the packages were installed successfully by **loading them one at a time** using the `library()` function.  
 
 ```{r}
+#| warning: false
+#| message: false
+
 library(DESeq2)
 library(tidyverse)
 library(RColorBrewer)
