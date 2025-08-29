@@ -1,0 +1,81 @@
+### SPIA
+
+```{r data_setup}
+#| echo: false
+
+# load libraries needed to render this lesson
+library(tidyverse)
+
+# load objects needed to render this lesson
+res_entrez <- readRDS("../data/intermediate_res_entrez.RDS")
+```
+
+The [SPIA (Signaling Pathway Impact Analysis)](http://bioconductor.org/packages/release/bioc/html/SPIA.html) tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. The blog post from [Getting Genetics Done](https://gettinggeneticsdone.blogspot.com/2012/03/pathway-analysis-for-high-throughput.html) provides a step-by-step procedure for using and understanding SPIA. 
+
+```{r libraries}
+# Install package (if needed)
+# BiocManager::install("SPIA")
+
+# Load package
+library(SPIA)
+```
+
+To perform SPIA, we need a list of background genes and a list of significant genes. For our background dataset we will use all genes tested for differential expression (all genes in our results table). For our significant gene list we will use genes with p-adjusted values less than 0.05 (we could include a fold change threshold too if we have many DE genes).
+
+```{r gene_lists}
+# The background set is a vector of all the genes represented on the platform
+background_entrez <- res_entrez$entrezid
+
+# Significant genes is a vector of fold changes where the names are ENTREZ gene IDs
+sig_res_entrez <- res_entrez[which(res_entrez$padj < 0.05), ]
+sig_entrez <- sig_res_entrez$log2FoldChange
+names(sig_entrez) <- sig_res_entrez$entrezid
+
+# Look at the significant gene list input
+head(sig_entrez)
+```
+
+Now that we have our background and significant genes in the appropriate format, we can run SPIA (this will take a few minutes as it runs through all the pathways):
+
+```{r spia}
+# Run SPIA
+spia_result <- spia(de=sig_entrez, all=background_entrez, organism="hsa")
+
+# Look at the results
+head(spia_result, n=20)
+```
+
+SPIA outputs a table showing significantly dysregulated pathways based on over-representation and signaling perturbations accumulation. The table shows the following information: 
+
+- `pSize`: the number of genes on the pathway
+- `NDE`: the number of DE genes per pathway
+- `tA`: the observed total perturbation accumulation in the pathway
+- `pNDE`: the probability to observe at least NDE genes on the pathway using a hypergeometric model (similar to ORA)
+- `pPERT`: the probability to observe a total accumulation more extreme than tA only by chance
+- `pG`: the p-value obtained by combining pNDE and pPERT
+- `pGFdr` and `pGFWER` are the False Discovery Rate and Bonferroni adjusted global p-values, respectively
+- `Status`: gives the direction in which the pathway is perturbed (activated or inhibited)
+- `KEGGLINK` gives a web link to the KEGG website that **displays the pathway image** with the differentially expressed genes highlighted in red
+
+We can view the significantly dysregulated pathways by viewing the over-representation and perturbations for each pathway.
+
+```{r spia_plot}
+# To avoid an error, remove any rows where `pPERT` is NA
+spia_result <- spia_result %>% filter(!is.na(pPERT))
+
+# Plot significant pathways
+plotP(spia_result, threshold=0.05)
+```
+
+In this plot, each pathway is a point and the coordinates are the log of pNDE (using a hypergeometric model) and the p-value from perturbations, pPERT. The oblique lines in the plot show the significance regions based on the combined evidence.
+
+If we choose to explore the significant genes from our dataset occurring in these pathways, we can subset our SPIA results:
+
+```{r spia_results}
+# Look at pathway 05203 and view kegglink
+subset(spia_result, ID == "05203")
+```
+
+Then, click on the KEGGLINK, we can view the genes within our dataset from these perturbed pathways:
+
+![perturbed_pathway](http://www.genome.jp/dbget-bin/show_pathway?hsa05203+1739+5829+578+3661+5700+1108+3725+836+581+572+5366+7187+7188+1642+5594+10488+64764+90993+9586+6777+5291+5293+5966+1959+1019+55697+5902+2648+6850+3718+595+894+896+890+4193+28973+898+9134+1233+7419+3265+3845+4893+10971+7529+7531+7532+7534+6502+2965+1387+9114+1026+5315+3065+5922+998+387+81+88+2957+991+3665+3106+3107+3133+3134+5566+5567+2885+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370)

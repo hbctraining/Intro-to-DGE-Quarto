@@ -1,0 +1,249 @@
+# Workshop Schedule
+
+## Pre-reading
+
+1. [Workflow (raw data to counts)](./01a_RNAseq_processing_workflow.html)
+1. [Experimental design considerations](./experimental_planning_considerations.html)
+
+## Day 1
+
+| Time          |  Topic                                                                      | Instructor |
+|:-------------:|:---------------------------------------------------------------------------:|:----------:|
+| 10:00 - 10:30 | [Workshop Introduction](../lectures/workshop_intro_slides.pdf)              | Will |
+| 10:30 - 11:00 | RNA-seq pre-reading discussion                                              | All |
+| 11:00 - 11:45 | [Intro to DGE / setting up DGE analysis](./01b_DGE_setup_and_overview.html) | Meeta |
+| 11:45 - 12:00 | Overview of self-learning materials and homework submission                 | Will |
+
+### Before the next class:
+
+1. Please **study the contents** and **work through all the code** within the following lessons:
+  
+  * [RNA-seq counts distribution](./01c_RNAseq_count_distribution.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Starting with the count matrix, we want to explore some characteristics of the RNA-seq data and evaluate the appropriate model to use.
+  
+  This lesson will cover:
+  
+  - Describing characteristics of the RNA-seq count data
+  - Understanding different statistical methods to model the count data
+  - Explaining the benefits of biological replicates
+:::
+  
+  * [Count normalization](./02_DGE_count_normalization.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Count normalization is an important data pre-processing step before the differential expression analysis.
+  
+  This lesson will cover:
+  
+  - Describing "uninteresting factors" to consider during normalization
+  - Understanding different normalization methods and their corresponding use cases
+  - Generating a matrix of normalized counts using DESeq2's median of ratios method
+:::
+  
+  * [Sample-level QC](./03_DGE_QC_analysis.html) (PCA and hierarchical clustering)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Next, we want to check the quality of count data, to make sure that the samples are good.
+  
+  This lesson will cover:
+  
+  - Understanding the importance of similarity analysis between samples
+  - Describing Principal Component Analysis (PCA) and interpreting PCA plots from RNA-seq data
+  - Performing hierarchical clustering and plotting correlation metrics
+:::
+  
+2. **Complete the exercises**:
+   * Each lesson above contains exercises; please go through each of them.
+   * **Copy over** your solutions into the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLScUcYzyiM_dAsgQdNx9ECzCX3lKrTHTwmUKux9u8VyP2JDLNQ/viewform?usp=sf_link) **the day before the next class**.
+
+### Questions?
+* ***If you get stuck due to an error*** while runnning code in the lesson, [email us](mailto:hbctraining@hsph.harvard.edu) 
+
+---
+
+## Day 2
+
+| Time          |  Topic                                                                           | Instructor |
+|:-------------:|:--------------------------------------------------------------------------------:|:----------:|
+| 10:00 - 11:00 | Self-learning lessons discussion                                                 | All |
+| 11:00 - 11:30 | [Design formulas](./04a_design_formulas.html)                                    | Will |
+| 11:30 - 12:00 | [Hypothesis testing and multiple test correction](./05a_hypothesis_testing.html) | Meeta |
+
+### Before the next class:
+
+1. Please **study the contents** and **work through all the code** within the following lessons:
+
+  * [Description of steps for DESeq2](./04b_DGE_DESeq2_analysis.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  The R code required to perform differential gene expression analysis is actually quite simple. Running the `DESeq()` function will carry out the various steps involved. It is important that you have some knowledge of what is happening under the hood, to be able to fully understand and interpret the results.
+  
+  In this lesson you will:
+  
+  - Examine size factors and learn about sources that cause observed variation in values
+  - Explore the gene-wise dispersion estimates as they relate back the mean-variance relationship
+  - Critically evaluate a dispersion plot
+:::
+
+  * [Wald test results](./05b_wald_test_results.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  We have run the analysis, and now it's time to explore the results!
+  
+  In this lesson you will:
+  
+  - Learn how to extract results for specific group comparisons
+  - Explore the information presented in the results table (different statistics and their importance)
+  - Understand the different levels of filtering that are applied in DESeq2 by default (and why they are important)
+:::
+  
+ * [Summarizing results and extracting significant gene lists](./05c_summarizing_results.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Once you have your results, it is useful to summarize the information. Here, we get a snapshot of the number of differentially expressed genes that are identified from the different comparisons.
+:::
+        
+  * [Visualization](./06_DGE_visualizing_results.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  A picture is worth a thousand words. In our case, a figure is worth a thousand (or 30 thousand) data points. When working with large scale data, it can be helpful to visualize results and get a big picture perspective of your findings.
+  
+  In this lesson you will:
+  
+  - Explore different plots for data visualization
+  - Create a volcano plot to evaluate the relationship between different statistics from the results table
+  - Create a heatmap for visualization of differentially expressed genes
+:::
+
+2. **Complete the exercises**:
+   * Each lesson above contains exercises; please go through each of them.
+   * **Copy over** your solutions into the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfVELkIcVN4wyJ2aNrowgxiuat5uUXCXACj8QN4MfTK5Yr-Zw/viewform?usp=sf_link) **the day before the next class**.
+
+### Questions?
+* ***If you get stuck due to an error*** while running code in the lesson, [email us](mailto:hbctraining@hsph.harvard.edu) 
+
+---
+
+## Day 3
+
+| Time          |  Topic                                                      | Instructor |
+|:-------------:|:-----------------------------------------------------------:|:----------:|
+| 10:00 - 11:15 | Self-learning lessons discussion                            | All |
+| 11:15 - 12:00 | [Likelihood Ratio Test results](./08a_DGE_LRT_results.html) | Meeta |
+
+### Before the next class:
+
+1. Please **study the contents** and **work through all the code** within the following lessons:
+
+  * [Time course analysis](./08b_time_course_analyses.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Sometimes we are interested in how a gene changes over time. The Likelihood Ratio Test (LRT) is paricularly well-suited for this task.
+  
+  This lesson will cover:
+  
+  - Designing a LRT for a time-course analysis in DESeq2
+  - Identifying patterns in our list of differentially expressed genes
+:::
+  
+  * [Gene annotation](./genomic_annotation.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Next-generation analyses rely on annotations to provide a description for defining genes, transcripts and/or proteins. These annotations are often stored in publicly available databases.
+  
+  This lesson will cover:
+  
+  - Describing the various annotation databases
+  - Accessing annotations from one of these databases using R
+:::
+  
+  * [Functional analysis - over-representation analysis](./10_FA_over-representation_analysis.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  Oftentimes after completing an RNA-seq experiment, you will be left with a list of differentially expressed transcripts. You may be interested in knowing if these transcripts are enriched in certain biologically-relevant contexts.
+  
+  This lesson will cover:
+  
+  - Describing how functional enrichment tools yield statistically enriched functional categories or interactions
+  - Identifying enriched Gene Ontology terms using the R package, clusterProfiler
+:::
+  
+  * [Functional analysis - functional class scoring / GSEA](./11_FA_functional_class_scoring.html)
+  
+:::{.callout-note collapse="true"}
+# Click here for a preview of this lesson
+  
+  While some functional analyses focus on large changes focused on a select few genes, functional class scoring (FCS) focuses on weaker but coordinated changes in sets of functionally related genes (i.e., pathways) that can also have significant effects.
+  
+  This lesson will cover:
+  
+  - Designing a GSEA analysis using GO and/or KEGG gene sets
+  - Evaluating the results of a GSEA analysis
+  - Discussing other tools and resources for identifying genes of novel pathways or networks
+:::
+
+2. **There is no assignment submission, but please use this [Google form](https://forms.gle/QHPktomJZysJe7Zz8) to ask us questions!**
+
+### Questions?
+* ***If you get stuck due to an error*** while running code in the lesson, [email us](mailto:hbctraining@hsph.harvard.edu) 
+
+---
+
+## Day 4
+
+| Time          |  Topic                                                     | Instructor |
+|:-------------:|:----------------------------------------------------------:|:--------:|
+| 10:00 - 11:00 | Questions about self-learning lessons                      | All |
+| 11:00 - 11:15 | [Summarizing workflow](./07_DGE_summarizing_workflow.html) | Will |
+| 11:15 - 11:45 | Discussion, Q & A                                          | All |
+| 11:45 - 12:00 | [Wrap Up](../lectures/workshop_wrapup_slides.pdf)          | Will |
+
+---
+
+## Answer keys
+
+* [Day 1 Answer Key](../homework/DGE_assignment_1_answer_key.R)
+* [Day 2 Answer Key](../homework/DGE_assignment_2_answer_key.R)
+
+## Resources
+
+We have covered the inner workings of DESeq2 in a fair amount of detail such that when using this package you have a good understanding of what is going on under the hood. For more information on topics covered, we encourage you to take a look at the following resources:
+
+* [DESeq2 vignette](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#theory-behind-deseq2)
+* GitHub book on [RNA-seq gene level analysis](http://genomicsclass.github.io/book/pages/rnaseq_gene_level.html)
+* [Bioconductor support site](https://support.bioconductor.org/t/deseq2/) (posts tagged with `deseq2`) 
+* [Enrichment analysis book](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html)
+   * [Visualization: Functional (Enrichment) analysis](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)
+
+## Building on this workshop
+
+* [Single-cell RNA-seq workshop](https://hbctraining.github.io/scRNA-seq/)
+* [RMarkdown](https://hbctraining.github.io/Training-modules/Rmarkdown/)
+* [ggplot2 for functional analysis](https://hbctraining.github.io/Training-modules/Tidyverse_ggplot2/lessons/03_ggplot2.html)
+
+## Other helpful links
+
+* [Online hbctraining learning materials](https://hbctraining.github.io/main/table_of_training_README.html)
+* [hbctraining webpage](https://hbctraining.github.io/main)

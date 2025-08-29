@@ -61,7 +61,7 @@ The authors are investigating interactions between various genes involved in Fra
 
 ## RNA-seq workflow
 
-For this dataset, raw sequence reads were obtained from the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367). These reads were then processed using the RNA-seq workflow as detailed in the [pre-reading for this workshop](01a_RNAseq_processing_workflow.md). All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://github.com/hbctraining/DGE_workshop_salmon_online/raw/master/data/multiqc_report_rnaseq.html.zip)** for you to peruse.
+For this dataset, raw sequence reads were obtained from the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367). These reads were then processed using the RNA-seq workflow as detailed in the [pre-reading for this workshop](01a_RNAseq_processing_workflow.html). All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://github.com/hbctraining/DGE_workshop_salmon_online/raw/master/data/multiqc_report_rnaseq.html.zip)** for you to peruse.
 
 The directories of output from the mapping/quantification step of the workflow (Salmon) is the data that we will be using. These transcript abundance estimates, often referred to as **'pseudocounts', will be the starting point for our differential gene expression analysis**.
 
@@ -87,7 +87,7 @@ Now we need to grab the files that we will be working with for the analysis. The
 
   Once you have the zip file downloaded you will want to decompress it. This will create a `data` directory with sub-directories that correspond to each of the samples in our dataset.
 
-2. Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html). For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory, into the data folder.*
+2. Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html). For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into the `data` folder in your project directory.*
 
   * [Annotation file](https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt)
 
@@ -98,9 +98,18 @@ Finally, go to the `File` menu and select `New File`, then select `R Script`. Th
 # Gene-level differential expression analysis using DESeq2
 ```
 
-Now save the file as `de_script.R` within the `scripts` directory. When finished, your working directory should now look similar to this:
+Now save the file as `de_script.R` within the `scripts` directory. When finished, your project directory should now look similar to this:
 
-![setup](../img/settingup.png)
+![](../img/settingup.png)
+
+Finally, make sure you **change working directory to the `scripts` folder** to ensure that all the file paths will be correct when we run our scripts. You can change this by going to the top menu bar and selecting `Session` > `Set Working Directory` > `To Source File Location` (because the script we have open is saved to this folder) or by running the code below in your console:
+
+```{r wd}
+#| eval: false
+
+# Make sure we are working from the folder where our script is saved
+setwd("./scripts")
+```
 
 ### Loading libraries
 
@@ -162,7 +171,7 @@ Our Salmon index was generated with transcript sequences listed by Ensembl IDs, 
 tx2gene <- read.delim("../data/tx2gene_grch38_ens94.txt")
 
 # Take a look at it 
-tx2gene %>% View()
+tx2gene %>% head()
 ```
 
 **`tx2gene`** is a three-column **data frame linking transcript ID (column 1) to gene ID (column 2)** to gene symbol (column 3). We will take the first two columns as input to `tximport`. The **column names are not relevant, but the column order is (i.e., transcript ID must be first).**
@@ -200,7 +209,7 @@ txi <- tximport(files, type = "salmon", tx2gene = tx2gene[,c("tx_id", "ensgene")
 
 ::: callout-note
 # An additional argument for `tximport`
-When performing your own analysis, you may find that the reference transcriptome file you obtain from Ensembl will have version numbers included on your identifiers (i.e., ENSG00000265439.2). This will cause a discrepancy with the tx2gene file, since the annotation databases don't usually contain version numbers (i.e., ENSG00000265439). To get around this issue you can use the argument `ignoreTxVersion	= TRUE`. The logical value indicates whether to split the tx id on the '.' character to remove version information, for easier matching.
+When performing your own analysis, you may find that the reference transcriptome file you obtain from Ensembl will have version numbers included on your identifiers (i.e., ENSG00000265439.2). This will cause a discrepancy with the tx2gene file, since the annotation databases don't usually contain version numbers (i.e., ENSG00000265439). To get around this issue you can use the argument `ignoreTxVersion = TRUE`. The logical value indicates whether to split the tx id on the '.' character to remove version information, for easier matching.
 :::
 
 ### Viewing data
@@ -213,10 +222,12 @@ attributes(txi)
 
 We will be using the `txi` object as is for input into DESeq2, but will save it until the next lesson. **For now let's take a look at the count matrix.** You will notice that there are decimal values, so let's round to the nearest whole number and convert it into a dataframe. We will save it to a variable called `data` that we can play with. 
 
-```{r counts}
+```{r counts_view}
 # Look at the counts
-txi$counts %>% View()
+txi$counts %>% head()
+```
 
+```{r counts_save}
 # Write the counts to an object
 data <- txi$counts %>% 
   round() %>% 
@@ -234,14 +245,25 @@ Of great importance is keeping track of the information about our data. At minim
 
 ```{r metadata}
 # Create a sample table / metadata
-sampletype <- factor(c(rep("control", 3), rep("MOV10_knockdown", 2), rep("MOV10_overexpression", 3)))
+sampletype <- factor(c(rep("control",              3),
+                       rep("MOV10_knockdown",      2),
+                       rep("MOV10_overexpression", 3)))
 meta <- data.frame(sampletype, row.names = colnames(txi$counts))
 ```
 
 **Now we are all set to start our analysis!**
 
+```{r data_save}
+#| echo: false
+
+# save objects needed to render future lessons
+saveRDS(data, "../data/intermediate_txi_counts.RDS")
+saveRDS(txi,  "../data/intermediate_txi.RDS")
+saveRDS(meta, "../data/metadata.RDS")
+```
+
 ***
 
-[Next Lesson](01c_RNAseq_count_distribution.md)
+[Next Lesson](01c_RNAseq_count_distribution.html)
 
 ***
