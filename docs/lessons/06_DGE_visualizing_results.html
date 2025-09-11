@@ -301,8 +301,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
- <span class="menu-text">lessons/08a_DGE_LRT_results.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08a_DGE_LRT_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DGE analysis using LRT in DESeq2</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -315,17 +318,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
- <span class="menu-text">lessons/08b_time_course_analyses.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08b_time_course_analyses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time course analysis with DESeq2</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">lessons/genomic_annotation.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/genomic_annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomic annotations</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">lessons/10_FA_over-representation_analysis.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/10_FA_over-representation_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Analysis for RNA-seq</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">lessons/11_FA_functional_class_scoring.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/11_FA_functional_class_scoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Analysis for RNA-seq</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -338,8 +353,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
- <span class="menu-text">lessons/07_DGE_summarizing_workflow.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07_DGE_summarizing_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of DGE workflow</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -1228,9 +1246,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="in">library(pheatmap)</span></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="in">meta &lt;- readRDS("../data_metadata.RDS")</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="in">dds  &lt;- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="in">tx2gene &lt;- read.delim("../data/tx2gene_grch38_ens94.txt")</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="in">meta           &lt;- readRDS("../data/metadata.RDS")</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="in">dds            &lt;- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="in">tx2gene     &lt;- read.delim("../data/tx2gene_grch38_ens94.txt")</span></span>
 <span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb &lt;- readRDS("../data/intermediate_res_tableOE_tb.RDS")</span></span>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="in">padj.cutoff &lt;- 0.05</span></span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="in">sigOE &lt;- res_tableOE_tb %&gt;% dplyr::filter(padj &lt; padj.cutoff)</span></span>

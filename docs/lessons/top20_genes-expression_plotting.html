@@ -708,9 +708,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb &lt;- readRDS("../data/intermediate_res_tableOE_tb.RDS")</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb    &lt;- readRDS("../data/intermediate_res_tableOE_tb.RDS")</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">normalized_counts &lt;- readRDS("../data/intermediate_normalized_counts_with_gene_names.RDS")</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">meta &lt;- readRDS("../data_metadata.RDS")</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">meta              &lt;- readRDS("../data/metadata.RDS")</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="in">mov10_meta &lt;- meta %&gt;% rownames_to_column(var="samplename") %&gt;% as_tibble()</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
