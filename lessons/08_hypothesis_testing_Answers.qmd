@@ -1,0 +1,49 @@
+---
+title: "Hypothesis testing and multiple testing - Answer key"
+---
+
+# Exercise 1
+
+**You are studying brain maturation and growth patterns in mouse cortex and have obtained RNA-seq data for a total of 24 mice. These samples were acquired at 2 developmental stages (3 dpf and 10 dpf) and with or without treatment using a growth inhibitor (Monoamine oxidase (MAO) inhibitors). For each developmental stage and treatment combination you have 6 replicates. You also have sex information for these mice (12 males and 12 females).**
+
+**What steps are necessary to take to decide what your model should be?**
+
+Look at QC analyses such as PCA to determine which metadata factors are associated with large amounts of variation in the data.
+
+**What is an appropriate hypothesis test if you are testing for expression differences across the developmental stages?**
+
+We only have 2 developmental stages, so we can use the Wald test for comparison.
+
+**Provide the line of code used to create the `dds` object.**
+
+Here we assume that the metadata includes the following columns: developmental_stage, treatment, and sex. We want to include treatment and sex as covariates in our model, but make sure that developmental_stage is the last factor in the model so that the default result that is returned when using the `results()` function will be for our main effect.
+
+```{r}
+#| eval: false
+
+# create the dds object
+dds <- DESeqDataSetFromTximport(txi, colData = meta, design = ~ treatment + sex + developmental_stage)
+```
+
+**Provide the line of code used to run DESeq2.**
+
+```{r}
+#| eval: false
+
+# run DESeq
+dds <- DESeq(dds)
+```
+
+**Would you use a different hypothesis test if you had 3 developmental timepoints?**
+
+In that case we would use a likelihood ratio test, because there are more than two groups for comparison. Since the full model is `~ treatment + sex + developmental_stage`, the reduced model is then `~ treatment + sex`. (We don't use `~1` here, because our reduced model does still include factors.)
+
+```{r}
+#| eval: false
+
+# create the dds object
+dds <- DESeqDataSetFromTximport(txi, colData = meta, design = ~ treatment + sex + developmental_stage)
+
+# run DESeq LRT
+dds_lrt <- DESeq(dds, test = "LRT", reduced = ~ sex)
+```

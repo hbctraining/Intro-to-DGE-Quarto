@@ -1,0 +1,33 @@
+---
+title: "Design formulas for differential expression analysis in DESeq2 - Answer key"
+---
+
+# Exercise 1
+
+**Suppose you wanted to study the expression differences between the two age groups in the metadata shown above, and major sources of variation were sex and treatment, how would the design formula be written?**
+
+design = ~ sex + treatment + age
+
+**Based on our Mov10 metadata dataframe, which factors could we include in our design formula?**
+
+design = ~ sampletype
+
+**What would you do if you wanted to include a factor in your design formula that is not in your metadata?**
+
+Add that factor into your metadata.
+
+# Exercise 2
+
+**How would the design formula be structured to perform the following analyses?**
+
+**Test for the effect of treatment.**
+
+design = ~ treatment
+
+**Test for the effect of genotype, while regressing out the variation due to treatment.**
+
+design = ~ treatment + genotype
+
+**Test for the effect of genotype on the treatment effects.**
+
+design = ~ genotype + treatment + genotype:treatment

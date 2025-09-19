@@ -35,42 +35,42 @@ website:
     contents:
       - section: "Pre-reading:"
         contents:
-        - lessons/01a_RNAseq_processing_workflow.qmd
-        - lessons/experimental_planning_considerations.qmd
+        - lessons/01_RNAseq_processing_workflow.qmd
+        - lessons/02_experimental_planning_considerations.qmd
 
       - section: "Day 1:"
         contents:
-          - lessons/01b_DGE_setup_and_overview.qmd
+          - lessons/03_DGE_setup_and_overview.qmd
       - section: "Day 1 Self-learning:"
         contents:
-          - lessons/01c_RNAseq_count_distribution.qmd
-          - lessons/02_DGE_count_normalization.qmd
-          - lessons/03_DGE_QC_analysis.qmd
+          - lessons/04_RNAseq_count_distribution.qmd
+          - lessons/05_DGE_count_normalization.qmd
+          - lessons/06_DGE_QC_analysis.qmd
           
       - section: "Day 2:"
         contents:
-          - lessons/04a_design_formulas.qmd
-          - lessons/05a_hypothesis_testing.qmd
+          - lessons/07_design_formulas.qmd
+          - lessons/08_hypothesis_testing.qmd
       - section: "Day 2 Self-learning"
         contents:
-          - lessons/04b_DGE_DESeq2_analysis.qmd
-          - lessons/05b_wald_test_results.qmd
-          - lessons/05c_summarizing_results.qmd
-          - lessons/06_DGE_visualizing_results.qmd
+          - lessons/09_DGE_DESeq2_analysis.qmd
+          - lessons/10_wald_test_results.qmd
+          - lessons/11_summarizing_results.qmd
+          - lessons/12_DGE_visualizing_results.qmd
           
       - section: "Day 3:"
         contents:
-          - lessons/08a_DGE_LRT_results.qmd
+          - lessons/13_DGE_LRT_results.qmd
       - section: "Day 3 Self-learning"
         contents:
-          - lessons/08b_time_course_analyses.qmd
-          - lessons/genomic_annotation.qmd
-          - lessons/10_FA_over-representation_analysis.qmd
-          - lessons/11_FA_functional_class_scoring.qmd
+          - lessons/14_time_course_analyses.qmd
+          - lessons/15_genomic_annotation.qmd
+          - lessons/16_FA_over-representation_analysis.qmd
+          - lessons/17_FA_functional_class_scoring.qmd
           
       - section: "Day 4:"
         contents:
-          - lessons/07_DGE_summarizing_workflow.qmd
+          - lessons/18_DGE_summarizing_workflow.qmd
           
 
 format:

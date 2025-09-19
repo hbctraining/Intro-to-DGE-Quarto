@@ -1,0 +1,36 @@
+---
+title: "Exploring DESeq2 results from the Wald test - Answer key"
+---
+
+# Exercise 1
+
+**MOV10 Differential Expression Analysis: Control versus Knockdown**
+
+Now that we have results for the overexpression results, do the same for the Control vs. Knockdown samples.
+
+**Create a contrast vector called contrast_kd.**
+
+```{r}
+#| eval: false
+
+# Define contrasts for MOV10 knockdown
+contrast_kd <- c("sampletype", "MOV10_knockdown", "control")
+```
+
+**Use contrast vector in the results() to extract a results table and store that to a variable called res_tableKD.**
+
+```{r}
+#| eval: false
+
+# Extract results for MOV10 knockdown vs control
+res_tableKD <- results(dds, contrast=contrast_kd, alpha = 0.05)
+```
+
+**Shrink the LFC estimates using lfcShrink() and assign it back to res_tableKD.**
+
+```{r}
+#| eval: false
+
+# Apply fold change shrinkage
+res_tableKD <- lfcShrink(dds, coef="sampletype_MOV10_knockdown_vs_control", type="apeglm")
+```

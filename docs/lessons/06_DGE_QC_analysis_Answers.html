@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Differential Gene Expression Analysis</title>
+<title>Introduction to Differential Gene Expression Analysis - QC methods for DE analysis using DESeq2 - Answer key</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,110 +156,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-differential-gene-expression-analysis" id="toc-introduction-to-differential-gene-expression-analysis" class="nav-link active" data-scroll-target="#introduction-to-differential-gene-expression-analysis">Introduction to Differential Gene Expression Analysis</a>
-  <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#installations" id="toc-installations" class="nav-link" data-scroll-target="#installations">Installations</a></li>
-  <li><a href="#lessons" id="toc-lessons" class="nav-link" data-scroll-target="#lessons">Lessons</a>
-  <ul class="collapse">
-  <li><a href="#part-1-getting-started" id="toc-part-1-getting-started" class="nav-link" data-scroll-target="#part-1-getting-started">Part 1 (Getting Started)</a></li>
-  <li><a href="#part-ii-qc-and-setting-up-for-deseq2" id="toc-part-ii-qc-and-setting-up-for-deseq2" class="nav-link" data-scroll-target="#part-ii-qc-and-setting-up-for-deseq2">Part II (QC and setting up for DESeq2)</a></li>
-  <li><a href="#part-iii-deseq2" id="toc-part-iii-deseq2" class="nav-link" data-scroll-target="#part-iii-deseq2">Part III (DESeq2)</a></li>
-  <li><a href="#part-iv-functional-analysis" id="toc-part-iv-functional-analysis" class="nav-link" data-scroll-target="#part-iv-functional-analysis">Part IV (Functional Analysis)</a></li>
-  </ul></li>
-  <li><a href="#building-on-this-workshop" id="toc-building-on-this-workshop" class="nav-link" data-scroll-target="#building-on-this-workshop">Building on this workshop</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  </ul></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link active" data-scroll-target="#exercise-1">Exercise 1</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">QC methods for DE analysis using DESeq2 - Answer key</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="introduction-to-differential-gene-expression-analysis" class="level1">
-<h1>Introduction to Differential Gene Expression Analysis</h1>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<ul>
-<li>Explain and interpret QC on count data using Principal Component Analysis (PCA) and hierarchical clustering</li>
-<li>Implement DESeq2 to obtain a list of significantly different genes</li>
-<li>Perform functional analysis on gene lists with R-based tools</li>
-</ul>
-</section>
-<section id="installations" class="level2">
-<h2 class="anchored" data-anchor-id="installations">Installations</h2>
-<p><a href="../index.html#installation-requirements">Follow the instructions linked here</a> to download R and RStudio + Install Packages from CRAN and Bioconductor</p>
-</section>
-<section id="lessons" class="level2">
-<h2 class="anchored" data-anchor-id="lessons">Lessons</h2>
-<section id="part-1-getting-started" class="level3">
-<h3 class="anchored" data-anchor-id="part-1-getting-started">Part 1 (Getting Started)</h3>
-<ol type="1">
-<li><a href="./01_RNAseq_processing_workflow.html">Workflow (raw data to counts)</a></li>
-<li><a href="./02_experimental_planning_considerations.html">Experimental design considerations</a></li>
-<li><a href="./03_DGE_setup_and_overview.html">Intro to DGE / setting up DGE analysis</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-ii-qc-and-setting-up-for-deseq2" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii-qc-and-setting-up-for-deseq2">Part II (QC and setting up for DESeq2)</h3>
-<ol type="1">
-<li><a href="./04_RNAseq_count_distribution.html">RNA-seq counts distribution</a></li>
-<li><a href="./05_DGE_count_normalization.html">Count normalization</a></li>
-<li><a href="./06_DGE_QC_analysis.html">Sample-level QC</a> (PCA and hierarchical clustering)</li>
-<li><a href="./07_design_formulas.html">Design formulas</a></li>
-<li><a href="./08_hypothesis_testing.html">Hypothesis testing and multiple test correction</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-iii-deseq2" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii-deseq2">Part III (DESeq2)</h3>
-<ol type="1">
-<li><a href="./09_DGE_DESeq2_analysis.html">Description of steps for DESeq2</a></li>
-<li><a href="./10_wald_test_results.html">Wald test results</a></li>
-<li><a href="./11_summarizing_results.html">Summarizing results and extracting significant gene lists</a></li>
-<li><a href="./12_DGE_visualizing_results.html">Visualization</a></li>
-<li><a href="./13_DGE_LRT_results.html">Likelihood Ratio Test results</a></li>
-<li><a href="./14_time_course_analyses.html">Time course analysis</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-iv-functional-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv-functional-analysis">Part IV (Functional Analysis)</h3>
-<ol type="1">
-<li><a href="./15_genomic_annotation.html">Gene annotation</a></li>
-<li><a href="./16_FA_over-representation_analysis.html">Functional analysis - over-representation analysis</a></li>
-<li><a href="./17_FA_functional_class_scoring.html">Functional analysis - functional class scoring / GSEA</a></li>
-</ol>
-<hr>
-<p><a href="./18_DGE_summarizing_workflow.html">Workflow Summary</a></p>
-<hr>
-</section>
-</section>
-<section id="building-on-this-workshop" class="level2">
-<h2 class="anchored" data-anchor-id="building-on-this-workshop">Building on this workshop</h2>
-<ul>
-<li><a href="https://hbctraining.github.io/scRNA-seq/">Single-cell RNA-seq workshop</a></li>
-<li><a href="https://hbctraining.github.io/Training-modules/Rmarkdown/">RMarkdown</a></li>
-<li><a href="https://hbctraining.github.io/Training-modules/Tidyverse_ggplot2/lessons/ggplot2.html">Ggplot2 for functional analysis</a></li>
-</ul>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#theory-behind-deseq2">DESeq2 vignette</a></li>
-<li>GitHub book on <a href="http://genomicsclass.github.io/book/pages/rnaseq_gene_level.html">RNA-seq gene level analysis</a></li>
-<li><a href="https://support.bioconductor.org/t/deseq2/">Bioconductor support site</a> (posts tagged with <code>deseq2</code>)</li>
-<li><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">Functional analysis visualization</a></li>
-</ul>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="exercise-1" class="level1">
+<h1>Exercise 1</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_DGE_QC_analysis_Answers_files/figure-html/pca_plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What does the above plot tell you about the similarity of samples?</strong></p>
+<p>Samples from different experimental groups are different, while replicates within the same group are similar.</p>
+<p><strong>Does it fit the expectation from the experimental design?</strong></p>
+<p>Yes, it does.</p>
+<p><strong>What do you think the %variance information (in the axes titles) tell you about the data in the context of the PCA?</strong></p>
+<p>PC1 is associated with 37% of the variance in the data, and PC2 is associated with 16%.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You won’t see the %variance information when you make PCA plots without the plotPCA() function. But there are tools that let you explore this.</p>
+</div>
+</div>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -723,67 +679,49 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction to Differential Gene Expression Analysis</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "QC methods for DE analysis using DESeq2 - Answer key"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explain and interpret QC on count data using Principal Component Analysis (PCA) and hierarchical clustering</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement DESeq2 to obtain a list of significantly different genes</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Perform functional analysis on gene lists with R-based tools</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installations</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Follow the instructions linked here</span><span class="co">](../index.html#installation-requirements)</span> to download R and RStudio + Install Packages from CRAN and Bioconductor</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lessons</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part 1 (Getting Started)</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Workflow (raw data to counts)</span><span class="co">](./01_RNAseq_processing_workflow.html)</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Experimental design considerations</span><span class="co">](./02_experimental_planning_considerations.html)</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Intro to DGE / setting up DGE analysis</span><span class="co">](./03_DGE_setup_and_overview.html)</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data_setup}</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in"># load libraries needed to render this lesson</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">library(DESeq2)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">dds  &lt;- readRDS("./data/intermediate_dds.RDS")</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="in">meta &lt;- readRDS("./data/metadata.RDS")</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 1</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pca_plot}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part II (QC and setting up for DESeq2)</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">RNA-seq counts distribution</span><span class="co">](./04_RNAseq_count_distribution.html)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Count normalization</span><span class="co">](./05_DGE_count_normalization.html)</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Sample-level QC</span><span class="co">](./06_DGE_QC_analysis.html)</span> (PCA and hierarchical clustering)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Design formulas</span><span class="co">](./07_design_formulas.html)</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Hypothesis testing and multiple test correction</span><span class="co">](./08_hypothesis_testing.html)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="in"># Transform counts for data visualization</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="in">rld &lt;- rlog(dds, blind=TRUE)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="in"># Plot PCA </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="in">plotPCA(rld, intgroup="sampletype")</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>**What does the above plot tell you about the similarity of samples?**</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part III (DESeq2)</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Description of steps for DESeq2</span><span class="co">](./09_DGE_DESeq2_analysis.html)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Wald test results</span><span class="co">](./10_wald_test_results.html)</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Summarizing results and extracting significant gene lists</span><span class="co">](./11_summarizing_results.html)</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Visualization</span><span class="co">](./12_DGE_visualizing_results.html)</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Likelihood Ratio Test results</span><span class="co">](./13_DGE_LRT_results.html)</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Time course analysis</span><span class="co">](./14_time_course_analyses.html)</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Samples from different experimental groups are different, while replicates within the same group are similar.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>**Does it fit the expectation from the experimental design?**</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Yes, it does.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>**What do you think the %variance information (in the axes titles) tell you about the data in the context of the PCA?**</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>PC1 is associated with 37% of the variance in the data, and PC2 is associated with 16%. </span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part IV (Functional Analysis)</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Gene annotation</span><span class="co">](./15_genomic_annotation.html)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Functional analysis - over-representation analysis</span><span class="co">](./16_FA_over-representation_analysis.html)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Functional analysis - functional class scoring / GSEA</span><span class="co">](./17_FA_functional_class_scoring.html)</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Workflow Summary</span><span class="co">](./18_DGE_summarizing_workflow.html)</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Building on this workshop</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Single-cell RNA-seq workshop</span><span class="co">](https://hbctraining.github.io/scRNA-seq/)</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">RMarkdown</span><span class="co">](https://hbctraining.github.io/Training-modules/Rmarkdown/)</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Ggplot2 for functional analysis</span><span class="co">](https://hbctraining.github.io/Training-modules/Tidyverse_ggplot2/lessons/ggplot2.html)</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">DESeq2 vignette</span><span class="co">](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#theory-behind-deseq2)</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>GitHub book on <span class="co">[</span><span class="ot">RNA-seq gene level analysis</span><span class="co">](http://genomicsclass.github.io/book/pages/rnaseq_gene_level.html)</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Bioconductor support site</span><span class="co">](https://support.bioconductor.org/t/deseq2/)</span> (posts tagged with <span class="in">`deseq2`</span>) </span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Functional analysis visualization</span><span class="co">](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>:::callout-note</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>You won't see the %variance information when you make PCA plots without the plotPCA() function. But there are tools that let you explore this.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

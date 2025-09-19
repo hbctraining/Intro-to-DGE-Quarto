@@ -156,20 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-differential-gene-expression-analysis" id="toc-introduction-to-differential-gene-expression-analysis" class="nav-link active" data-scroll-target="#introduction-to-differential-gene-expression-analysis">Introduction to Differential Gene Expression Analysis</a>
-  <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#installations" id="toc-installations" class="nav-link" data-scroll-target="#installations">Installations</a></li>
-  <li><a href="#lessons" id="toc-lessons" class="nav-link" data-scroll-target="#lessons">Lessons</a>
-  <ul class="collapse">
-  <li><a href="#part-1-getting-started" id="toc-part-1-getting-started" class="nav-link" data-scroll-target="#part-1-getting-started">Part 1 (Getting Started)</a></li>
-  <li><a href="#part-ii-qc-and-setting-up-for-deseq2" id="toc-part-ii-qc-and-setting-up-for-deseq2" class="nav-link" data-scroll-target="#part-ii-qc-and-setting-up-for-deseq2">Part II (QC and setting up for DESeq2)</a></li>
-  <li><a href="#part-iii-deseq2" id="toc-part-iii-deseq2" class="nav-link" data-scroll-target="#part-iii-deseq2">Part III (DESeq2)</a></li>
-  <li><a href="#part-iv-functional-analysis" id="toc-part-iv-functional-analysis" class="nav-link" data-scroll-target="#part-iv-functional-analysis">Part IV (Functional Analysis)</a></li>
-  </ul></li>
-  <li><a href="#building-on-this-workshop" id="toc-building-on-this-workshop" class="nav-link" data-scroll-target="#building-on-this-workshop">Building on this workshop</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  </ul></li>
+  <li><a href="#using-ggplot2-to-plot-multiple-genes-e.g.-top-20" id="toc-using-ggplot2-to-plot-multiple-genes-e.g.-top-20" class="nav-link active" data-scroll-target="#using-ggplot2-to-plot-multiple-genes-e.g.-top-20">Using <code>ggplot2</code> to plot multiple genes (e.g.&nbsp;top 20)</a></li>
   </ul>
 </nav>
     </div>
@@ -179,87 +166,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction-to-differential-gene-expression-analysis" class="level1">
-<h1>Introduction to Differential Gene Expression Analysis</h1>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<ul>
-<li>Explain and interpret QC on count data using Principal Component Analysis (PCA) and hierarchical clustering</li>
-<li>Implement DESeq2 to obtain a list of significantly different genes</li>
-<li>Perform functional analysis on gene lists with R-based tools</li>
-</ul>
-</section>
-<section id="installations" class="level2">
-<h2 class="anchored" data-anchor-id="installations">Installations</h2>
-<p><a href="../index.html#installation-requirements">Follow the instructions linked here</a> to download R and RStudio + Install Packages from CRAN and Bioconductor</p>
-</section>
-<section id="lessons" class="level2">
-<h2 class="anchored" data-anchor-id="lessons">Lessons</h2>
-<section id="part-1-getting-started" class="level3">
-<h3 class="anchored" data-anchor-id="part-1-getting-started">Part 1 (Getting Started)</h3>
-<ol type="1">
-<li><a href="./01_RNAseq_processing_workflow.html">Workflow (raw data to counts)</a></li>
-<li><a href="./02_experimental_planning_considerations.html">Experimental design considerations</a></li>
-<li><a href="./03_DGE_setup_and_overview.html">Intro to DGE / setting up DGE analysis</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-ii-qc-and-setting-up-for-deseq2" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii-qc-and-setting-up-for-deseq2">Part II (QC and setting up for DESeq2)</h3>
-<ol type="1">
-<li><a href="./04_RNAseq_count_distribution.html">RNA-seq counts distribution</a></li>
-<li><a href="./05_DGE_count_normalization.html">Count normalization</a></li>
-<li><a href="./06_DGE_QC_analysis.html">Sample-level QC</a> (PCA and hierarchical clustering)</li>
-<li><a href="./07_design_formulas.html">Design formulas</a></li>
-<li><a href="./08_hypothesis_testing.html">Hypothesis testing and multiple test correction</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-iii-deseq2" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii-deseq2">Part III (DESeq2)</h3>
-<ol type="1">
-<li><a href="./09_DGE_DESeq2_analysis.html">Description of steps for DESeq2</a></li>
-<li><a href="./10_wald_test_results.html">Wald test results</a></li>
-<li><a href="./11_summarizing_results.html">Summarizing results and extracting significant gene lists</a></li>
-<li><a href="./12_DGE_visualizing_results.html">Visualization</a></li>
-<li><a href="./13_DGE_LRT_results.html">Likelihood Ratio Test results</a></li>
-<li><a href="./14_time_course_analyses.html">Time course analysis</a></li>
-</ol>
-<hr>
-</section>
-<section id="part-iv-functional-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv-functional-analysis">Part IV (Functional Analysis)</h3>
-<ol type="1">
-<li><a href="./15_genomic_annotation.html">Gene annotation</a></li>
-<li><a href="./16_FA_over-representation_analysis.html">Functional analysis - over-representation analysis</a></li>
-<li><a href="./17_FA_functional_class_scoring.html">Functional analysis - functional class scoring / GSEA</a></li>
-</ol>
-<hr>
-<p><a href="./18_DGE_summarizing_workflow.html">Workflow Summary</a></p>
-<hr>
-</section>
-</section>
-<section id="building-on-this-workshop" class="level2">
-<h2 class="anchored" data-anchor-id="building-on-this-workshop">Building on this workshop</h2>
-<ul>
-<li><a href="https://hbctraining.github.io/scRNA-seq/">Single-cell RNA-seq workshop</a></li>
-<li><a href="https://hbctraining.github.io/Training-modules/Rmarkdown/">RMarkdown</a></li>
-<li><a href="https://hbctraining.github.io/Training-modules/Tidyverse_ggplot2/lessons/ggplot2.html">Ggplot2 for functional analysis</a></li>
-</ul>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#theory-behind-deseq2">DESeq2 vignette</a></li>
-<li>GitHub book on <a href="http://genomicsclass.github.io/book/pages/rnaseq_gene_level.html">RNA-seq gene level analysis</a></li>
-<li><a href="https://support.bioconductor.org/t/deseq2/">Bioconductor support site</a> (posts tagged with <code>deseq2</code>)</li>
-<li><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">Functional analysis visualization</a></li>
-</ul>
+<section id="using-ggplot2-to-plot-multiple-genes-e.g.-top-20" class="level3">
+<h3 class="anchored" data-anchor-id="using-ggplot2-to-plot-multiple-genes-e.g.-top-20">Using <code>ggplot2</code> to plot multiple genes (e.g.&nbsp;top 20)</h3>
+<p>Often it is helpful to check the expression of multiple genes of interest at the same time. This often first requires some data wrangling.</p>
+<p>We are going to plot the normalized count values for the <strong>top 20 differentially expressed genes (by padj values)</strong>. To do this, we first need to determine the gene names of our top 20 genes by ordering our results and extracting the top 20 genes (by padj values):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Order results by padj values</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>top20_sigOE_genes <span class="ot">&lt;-</span> res_tableOE_tb <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(padj) <span class="sc">%&gt;%</span> <span class="co"># Arrange rows by padj values</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(gene) <span class="sc">%&gt;%</span>        <span class="co"># Extract character vector of ordered genes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">20</span>)            <span class="co"># Extract the first 20 genes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we can extract the normalized count values for these top 20 genes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get normalized counts for top 20 significant genes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>top20_sigOE_norm <span class="ot">&lt;-</span> normalized_counts <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> top20_sigOE_genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have the normalized counts for each of the top 20 genes for all 8 samples, to plot using <code>ggplot()</code>, we need to gather the counts for all samples into a single column to allow us to give ggplot the one column with the values we want it to plot.</p>
+<p>The <code>gather()</code> function in the <strong>tidyr</strong> package will perform this operation and will output the normalized counts for all genes for <em>Mov10_oe_1</em> listed in the first 20 rows, followed by the normalized counts for <em>Mov10_oe_2</em> in the next 20 rows, so on and so forth.</p>
+<p><img src="../img/melt_wide_to_long_format.png" width="800"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gathering the columns to have normalized counts to a single column</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gathered_top20_sigOE <span class="ot">&lt;-</span> top20_sigOE_norm <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="fu">colnames</span>(top20_sigOE_norm)[<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>], <span class="at">key =</span> <span class="st">"samplename"</span>, <span class="at">value =</span> <span class="st">"normalized_counts"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the column header in the "gathered" data frame</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gathered_top20_sigOE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  gene            symbol samplename normalized_counts
+  &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;                  &lt;dbl&gt;
+1 ENSG00000089220 PEBP1  Irrel_kd_1             7289.
+2 ENSG00000096654 ZNF184 Irrel_kd_1              502.
+3 ENSG00000102317 RBM3   Irrel_kd_1             8550.
+4 ENSG00000104885 DOT1L  Irrel_kd_1             3680.
+5 ENSG00000112972 HMGCS1 Irrel_kd_1             9310.
+6 ENSG00000124762 CDKN1A Irrel_kd_1             1639.</code></pre>
+</div>
+</div>
+<p>Now, if we want our counts colored by sample group, then we need to combine the metadata information with the melted normalized counts data into the same data frame for input to <code>ggplot()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add metadata</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gathered_top20_sigOE <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(mov10_meta, gathered_top20_sigOE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>inner_join()</code> will merge 2 data frames with respect to any column with the same column name in both data frames: in this case, the “samplename” column.</p>
+<p>Now that we have a data frame in a format that can be utilized by ggplot easily, let’s plot!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using ggplot2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gathered_top20_sigOE) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> symbol, <span class="at">y =</span> normalized_counts, <span class="at">color =</span> sampletype)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add title and plot tweaks</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Genes"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"log10 Normalized Counts"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Top 20 Significant DE Genes"</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Aside_top20_genes-expression_plotting_files/figure-html/plot_genes-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -723,67 +699,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction to Differential Gene Expression Analysis</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explain and interpret QC on count data using Principal Component Analysis (PCA) and hierarchical clustering</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement DESeq2 to obtain a list of significantly different genes</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Perform functional analysis on gene lists with R-based tools</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installations</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Follow the instructions linked here</span><span class="co">](../index.html#installation-requirements)</span> to download R and RStudio + Install Packages from CRAN and Bioconductor</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lessons</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part 1 (Getting Started)</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Workflow (raw data to counts)</span><span class="co">](./01_RNAseq_processing_workflow.html)</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Experimental design considerations</span><span class="co">](./02_experimental_planning_considerations.html)</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Intro to DGE / setting up DGE analysis</span><span class="co">](./03_DGE_setup_and_overview.html)</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part II (QC and setting up for DESeq2)</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">RNA-seq counts distribution</span><span class="co">](./04_RNAseq_count_distribution.html)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Count normalization</span><span class="co">](./05_DGE_count_normalization.html)</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Sample-level QC</span><span class="co">](./06_DGE_QC_analysis.html)</span> (PCA and hierarchical clustering)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Design formulas</span><span class="co">](./07_design_formulas.html)</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Hypothesis testing and multiple test correction</span><span class="co">](./08_hypothesis_testing.html)</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part III (DESeq2)</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Description of steps for DESeq2</span><span class="co">](./09_DGE_DESeq2_analysis.html)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Wald test results</span><span class="co">](./10_wald_test_results.html)</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Summarizing results and extracting significant gene lists</span><span class="co">](./11_summarizing_results.html)</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Visualization</span><span class="co">](./12_DGE_visualizing_results.html)</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Likelihood Ratio Test results</span><span class="co">](./13_DGE_LRT_results.html)</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Time course analysis</span><span class="co">](./14_time_course_analyses.html)</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Part IV (Functional Analysis)</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Gene annotation</span><span class="co">](./15_genomic_annotation.html)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Functional analysis - over-representation analysis</span><span class="co">](./16_FA_over-representation_analysis.html)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Functional analysis - functional class scoring / GSEA</span><span class="co">](./17_FA_functional_class_scoring.html)</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Workflow Summary</span><span class="co">](./18_DGE_summarizing_workflow.html)</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Building on this workshop</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Single-cell RNA-seq workshop</span><span class="co">](https://hbctraining.github.io/scRNA-seq/)</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">RMarkdown</span><span class="co">](https://hbctraining.github.io/Training-modules/Rmarkdown/)</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Ggplot2 for functional analysis</span><span class="co">](https://hbctraining.github.io/Training-modules/Tidyverse_ggplot2/lessons/ggplot2.html)</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">DESeq2 vignette</span><span class="co">](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#theory-behind-deseq2)</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>GitHub book on <span class="co">[</span><span class="ot">RNA-seq gene level analysis</span><span class="co">](http://genomicsclass.github.io/book/pages/rnaseq_gene_level.html)</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Bioconductor support site</span><span class="co">](https://support.bioconductor.org/t/deseq2/)</span> (posts tagged with <span class="in">`deseq2`</span>) </span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">Functional analysis visualization</span><span class="co">](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Using `ggplot2` to plot multiple genes (e.g. top 20)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data_setup}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in"># load libraries needed to render this lesson</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb    &lt;- readRDS("./data/intermediate_res_tableOE_tb.RDS")</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">normalized_counts &lt;- readRDS("./data/intermediate_normalized_counts_with_gene_names.RDS")</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">meta              &lt;- readRDS("./data/metadata.RDS")</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="in">mov10_meta &lt;- meta %&gt;% rownames_to_column(var="samplename") %&gt;% as_tibble()</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Often it is helpful to check the expression of multiple genes of interest at the same time. This often first requires some data wrangling.</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>We are going to plot the normalized count values for the **top 20 differentially expressed genes (by padj values)**. </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>To do this, we first need to determine the gene names of our top 20 genes by ordering our results and extracting the top 20 genes (by padj values):</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r order_results}</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="in"># Order results by padj values</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="in">top20_sigOE_genes &lt;- res_tableOE_tb %&gt;% </span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="in">  arrange(padj) %&gt;% # Arrange rows by padj values</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="in">  pull(gene) %&gt;%        # Extract character vector of ordered genes</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">  head(n=20)            # Extract the first 20 genes</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>Then, we can extract the normalized count values for these top 20 genes:</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r extract_norm_exp}</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="in"># Get normalized counts for top 20 significant genes</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="in">top20_sigOE_norm &lt;- normalized_counts %&gt;%</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(gene %in% top20_sigOE_genes)</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>Now that we have the normalized counts for each of the top 20 genes for all 8 samples, to plot using <span class="in">`ggplot()`</span>, we need to gather the counts for all samples into a single column to allow us to give ggplot the one column with the values we want it to plot.</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>The <span class="in">`gather()`</span> function in the **tidyr** package will perform this operation and will output the normalized counts for all genes for *Mov10_oe_1* listed in the first 20 rows, followed by the normalized counts for *Mov10_oe_2* in the next 20 rows, so on and so forth.</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>&lt;img src="../img/melt_wide_to_long_format.png" width="800"&gt;</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r wrangle_data}</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="in"># Gathering the columns to have normalized counts to a single column</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="in">gathered_top20_sigOE &lt;- top20_sigOE_norm %&gt;%</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="in">  gather(colnames(top20_sigOE_norm)[2:9], key = "samplename", value = "normalized_counts")</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="in"># Check the column header in the "gathered" data frame</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="in">head(gathered_top20_sigOE)</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>Now, if we want our counts colored by sample group, then we need to combine the metadata information with the melted normalized counts data into the same data frame for input to <span class="in">`ggplot()`</span>:</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r add_metadata}</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in"># Add metadata</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="in">gathered_top20_sigOE &lt;- inner_join(mov10_meta, gathered_top20_sigOE)</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>The <span class="in">`inner_join()`</span> will merge 2 data frames with respect to any column with the same column name in both data frames: in this case, the "samplename" column.</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>Now that we have a data frame in a format that can be utilized by ggplot easily, let's plot! </span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot_genes}</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="in"># Plot using ggplot2</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(gathered_top20_sigOE) +</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point(aes(x = symbol, y = normalized_counts, color = sampletype)) +</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_y_log10() +</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="in">  # Add title and plot tweaks</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">  xlab("Genes") +</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="in">  ylab("log10 Normalized Counts") +</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="in">  ggtitle("Top 20 Significant DE Genes") +</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="in">  theme_bw() +</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="in">  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="in">  theme(plot.title = element_text(hjust = 0.5))</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

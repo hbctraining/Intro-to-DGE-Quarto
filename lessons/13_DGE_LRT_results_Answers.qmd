@@ -1,0 +1,48 @@
+---
+title: "DGE analysis using LRT in DESeq2"
+---
+
+```{r data_setup}
+#| echo: false
+
+# load libraries needed to render this lesson
+library(tidyverse)
+library(DESeq2)
+
+# load objects needed to render this lesson
+dds_lrt <- readRDS("./data/intermediate_dds_lrt.RDS")
+sigOE   <- readRDS("./data/intermediate_res_sigOE.RDS")
+sigKD   <- readRDS("./data/intermediate_res_sigKD.RDS")
+padj.cutoff <- 0.05
+
+# Extract results for LRT
+res_LRT <- results(dds_lrt)
+# Create a tibble for LRT results
+res_LRT_tb <- res_LRT %>%
+  data.frame() %>%
+  rownames_to_column(var="gene") %>% 
+  as_tibble()
+# Subset to return genes with padj < 0.05
+sigLRT_genes <- res_LRT_tb %>% 
+  dplyr::filter(padj < padj.cutoff)
+```
+
+# Exercise 1
+
+**Compare the resulting gene list from the LRT test to the gene lists from the Wald test comparisons.**
+
+**How many of the `sigLRT_genes` overlap with the significant genes in `sigOE`?**
+
+```{r}
+# find overlaps between sigLRT_genes and sigOE
+overlap_LRT_OE <- sigLRT_genes %>% subset(gene %in% sigOE$gene)
+nrow(overlap_LRT_OE)
+```
+
+**How many of the `sigLRT_genes` overlap with the significant genes in `sigKD`?**
+
+```{r}
+# find overlaps between sigLRT_genes and sigKD
+overlap_LRT_KD <- sigLRT_genes %>% subset(gene %in% sigKD$gene)
+nrow(overlap_LRT_KD)
+```

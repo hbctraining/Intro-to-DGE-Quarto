@@ -1,0 +1,43 @@
+---
+title: "QC methods for DE analysis using DESeq2 - Answer key"
+---
+
+```{r data_setup}
+#| echo: false
+
+# load libraries needed to render this lesson
+library(ggplot2)
+library(DESeq2)
+
+# load objects needed to render this lesson
+dds  <- readRDS("./data/intermediate_dds.RDS")
+meta <- readRDS("./data/metadata.RDS")
+```
+
+# Exercise 1
+
+```{r pca_plot}
+#| echo: false
+
+# Transform counts for data visualization
+rld <- rlog(dds, blind=TRUE)
+
+# Plot PCA 
+plotPCA(rld, intgroup="sampletype")
+```
+
+**What does the above plot tell you about the similarity of samples?**
+
+Samples from different experimental groups are different, while replicates within the same group are similar.
+
+**Does it fit the expectation from the experimental design?**
+
+Yes, it does.
+
+**What do you think the %variance information (in the axes titles) tell you about the data in the context of the PCA?**
+
+PC1 is associated with 37% of the variance in the data, and PC2 is associated with 16%. 
+
+:::callout-note
+You won't see the %variance information when you make PCA plots without the plotPCA() function. But there are tools that let you explore this.
+:::

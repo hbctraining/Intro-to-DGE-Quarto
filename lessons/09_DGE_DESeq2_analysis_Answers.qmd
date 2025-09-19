@@ -1,0 +1,13 @@
+---
+title: "Gene-level differential expression analysis with DESeq2 - Answer key"
+---
+
+# Exercise 1
+
+**Given the dispersion plot below, would you have any concerns regarding the fit of your data to the model? If not, what aspects of the plot makes you feel confident about your data? If so, what are your concerns? What would you do to address them?**
+
+<p align="center">
+<img src="../img/exercise_dispersion.png" width="500">
+</p>
+
+Yes, there are some concerns. The data does not scatter around the fitted curve, and the distribution of normalized counts are restricted in a small range. I would double check QC of my samples to make sure that there are no contamination or outliers.

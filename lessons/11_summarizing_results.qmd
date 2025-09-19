@@ -1,0 +1,103 @@
+---
+title: "Summarizing results from the Wald test"
+author: "Meeta Mistry, Radhika Khetani, Mary Piper"
+date: "June 1, 2020"
+---
+
+Approximate time: 20 minutes
+
+```{r data_setup}
+#| echo: false
+
+# load libraries needed to render this lesson
+library(tidyverse)
+library(DESeq2)
+
+# load objects needed to render this lesson
+res_tableOE <- readRDS("./data/intermediate_res_tableOE.RDS")
+res_tableKD <- readRDS("./data/intermediate_res_tableKD.RDS")
+```
+
+## Learning Objectives
+
+* Evaluate the number of differentially expressed genes produced for each comparison
+* Construct R objects containing significant genes from each comparison
+
+## Summarizing results
+
+To summarize the results table, a handy function in DESeq2 is `summary()`. Confusingly it has the same name as the function used to inspect data frames. This function, when called with a DESeq results table as input, will summarize the results using a default threshold of padj < 0.1. However, since we had set the `alpha` argument to 0.05 when creating our results table, the `summary()` function should also use the threshold FDR < 0.05. (Note that padj/FDR is used even though the output says `p-value < 0.05`.) Let's start with the OE vs control results:
+
+```{r results_summary}
+# Summarize results
+summary(res_tableOE, alpha = 0.05)
+```
+
+In addition to the number of genes up- and down-regulated at the default threshold, **the function also reports the number of genes that were tested (genes with non-zero total read count), and the number of genes not included in multiple test correction due to a low mean count**.
+
+## Extracting significant differentially expressed genes
+
+Let's first create variables that contain our threshold criteria. We will only be using the adjusted p-values in our criteria:
+
+```{r results_thresholds}
+# Set thresholds
+padj.cutoff <- 0.05
+```
+
+We can easily subset the results table to only include those that are significant using the `filter()` function, but first we will convert the results table into a tibble:
+
+```{r results_tibble}
+# Create a tibble of results
+res_tableOE_tb <- res_tableOE %>%
+  data.frame() %>%
+  rownames_to_column(var="gene") %>% 
+  as_tibble()
+```
+
+Now we can subset that table to only keep the significant genes using our pre-defined thresholds:
+
+```{r results_sig}
+# Subset the tibble to keep only significant genes
+sigOE <- res_tableOE_tb %>%
+  dplyr::filter(padj < padj.cutoff)
+
+# Take a quick look at this tibble
+sigOE
+```
+
+::: callout-tip
+# [**Exercise 1**](11_summarizing_results_Answers.html#exercise-1)
+
+**MOV10 Differential Expression Analysis: Control versus Knockdown**
+
+1. Using the same p-adjusted threshold as above (`padj.cutoff < 0.05`), subset `res_tableKD` to report the number of genes that are up- and down-regulated in Mov10_knockdown compared to control.
+2. How many genes are differentially expressed in the Knockdown compared to Control? How does this compare to the overexpression significant gene list (in terms of numbers)?
+:::
+
+```{r exercise}
+#| echo: false
+
+# Create a tibble of results
+res_tableKD_tb <- res_tableKD %>%
+  data.frame() %>%
+  rownames_to_column(var="gene") %>% 
+  as_tibble()
+
+# Subset the tibble to keep only significant genes
+sigKD <- res_tableKD_tb %>%
+  dplyr::filter(padj < padj.cutoff)
+```
+
+Now that we have extracted the significant results, we are ready for visualization!
+
+```{r data_save}
+#| echo: false
+
+# save objects needed to render future lessons
+saveRDS(res_tableOE_tb, "./data/intermediate_res_tableOE_tb.RDS")
+saveRDS(sigOE,          "./data/intermediate_res_sigOE.RDS")
+saveRDS(sigKD,          "./data/intermediate_res_sigKD.RDS")
+```
+
+---
+
+*Some materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*

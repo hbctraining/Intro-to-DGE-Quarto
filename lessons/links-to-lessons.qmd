@@ -13,39 +13,39 @@
 ## Lessons
 
 ### Part 1 (Getting Started)
-1. [Workflow (raw data to counts)](./01a_RNAseq_processing_workflow.html)
-1. [Experimental design considerations](./experimental_planning_considerations.html)
-1. [Intro to DGE / setting up DGE analysis](./01b_DGE_setup_and_overview.html)
+1. [Workflow (raw data to counts)](./01_RNAseq_processing_workflow.html)
+1. [Experimental design considerations](./02_experimental_planning_considerations.html)
+1. [Intro to DGE / setting up DGE analysis](./03_DGE_setup_and_overview.html)
      
 ***
 
 ### Part II (QC and setting up for DESeq2)
-1. [RNA-seq counts distribution](./01c_RNAseq_count_distribution.html)
-1. [Count normalization](./02_DGE_count_normalization.html)
-1. [Sample-level QC](./03_DGE_QC_analysis.html) (PCA and hierarchical clustering)
-1. [Design formulas](./04a_design_formulas.html)
-1. [Hypothesis testing and multiple test correction](./05a_hypothesis_testing.html)
+1. [RNA-seq counts distribution](./04_RNAseq_count_distribution.html)
+1. [Count normalization](./05_DGE_count_normalization.html)
+1. [Sample-level QC](./06_DGE_QC_analysis.html) (PCA and hierarchical clustering)
+1. [Design formulas](./07_design_formulas.html)
+1. [Hypothesis testing and multiple test correction](./08_hypothesis_testing.html)
 
 ***
 
 ### Part III (DESeq2)
-1. [Description of steps for DESeq2](./04b_DGE_DESeq2_analysis.html)
-1. [Wald test results](./05b_wald_test_results.html)
-1. [Summarizing results and extracting significant gene lists](./05c_summarizing_results.html)
-1. [Visualization](./06_DGE_visualizing_results.html)
-1. [Likelihood Ratio Test results](./08a_DGE_LRT_results.html)
-1. [Time course analysis](./08b_time_course_analyses.html)
+1. [Description of steps for DESeq2](./09_DGE_DESeq2_analysis.html)
+1. [Wald test results](./10_wald_test_results.html)
+1. [Summarizing results and extracting significant gene lists](./11_summarizing_results.html)
+1. [Visualization](./12_DGE_visualizing_results.html)
+1. [Likelihood Ratio Test results](./13_DGE_LRT_results.html)
+1. [Time course analysis](./14_time_course_analyses.html)
 
 ***
 
 ### Part IV (Functional Analysis)
-1. [Gene annotation](./genomic_annotation.html)
-1. [Functional analysis - over-representation analysis](./10_FA_over-representation_analysis.html)
-1. [Functional analysis - functional class scoring / GSEA](./11_FA_functional_class_scoring.html)
+1. [Gene annotation](./15_genomic_annotation.html)
+1. [Functional analysis - over-representation analysis](./16_FA_over-representation_analysis.html)
+1. [Functional analysis - functional class scoring / GSEA](./17_FA_functional_class_scoring.html)
 
 ***
    
-[Workflow Summary](./07_DGE_summarizing_workflow.html)
+[Workflow Summary](./18_DGE_summarizing_workflow.html)
 
 ***
 

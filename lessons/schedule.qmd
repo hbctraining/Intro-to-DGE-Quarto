@@ -2,23 +2,23 @@
 
 ## Pre-reading
 
-1. [Workflow (raw data to counts)](./01a_RNAseq_processing_workflow.html)
-1. [Experimental design considerations](./experimental_planning_considerations.html)
+1. [Workflow (raw data to counts)](./01_RNAseq_processing_workflow.html)
+1. [Experimental design considerations](./02_experimental_planning_considerations.html)
 
 ## Day 1
 
-| Time          |  Topic                                                                      | Instructor |
-|:-------------:|:---------------------------------------------------------------------------:|:----------:|
-| 10:00 - 10:30 | [Workshop Introduction](../lectures/workshop_intro_slides.pdf)              | Will |
-| 10:30 - 11:00 | RNA-seq pre-reading discussion                                              | All |
-| 11:00 - 11:45 | [Intro to DGE / setting up DGE analysis](./01b_DGE_setup_and_overview.html) | Meeta |
-| 11:45 - 12:00 | Overview of self-learning materials and homework submission                 | Will |
+| Time          |  Topic                                                                     | Instructor |
+|:-------------:|:--------------------------------------------------------------------------:|:----------:|
+| 10:00 - 10:30 | [Workshop Introduction](../lectures/workshop_intro_slides.pdf)             | Will |
+| 10:30 - 11:00 | RNA-seq pre-reading discussion                                             | All |
+| 11:00 - 11:45 | [Intro to DGE / setting up DGE analysis](./03_DGE_setup_and_overview.html) | Meeta |
+| 11:45 - 12:00 | Overview of self-learning materials and homework submission                | Will |
 
 ### Before the next class:
 
 1. Please **study the contents** and **work through all the code** within the following lessons:
   
-  * [RNA-seq counts distribution](./01c_RNAseq_count_distribution.html)
+  * [RNA-seq counts distribution](./04_RNAseq_count_distribution.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -32,7 +32,7 @@
   - Explaining the benefits of biological replicates
 :::
   
-  * [Count normalization](./02_DGE_count_normalization.html)
+  * [Count normalization](./05_DGE_count_normalization.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -46,7 +46,7 @@
   - Generating a matrix of normalized counts using DESeq2's median of ratios method
 :::
   
-  * [Sample-level QC](./03_DGE_QC_analysis.html) (PCA and hierarchical clustering)
+  * [Sample-level QC](./06_DGE_QC_analysis.html) (PCA and hierarchical clustering)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -71,17 +71,17 @@
 
 ## Day 2
 
-| Time          |  Topic                                                                           | Instructor |
-|:-------------:|:--------------------------------------------------------------------------------:|:----------:|
-| 10:00 - 11:00 | Self-learning lessons discussion                                                 | All |
-| 11:00 - 11:30 | [Design formulas](./04a_design_formulas.html)                                    | Will |
-| 11:30 - 12:00 | [Hypothesis testing and multiple test correction](./05a_hypothesis_testing.html) | Meeta |
+| Time          |  Topic                                                                          | Instructor |
+|:-------------:|:-------------------------------------------------------------------------------:|:----------:|
+| 10:00 - 11:00 | Self-learning lessons discussion                                                | All |
+| 11:00 - 11:30 | [Design formulas](./07_design_formulas.html)                                    | Will |
+| 11:30 - 12:00 | [Hypothesis testing and multiple test correction](./08_hypothesis_testing.html) | Meeta |
 
 ### Before the next class:
 
 1. Please **study the contents** and **work through all the code** within the following lessons:
 
-  * [Description of steps for DESeq2](./04b_DGE_DESeq2_analysis.html)
+  * [Description of steps for DESeq2](./09_DGE_DESeq2_analysis.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -95,7 +95,7 @@
   - Critically evaluate a dispersion plot
 :::
 
-  * [Wald test results](./05b_wald_test_results.html)
+  * [Wald test results](./10_wald_test_results.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -109,7 +109,7 @@
   - Understand the different levels of filtering that are applied in DESeq2 by default (and why they are important)
 :::
   
- * [Summarizing results and extracting significant gene lists](./05c_summarizing_results.html)
+ * [Summarizing results and extracting significant gene lists](./11_summarizing_results.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -117,7 +117,7 @@
   Once you have your results, it is useful to summarize the information. Here, we get a snapshot of the number of differentially expressed genes that are identified from the different comparisons.
 :::
         
-  * [Visualization](./06_DGE_visualizing_results.html)
+  * [Visualization](./12_DGE_visualizing_results.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -142,16 +142,16 @@
 
 ## Day 3
 
-| Time          |  Topic                                                      | Instructor |
-|:-------------:|:-----------------------------------------------------------:|:----------:|
-| 10:00 - 11:15 | Self-learning lessons discussion                            | All |
-| 11:15 - 12:00 | [Likelihood Ratio Test results](./08a_DGE_LRT_results.html) | Meeta |
+| Time          |  Topic                                                     | Instructor |
+|:-------------:|:----------------------------------------------------------:|:----------:|
+| 10:00 - 11:15 | Self-learning lessons discussion                           | All |
+| 11:15 - 12:00 | [Likelihood Ratio Test results](./13_DGE_LRT_results.html) | Meeta |
 
 ### Before the next class:
 
 1. Please **study the contents** and **work through all the code** within the following lessons:
 
-  * [Time course analysis](./08b_time_course_analyses.html)
+  * [Time course analysis](./14_time_course_analyses.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -164,7 +164,7 @@
   - Identifying patterns in our list of differentially expressed genes
 :::
   
-  * [Gene annotation](./genomic_annotation.html)
+  * [Gene annotation](./15_genomic_annotation.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -177,7 +177,7 @@
   - Accessing annotations from one of these databases using R
 :::
   
-  * [Functional analysis - over-representation analysis](./10_FA_over-representation_analysis.html)
+  * [Functional analysis - over-representation analysis](./16_FA_over-representation_analysis.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -190,7 +190,7 @@
   - Identifying enriched Gene Ontology terms using the R package, clusterProfiler
 :::
   
-  * [Functional analysis - functional class scoring / GSEA](./11_FA_functional_class_scoring.html)
+  * [Functional analysis - functional class scoring / GSEA](./17_FA_functional_class_scoring.html)
   
 :::{.callout-note collapse="true"}
 # Click here for a preview of this lesson
@@ -216,16 +216,11 @@
 | Time          |  Topic                                                     | Instructor |
 |:-------------:|:----------------------------------------------------------:|:--------:|
 | 10:00 - 11:00 | Questions about self-learning lessons                      | All |
-| 11:00 - 11:15 | [Summarizing workflow](./07_DGE_summarizing_workflow.html) | Will |
+| 11:00 - 11:15 | [Summarizing workflow](./18_DGE_summarizing_workflow.html) | Will |
 | 11:15 - 11:45 | Discussion, Q & A                                          | All |
 | 11:45 - 12:00 | [Wrap Up](../lectures/workshop_wrapup_slides.pdf)          | Will |
 
 ---
-
-## Answer keys
-
-* [Day 1 Answer Key](../homework/DGE_assignment_1_answer_key.R)
-* [Day 2 Answer Key](../homework/DGE_assignment_2_answer_key.R)
 
 ## Resources
 

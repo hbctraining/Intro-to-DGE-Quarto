@@ -1,0 +1,35 @@
+---
+title: "Count normalization with DESeq2 - Answer key"
+---
+
+```{r data_setup}
+#| echo: false
+
+# load objects needed to render this lesson
+txi  <- readRDS("./data/intermediate_txi.RDS")
+meta <- readRDS("./data/metadata.RDS")
+data <- readRDS("./data/intermediate_txi_counts.RDS")
+```
+
+# Exercise 1
+
+**Suppose we have sample names matching in the counts matrix and metadata file, but they are in different order. Write the line(s) of code to create a new matrix with columns re-ordered such that they are identical to the row names of the metadata.**
+
+There are multiple ways to do this. For example:
+
+```{r}
+idx <- match(rownames(meta), colnames(data))
+data_reordered <- data[, idx]
+```
+
+OR
+
+```{r}
+data_reordered <- data[, match(rownames(meta), colnames(data))]
+```
+
+OR
+
+```{r}
+txi$counts <- txi$counts[, match(rownames(meta), colnames(txi$counts))]
+```
