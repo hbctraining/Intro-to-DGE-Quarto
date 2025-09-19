@@ -887,7 +887,7 @@ Mov10_oe_3
 <p>We can save this normalized data matrix to file for later use:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save normalized counts matrix</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(normalized_counts, <span class="at">file=</span><span class="st">"../data/normalized_counts.txt"</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote=</span><span class="cn">FALSE</span>, <span class="at">col.names=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(normalized_counts, <span class="at">file=</span><span class="st">"./data/normalized_counts.txt"</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote=</span><span class="cn">FALSE</span>, <span class="at">col.names=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1389,8 +1389,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="in">library(DESeq2)</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="in">txi  &lt;- readRDS("../data/intermediate_txi.RDS")</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="in">meta &lt;- readRDS("../data/metadata.RDS")</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="in">txi  &lt;- readRDS("./data/intermediate_txi.RDS")</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="in">meta &lt;- readRDS("./data/metadata.RDS")</span></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives </span></span>
@@ -1623,7 +1623,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r save_normalized}</span></span>
 <span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a><span class="in"># Save normalized counts matrix</span></span>
-<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a><span class="in">write.table(normalized_counts, file="../data/normalized_counts.txt", sep="\t", quote=FALSE, col.names=NA)</span></span>
+<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a><span class="in">write.table(normalized_counts, file="./data/normalized_counts.txt", sep="\t", quote=FALSE, col.names=NA)</span></span>
 <span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
@@ -1634,7 +1634,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
 <span id="cb13-260"><a href="#cb13-260" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-261"><a href="#cb13-261" aria-hidden="true" tabindex="-1"></a><span class="in"># save objects needed to render future lessons</span></span>
-<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(dds, "../data/intermediate_dds.RDS")</span></span>
+<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(dds, "./data/intermediate_dds.RDS")</span></span>
 <span id="cb13-263"><a href="#cb13-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a>***</span>

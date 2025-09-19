@@ -14,8 +14,8 @@ library(ggplot2)
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds  <- readRDS("../data/intermediate_dds.RDS")
-meta <- readRDS("../data/metadata.RDS")
+dds  <- readRDS("./data/intermediate_dds.RDS")
+meta <- readRDS("./data/metadata.RDS")
 ```
 
 ## Learning Objectives 

@@ -13,7 +13,7 @@ Approximate time: 30 minutes
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
+res_tableOE_tb <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
 ```
 
 ## Learning Objectives:
@@ -294,5 +294,5 @@ grch38
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(annotations_ahb, "../data/intermediate_annotations_ahb.RDS")
+saveRDS(annotations_ahb, "./data/intermediate_annotations_ahb.RDS")
 ```

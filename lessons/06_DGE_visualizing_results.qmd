@@ -16,10 +16,10 @@ library(ggrepel)
 library(pheatmap)
 
 # load objects needed to render this lesson
-meta           <- readRDS("../data/metadata.RDS")
-dds            <- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")
-tx2gene     <- read.delim("../data/tx2gene_grch38_ens94.txt")
-res_tableOE_tb <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
+meta           <- readRDS("./data/metadata.RDS")
+dds            <- readRDS("./data/intermediate_dds_2_ran_deseq.RDS")
+tx2gene     <- read.delim("./data/tx2gene_grch38_ens94.txt")
+res_tableOE_tb <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
 padj.cutoff <- 0.05
 sigOE <- res_tableOE_tb %>% dplyr::filter(padj < padj.cutoff)
 ```
@@ -278,7 +278,7 @@ DEGreport::degPlotWide(dds = dds, genes = row.names(res)[1:5], group = "conditio
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(normalized_counts, "../data/intermediate_normalized_counts_with_gene_names.RDS")
+saveRDS(normalized_counts, "./data/intermediate_normalized_counts_with_gene_names.RDS")
 ```
 
 ---

@@ -13,8 +13,8 @@ Approximate time: 30 minutes
 library(DESeq2)
 
 # load or re-create objects needed to render this lesson
-txi  <- readRDS("../data/intermediate_txi.RDS")
-meta <- readRDS("../data/metadata.RDS")
+txi  <- readRDS("./data/intermediate_txi.RDS")
+meta <- readRDS("./data/metadata.RDS")
 sampletype <- meta$sampletype
 ```
 
@@ -171,5 +171,5 @@ How would the design formula be structured to perform the following analyses?
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds, "../data/intermediate_dds_2_ran_deseq.RDS")
+saveRDS(dds, "./data/intermediate_dds_2_ran_deseq.RDS")
 ```

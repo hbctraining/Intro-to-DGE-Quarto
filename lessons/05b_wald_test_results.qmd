@@ -14,7 +14,7 @@ library(tidyverse)
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds <- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")
+dds <- readRDS("./data/intermediate_dds_2_ran_deseq.RDS")
 ```
 
 ## Learning Objectives 
@@ -334,8 +334,8 @@ res_tableKD <- lfcShrink(dds, coef="sampletype_MOV10_knockdown_vs_control", type
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_tableOE, "../data/intermediate_res_tableOE.RDS")
-saveRDS(res_tableKD, "../data/intermediate_res_tableKD.RDS")
+saveRDS(res_tableOE, "./data/intermediate_res_tableOE.RDS")
+saveRDS(res_tableKD, "./data/intermediate_res_tableKD.RDS")
 ```
 
 ---

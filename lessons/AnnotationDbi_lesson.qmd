@@ -7,7 +7,7 @@
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
+res_tableOE_tb <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
 ```
 
 AnnotationDbi is an R package that provides an interface for connecting and querying various annotation databases using SQLite data storage. The AnnotationDbi packages can query the *OrgDb*, *TxDb*, *EnsDb*, *Go.db*, and *BioMart* annotations. There is helpful [documentation](https://bioconductor.org/packages/release/bioc/vignettes/AnnotationDbi/inst/doc/IntroToAnnotationPackages.pdf) available to reference when extracting data from any of these databases.

@@ -13,7 +13,7 @@ Approximate time: 60 minutes
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds  <- readRDS("../data/intermediate_dds.RDS")
+dds  <- readRDS("./data/intermediate_dds.RDS")
 ```
 
 ## Learning Objectives 
@@ -153,7 +153,7 @@ By setting the FDR cutoff to < 0.05, we're saying that the proportion of false p
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds_lrt, "../data/intermediate_dds_lrt.RDS")
+saveRDS(dds_lrt, "./data/intermediate_dds_lrt.RDS")
 ```
 
 ---

@@ -77,7 +77,7 @@ Let's get started by opening up RStudio and setting up a new project for this an
 <img src="../img/Create_RStudio_Project.gif" width="900">
 </p>
 
-To check whether or not you are in the correct working directory, use `getwd()`. The path `Desktop/DEanalysis` should be returned to you in the console. Within your working directory, use the `New folder` button in the bottom right panel to create three new directories: `scripts`, `meta`, and `results`. Remember the key to a good analysis is keeping organized from the start! (*NOTE: we will be downloading our `data` folder.*)
+To check whether or not you are in the correct working directory, use `getwd()`. The path `Desktop/DEanalysis` should be returned to you in the console. Within your working directory, use the `New folder` button in the bottom right panel to create two new directories: `meta` and `results`. Remember the key to a good analysis is keeping organized from the start! (*NOTE: we will be downloading our `data` folder.*)
 
 Now we need to grab the files that we will be working with for the analysis. There are two things we need to download. 
 
@@ -98,18 +98,9 @@ Finally, go to the `File` menu and select `New File`, then select `R Script`. Th
 # Gene-level differential expression analysis using DESeq2
 ```
 
-Now save the file as `de_script.R` within the `scripts` directory. When finished, your project directory should now look similar to this:
+Now save the file as `de_script.R` within your project directory. When finished, your project directory should now look similar to this:
 
 ![](../img/settingup.png)
-
-Finally, make sure you **change working directory to the `scripts` folder** to ensure that all the file paths will be correct when we run our scripts. You can change this by going to the top menu bar and selecting `Session` > `Set Working Directory` > `To Source File Location` (because the script we have open is saved to this folder) or by running the code below in your console:
-
-```{r wd}
-#| eval: false
-
-# Make sure we are working from the folder where our script is saved
-setwd("./scripts")
-```
 
 ### Loading libraries
 
@@ -154,13 +145,13 @@ We will be using the R Bioconductor package `tximport` to prepare the `quant.sf`
 
 ```{r load_data}
 # List all directories containing data  
-samples <- list.files(path = "../data", full.names = TRUE, pattern = "salmon$")
+samples <- list.files(path = "./data", full.names = TRUE, pattern = "salmon$")
 
 # Obtain a vector of all filenames including the path
 files <- file.path(samples, "quant.sf")
 
 # Since all quant files have the same name, it is useful to have names for each element
-names(files) <- str_replace(samples, "../data/", "") %>% 
+names(files) <- str_replace(samples, "./data/", "") %>% 
                 str_replace(".salmon", "")
 ```
 
@@ -168,7 +159,7 @@ Our Salmon index was generated with transcript sequences listed by Ensembl IDs, 
 
 ```{r load_annotations}
 # Load the annotation table for GrCh38
-tx2gene <- read.delim("../data/tx2gene_grch38_ens94.txt")
+tx2gene <- read.delim("./data/tx2gene_grch38_ens94.txt")
 
 # Take a look at it 
 tx2gene %>% head()
@@ -257,9 +248,9 @@ meta <- data.frame(sampletype, row.names = colnames(txi$counts))
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(data, "../data/intermediate_txi_counts.RDS")
-saveRDS(txi,  "../data/intermediate_txi.RDS")
-saveRDS(meta, "../data/metadata.RDS")
+saveRDS(data, "./data/intermediate_txi_counts.RDS")
+saveRDS(txi,  "./data/intermediate_txi.RDS")
+saveRDS(meta, "./data/metadata.RDS")
 ```
 
 ***

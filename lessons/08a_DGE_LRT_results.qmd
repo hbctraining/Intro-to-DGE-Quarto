@@ -15,11 +15,11 @@ library(DESeq2)
 library(DEGreport)
 
 # load objects needed to render this lesson
-dds_lrt <- readRDS("../data/intermediate_dds_lrt.RDS")
-sigOE   <- readRDS("../data/intermediate_res_sigOE.RDS")
-sigKD   <- readRDS("../data/intermediate_res_sigKD.RDS")
-dds     <- readRDS("../data/intermediate_dds.RDS")
-meta    <- readRDS("../data/metadata.RDS")
+dds_lrt <- readRDS("./data/intermediate_dds_lrt.RDS")
+sigOE   <- readRDS("./data/intermediate_res_sigOE.RDS")
+sigKD   <- readRDS("./data/intermediate_res_sigKD.RDS")
+dds     <- readRDS("./data/intermediate_dds.RDS")
+meta    <- readRDS("./data/metadata.RDS")
 padj.cutoff <- 0.05
 ```
 

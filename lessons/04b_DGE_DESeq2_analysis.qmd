@@ -13,7 +13,7 @@ Approximate time: 60 minutes
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds  <- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")
+dds  <- readRDS("./data/intermediate_dds_2_ran_deseq.RDS")
 ```
 
 ## Learning Objectives 

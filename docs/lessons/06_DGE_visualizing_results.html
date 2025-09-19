@@ -1246,10 +1246,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="in">library(pheatmap)</span></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="in">meta           &lt;- readRDS("../data/metadata.RDS")</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="in">dds            &lt;- readRDS("../data/intermediate_dds_2_ran_deseq.RDS")</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="in">tx2gene     &lt;- read.delim("../data/tx2gene_grch38_ens94.txt")</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb &lt;- readRDS("../data/intermediate_res_tableOE_tb.RDS")</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="in">meta           &lt;- readRDS("./data/metadata.RDS")</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="in">dds            &lt;- readRDS("./data/intermediate_dds_2_ran_deseq.RDS")</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="in">tx2gene     &lt;- read.delim("./data/tx2gene_grch38_ens94.txt")</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="in">res_tableOE_tb &lt;- readRDS("./data/intermediate_res_tableOE_tb.RDS")</span></span>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="in">padj.cutoff &lt;- 0.05</span></span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="in">sigOE &lt;- res_tableOE_tb %&gt;% dplyr::filter(padj &lt; padj.cutoff)</span></span>
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1508,7 +1508,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-278"><a href="#cb19-278" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
 <span id="cb19-279"><a href="#cb19-279" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-280"><a href="#cb19-280" aria-hidden="true" tabindex="-1"></a><span class="in"># save objects needed to render future lessons</span></span>
-<span id="cb19-281"><a href="#cb19-281" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(normalized_counts, "../data/intermediate_normalized_counts_with_gene_names.RDS")</span></span>
+<span id="cb19-281"><a href="#cb19-281" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(normalized_counts, "./data/intermediate_normalized_counts_with_gene_names.RDS")</span></span>
 <span id="cb19-282"><a href="#cb19-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-283"><a href="#cb19-283" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-284"><a href="#cb19-284" aria-hidden="true" tabindex="-1"></a>---</span>

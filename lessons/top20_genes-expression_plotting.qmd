@@ -7,9 +7,9 @@
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb    <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
-normalized_counts <- readRDS("../data/intermediate_normalized_counts_with_gene_names.RDS")
-meta              <- readRDS("../data/metadata.RDS")
+res_tableOE_tb    <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+normalized_counts <- readRDS("./data/intermediate_normalized_counts_with_gene_names.RDS")
+meta              <- readRDS("./data/metadata.RDS")
 mov10_meta <- meta %>% rownames_to_column(var="samplename") %>% as_tibble()
 ```
 

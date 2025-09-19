@@ -7,7 +7,7 @@
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_entrez <- readRDS("../data/intermediate_res_entrez.RDS")
+res_entrez <- readRDS("./data/intermediate_res_entrez.RDS")
 ```
 
 The [SPIA (Signaling Pathway Impact Analysis)](http://bioconductor.org/packages/release/bioc/html/SPIA.html) tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. The blog post from [Getting Genetics Done](https://gettinggeneticsdone.blogspot.com/2012/03/pathway-analysis-for-high-throughput.html) provides a step-by-step procedure for using and understanding SPIA. 

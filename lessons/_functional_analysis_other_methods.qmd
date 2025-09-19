@@ -11,8 +11,8 @@ date: "Tuesday, October 10th, 2017"
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb  <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
-annotations_ahb <- readRDS("../data/intermediate_annotations_ahb.RDS")
+res_tableOE_tb  <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+annotations_ahb <- readRDS("./data/intermediate_annotations_ahb.RDS")
 
 # Untested genes have padj = NA, so let's keep genes with padj != NA
 res_tableOE_tb_noNAs <- filter(res_tableOE_tb, padj != "NA" )

@@ -13,8 +13,8 @@ Approximate time: 120 minutes
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb  <- readRDS("../data/intermediate_res_tableOE_tb.RDS")
-annotations_ahb <- readRDS("../data/intermediate_annotations_ahb.RDS")
+res_tableOE_tb  <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+annotations_ahb <- readRDS("./data/intermediate_annotations_ahb.RDS")
 ```
 
 Learning Objectives:
@@ -135,7 +135,7 @@ res_ids <- left_join(res_tableOE_tb_noNAs, annotations_ahb, by=c("gene"="gene_id
 ```
 
 ::: callout-note
-If you were unable to generate the `annotations_ahb` object, you can download the annotations to your `data` folder by right-clicking [here](../data/annotations_ahb.csv) and selecting "Save link as..."
+If you were unable to generate the `annotations_ahb` object, you can download the annotations to your `data` folder by right-clicking [here](./data/annotations_ahb.csv) and selecting "Save link as..."
 
 _To read in the object, you can run the following code:_
 `annotations_ahb <- read.csv("annotations_ahb.csv")`
@@ -312,5 +312,5 @@ cnetplot(ego2,
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_ids, "../data/intermediate_res_ids.RDS")
+saveRDS(res_ids, "./data/intermediate_res_ids.RDS")
 ```

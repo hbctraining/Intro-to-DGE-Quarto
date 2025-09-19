@@ -15,7 +15,7 @@ library(clusterProfiler)
 library(pathview)
 
 # load objects needed to render this lesson
-res_ids <- readRDS("../data/intermediate_res_ids.RDS")
+res_ids <- readRDS("./data/intermediate_res_ids.RDS")
 ```
 
 Learning Objectives:
@@ -302,5 +302,5 @@ The way the tools perform clustering is by taking the entire expression matrix a
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_entrez, "../data/intermediate_res_entrez.RDS")
+saveRDS(res_entrez, "./data/intermediate_res_entrez.RDS")
 ```

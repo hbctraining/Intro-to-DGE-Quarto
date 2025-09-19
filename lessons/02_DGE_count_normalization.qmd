@@ -14,8 +14,8 @@ library(ggplot2)
 library(DESeq2)
 
 # load objects needed to render this lesson
-txi  <- readRDS("../data/intermediate_txi.RDS")
-meta <- readRDS("../data/metadata.RDS")
+txi  <- readRDS("./data/intermediate_txi.RDS")
+meta <- readRDS("./data/metadata.RDS")
 ```
 
 ## Learning Objectives 
@@ -248,7 +248,7 @@ We can save this normalized data matrix to file for later use:
 
 ```{r save_normalized}
 # Save normalized counts matrix
-write.table(normalized_counts, file="../data/normalized_counts.txt", sep="\t", quote=FALSE, col.names=NA)
+write.table(normalized_counts, file="./data/normalized_counts.txt", sep="\t", quote=FALSE, col.names=NA)
 ```
 
 ::: callout-note
@@ -259,7 +259,7 @@ DESeq2 doesn't actually use normalized counts; rather it uses the raw counts and
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds, "../data/intermediate_dds.RDS")
+saveRDS(dds, "./data/intermediate_dds.RDS")
 ```
 
 ***

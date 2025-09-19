@@ -13,7 +13,7 @@ Approximate time: 60 minutes
 library(ggplot2)
 
 # load objects needed to render this lesson
-data <- readRDS("../data/intermediate_txi_counts.RDS")
+data <- readRDS("./data/intermediate_txi_counts.RDS")
 ```
 
 ## Learning Objectives 
