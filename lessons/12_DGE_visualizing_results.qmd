@@ -50,7 +50,8 @@ mov10_meta <- meta %>%
   as_tibble()
 ```
 
-Next, let's bring in a column with gene symbols to the `normalized_counts` object, so we can use them to label our plots. Ensembl IDs are great for many things, but the gene symbols are much more recognizable to us, as biologists. 
+Next, let's bring in a column with gene symbols to the `normalized_counts` object, so we can use them to label our plots. Ensembl IDs are great for many things, but the gene symbols are much more recognizable to us, as biologists.
+
 ```{r add_gene_names}
 # DESeq2 creates a matrix when you use the counts() function
 # First convert normalized_counts to a data frame and transfer the row names to a new column called "gene"
@@ -70,9 +71,20 @@ normalized_counts <- merge(normalized_counts, grch38annot, by.x = "gene", by.y =
 # Now create a tibble for the normalized counts
 normalized_counts <- normalized_counts %>%
   as_tibble()
+```
 
-# View at the tibble to make sure it looks correct
-normalized_counts %>% head()
+```{r view_counts_code}
+#| eval: false
+
+# View the tibble to make sure it looks correct
+normalized_counts %>% head() %>% View()
+```
+
+```{r view_counts_render}
+#| echo: false
+
+# View the tibble to make sure it looks correct
+normalized_counts %>% head() %>% DT::datatable()
 ```
 
 ::: callout-note
@@ -106,6 +118,7 @@ plotCounts(dds, gene = "ENSG00000155363", intgroup = "sampletype")
 ```
 
 ::: callout-note
+# About `plotCounts`
 This DESeq2 function only allows for plotting the counts of a single gene at a time, and is not flexible regarding the appearance.
 :::
 
@@ -113,13 +126,20 @@ This DESeq2 function only allows for plotting the counts of a single gene at a t
 
 If you wish to change the appearance of this plot, we can save the output of `plotCounts()` to a variable specifying the `returnData=TRUE` argument, then use `ggplot()`:
 
-```{r plot_one_gene_ggplot}
+```{r plot_one_gene_counts}
 # Save plotcounts to a data frame object
 d <- plotCounts(dds, gene = "ENSG00000155363", intgroup = "sampletype", returnData = TRUE)
 
 # What is the data output of plotCounts()?
-d %>% head()
+d
+```
 
+:::callout-note
+# Why is the expression of MOV10 in the knockdown not 0?
+As discussed in the [Set up lesson](03_DGE_setup_and_overview.html), knockdown of Mov10 was achieved using siRNA. RNA interference is inefficient: some RNAs escape degradation, and thus some expression remains.
+:::
+
+```{r plot_one_gene_ggplot}
 # Plot the MOV10 normalized counts, using the samplenames (rownames(d)) as labels
 ggplot(d, aes(x = sampletype, y = count, color = sampletype)) + 
   # Scatterplot but allow points to "jitter" so they are not on top of each other
@@ -225,9 +245,20 @@ res_tableOE_tb <- res_tableOE_tb %>% dplyr::arrange(padj)
 
 # Populate the genelabels column with contents of the gene symbols column for the first 10 rows, i.e., the top 10 most significantly expressed genes
 res_tableOE_tb$genelabels[1:10] <- as.character(res_tableOE_tb$symbol[1:10])
+```
+
+```{r label_top_DEG_code}
+#| eval: false
 
 # Look at the new table
-head(res_tableOE_tb)
+res_tableOE_tb %>% head(n = 15) %>% View()
+```
+
+```{r label_top_DEG_render}
+#| echo: false
+
+# Look at the new table
+res_tableOE_tb %>% head(n = 15) %>% DT::datatable()
 ```
 
 Next, we plot it as before with an additional layer for `geom_text_repel()` wherein we can specify the column of gene labels we just created. 
