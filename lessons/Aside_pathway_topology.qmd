@@ -39,10 +39,21 @@ Now that we have our background and significant genes in the appropriate format,
 
 ```{r spia}
 # Run SPIA
-spia_result <- spia(de=sig_entrez, all=background_entrez, organism="hsa")
+spia_result <- spia(de = sig_entrez, all = background_entrez, organism = "hsa")
+```
+
+```{r spia_code}
+#| eval: false
 
 # Look at the results
-head(spia_result, n=20)
+spia_result %>% head(n = 20) %>% View()
+```
+
+```{r spia_render}
+#| echo: false
+
+# Look at the results (prevent "KEGGLINK" column from wrapping so the table is not incredibly long)
+spia_result %>% head(n = 20) %>% DT::datatable() %>% DT::formatStyle("KEGGLINK", "white-space" = "nowrap")
 ```
 
 SPIA outputs a table showing significantly dysregulated pathways based on over-representation and signaling perturbations accumulation. The table shows the following information: 

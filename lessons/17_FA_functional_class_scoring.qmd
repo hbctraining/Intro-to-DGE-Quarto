@@ -137,9 +137,18 @@ write.csv(gseaKEGG_results, "results/gseaOE_kegg.csv", quote = FALSE)
 
 **How many pathways are enriched?** _NOTE: The results may look slightly different for you._ 
 
-```{r gsea_results}
+```{r gsea_results_code}
+#| eval: false
+
 # Look at GSEA results
-head(gseaKEGG_results)
+gseaKEGG_results %>% View()
+```
+
+```{r gsea_results_render}
+#| echo: false
+
+# Look at GSEA results (prevent "core_enrichment" column from wrapping so the table is not incredibly long)
+gseaKEGG_results %>% DT::datatable() %>% DT::formatStyle("core_enrichment", "white-space" = "nowrap")
 ```
 
 * The first few columns of the results table identify the pathway information
@@ -172,7 +181,7 @@ Use the [Pathview R package](http://bioconductor.org/packages/release/bioc/html/
 #| eval: false
 
 # First unload dplyr to avoid conflicts
-detach("package:dplyr", unload=TRUE)
+detach("package:dplyr", unload = TRUE)
 
 # Output images for a single significant KEGG pathway
 pathview(gene.data = foldchanges,

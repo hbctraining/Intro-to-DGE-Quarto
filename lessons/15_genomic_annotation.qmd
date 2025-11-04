@@ -124,17 +124,17 @@ If you would like to see more information about any of the classes of data, you 
   
 ```{r AH_species}
 # Explore all species information available
-unique(ah$species) %>% head()
+unique(ah$species) %>% head(n = 20)
 ```
 
 In addition to species information, there is also additional information about the type of Data Objects and the Data Providers:
 
 ```{r AH_DO}
 # Explore the types of Data Objects available
-unique(ah$rdataclass) %>% head()
+unique(ah$rdataclass)
 
 # Explore the Data Providers
-unique(ah$dataprovider) %>% head()
+unique(ah$dataprovider) %>% head(n = 20)
 ```
   
 Now that we know the types of information available from AnnotationHub, we can query it for the information we want using the `query()` function. Let's say we would like to **return the Ensembl `EnsDb` information for Human**. To return the records available, we need to use the terms as they are output from the `ah` object to extract the desired data.
@@ -158,19 +158,48 @@ human_ens <- human_ens[["AH119325"]]
 
 Now we can use `ensembldb` functions to extract the information at the gene, transcript, or exon levels. We are interested in the gene-level annotations, so we can extract that information as follows:
 
-```{r AH_human_genes}
+```{r AH_human_genes_code}
+#| eval: false
+
 # Extract gene-level information
-genes(human_ens, return.type = "data.frame") %>% head()
+genes(human_ens, return.type = "data.frame") %>% head() %>% View()
+```
+
+```{r AH_human_genes_render}
+#| echo: false
+
+# Extract gene-level information
+genes(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
 ```
 
 But note that it is just as easy to get the transcript- or exon-level information:
 
-```{r AH_human_tx_ex}
+```{r AH_human_tx_code}
+#| eval: false
+
 # Extract transcript-level information
-transcripts(human_ens, return.type = "data.frame") %>% head()
+transcripts(human_ens, return.type = "data.frame") %>% head() %>% View()
+```
+
+```{r AH_human_tx_render}
+#| echo: false
+
+# Extract transcript-level information
+transcripts(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
+```
+
+```{r AH_human_ex_code}
+#| eval: false
 
 # Extract exon-level information
-exons(human_ens, return.type = "data.frame") %>% head()
+exons(human_ens, return.type = "data.frame") %>% head() %>% View()
+```
+
+```{r AH_human_ex_render}
+#| echo: false
+
+# Extract exon-level information
+exons(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
 ```
 
 To **obtain an annotation data frame** using AnnotationHub, we'll use the `genes()` function, but only keep selected columns and filter out rows to keep those corresponding to our gene identifiers in our results file:
@@ -240,7 +269,7 @@ annotations_ahb <- annotations_ahb[non_duplicates_idx, ]
 annotations_ahb %>% nrow()
 ```
 
-Finally, it would be good to know **what proportion of the Ensembl identifiers map to an Entrez identifier**:
+Finally, it would be good to know **what proportion of the Ensembl identifiers do not map to an Entrez identifier**:
 
 ```{r Entrez_IDs}
 # Determine how many of the Entrez column entries are NA

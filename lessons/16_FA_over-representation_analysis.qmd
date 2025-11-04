@@ -41,7 +41,7 @@ Generally for any differential expression analysis, it is useful to interpret th
 The goal of functional analysis is provide biological insight, so it's necessary to analyze our results in the context of our experimental hypothesis: **FMRP and MOV10 associate and regulate the translation of a subset of RNAs**. Therefore, based on the authors' hypothesis, we may expect the enrichment of processes/pathways related to **translation, splicing, and the regulation of mRNAs**, which we would need to validate experimentally.
 
 ::: callout-important
-***Note that all tools described below are great tools to validate experimental results and to make hypotheses. These tools suggest genes/pathways that may be involved with your condition of interest; however, you should NOT use these tools to make conclusions about the pathways involved in your experimental process. You will need to perform experimental validation of any suggested pathways.***
+**Note that all tools described below are great tools to validate experimental results and to make hypotheses. These tools suggest genes/pathways that may be involved with your condition of interest; however, you should NOT use these tools to make conclusions about the pathways involved in your experimental process. You will need to perform experimental validation of any suggested pathways.**
 :::
 
 ## Over-representation analysis
@@ -180,9 +180,20 @@ ego <- enrichGO(gene = sigOE_genes,
 
 # Output results from GO analysis to a table
 cluster_summary <- data.frame(ego)
+```
+
+```{r enrichGO_code}
+#| eval: false
 
 # View results
-cluster_summary %>% head()
+cluster_summary %>% View()
+```
+
+```{r enrichGO_render}
+#| echo: false
+
+# View results (prevent "geneID" column from wrapping so the table is not incredibly long)
+cluster_summary %>% DT::datatable() %>% DT::formatStyle("geneID", "white-space" = "nowrap")
 ```
 
 ```{r enrichGO_save}
@@ -218,7 +229,7 @@ You can then create `ego_up` & `ego_down` objects by running the `enrichGO()` fu
 
 ### Visualizing clusterProfiler results
 
-clusterProfiler has a variety of options for viewing the over-represented GO terms. We will explore the dotplot, enrichment plot, and the category netplot.
+clusterProfiler has a variety of options for viewing the over-represented GO terms. We will explore the dotplot, enrichment plot, and category netplot.
 
 The **dotplot** shows the number of genes associated with the first 50 terms (size) and the p-adjusted values for these terms (color). This plot displays the top 30 GO terms by gene ratio (# genes related to GO term / total number of sig genes), not p-adjusted value.
 
@@ -236,7 +247,7 @@ dotplot(ego, showCategory=30)
 ggsave(filename = "results/plots_OE_ORA_dotplot.pdf", width = 8, height = 20)
 ```
   
-The next plot is the **enrichment GO plot**, which shows the relationship between the top 30 most significantly enriched GO terms (by padj), by grouping similar terms together. Before creating the plot, we will need to obtain the similarity between terms using the `pairwise_termsim()` function ([instructions for emapplot](https://rdrr.io/github/GuangchuangYu/enrichplot/man/emapplot.html)). In the enrichment plot, the color represents the p-values relative to the other displayed terms (brighter red is more significant), and the size of the terms represents the number of genes that are significant from our list.
+The next plot is the **enrichment GO plot**, which shows the relationship between the top 30 most significantly enriched GO terms (by padj), by grouping similar terms together. Before creating the plot, we will need to obtain the similarity between terms using the `pairwise_termsim()` function ([instructions for emapplot](https://rdrr.io/github/GuangchuangYu/enrichplot/man/emapplot.html)). In the enrichment plot, the color represents the p-values relative to the other displayed terms (brighter red is more significant), the size of the terms represents the number of genes that are significant from our list, and the length of the connecting lines represents how closely related the terms are to each other.
 
 ```{r plot_enrich}
 #| fig.height: 10
@@ -256,7 +267,7 @@ emapplot(ego, showCategory = 30)
 ggsave(filename = "results/plots_OE_ORA_enrich.pdf", width = 10, height = 10)
 ```
   
-Finally, the **category netplot** shows the relationships between the genes associated with the top five most significant GO terms and the fold changes of the significant genes associated with these terms (color). The size of the GO terms reflects the number of genes in the terms, with terms with more genes being larger. This plot is particularly useful for hypothesis generation in identifying genes that may be important to several of the most affected processes. 
+Finally, the **category netplot** shows the relationships between the genes associated with the top five most significant GO terms and the fold changes of the significant genes associated with these terms. The color of the dots for the genes reflects the fold change of that gene (blue = upregulated, red = downregulated). The size of the dots for the GO terms reflects the number of genes in the terms, with terms with more genes being larger. This plot is particularly useful for hypothesis generation in identifying genes that may be important to several of the most affected processes. 
 
 ::: callout-note
 You may need to install the `ggnewscale` package using `install.packages("ggnewscale")` for the `cnetplot()` function to work.

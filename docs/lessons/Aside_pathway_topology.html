@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Differential Gene Expression Analysis</title>
+<title>aside_pathway_topology – Introduction to Differential Gene Expression Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,15 +65,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -100,12 +102,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 
 
 <link rel="stylesheet" href="../css/styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -117,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -142,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -161,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
@@ -196,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now that we have our background and significant genes in the appropriate format, we can run SPIA (this will take a few minutes as it runs through all the pathways):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run SPIA</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> <span class="fu">spia</span>(<span class="at">de=</span>sig_entrez, <span class="at">all=</span>background_entrez, <span class="at">organism=</span><span class="st">"hsa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> <span class="fu">spia</span>(<span class="at">de =</span> sig_entrez, <span class="at">all =</span> background_entrez, <span class="at">organism =</span> <span class="st">"hsa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Done pathway 1 : RNA transport..
@@ -339,72 +351,15 @@ Done pathway 137 : Arrhythmogenic right ventricul..
 Done pathway 138 : Dilated cardiomyopathy..
 Done pathway 139 : Viral myocarditis..</code></pre>
 </div>
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the results</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(spia_result, <span class="at">n=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                     Name    ID pSize NDE         pNDE
-1                    Viral carcinogenesis 05203   179  85 1.105913e-07
-2   Pathogenic Escherichia coli infection 05130    47  26 1.384417e-04
-3                           RNA transport 03013   145  63 1.364787e-04
-4            Epstein-Barr virus infection 05169   182  73 7.872927e-04
-5            Systemic lupus erythematosus 05322    74  35 6.338994e-04
-6                     Parkinson's disease 05012   120  50 1.935891e-03
-7                          Focal adhesion 04510   182  65 2.836833e-02
-8                   p53 signaling pathway 04115    66  32 6.225200e-04
-9                          Bladder cancer 05219    40  20 4.025368e-03
-10                             Cell cycle 04110   121  51 1.299369e-03
-11               Chronic myeloid leukemia 05220    70  29 1.719907e-02
-12              Circadian rhythm - mammal 04710    21  10 5.446312e-02
-13                       HTLV-I infection 05166   226  87 1.219991e-03
-14               ECM-receptor interaction 04512    70  26 8.644146e-02
-15                             Alcoholism 05034   124  49 7.371891e-03
-16                 MAPK signaling pathway 04010   224  76 5.975551e-02
-17 Cytokine-cytokine receptor interaction 04060   122  38 3.298457e-01
-18                 Small cell lung cancer 05222    80  32 2.221126e-02
-19       Regulation of actin cytoskeleton 04810   180  60 1.136433e-01
-20              Vibrio cholerae infection 05110    48  21 2.055235e-02
-            tA pPERT           pG        pGFdr       pGFWER    Status
-1   1.06476367 0.106 2.257992e-07 0.0000309345 0.0000309345 Activated
-2  -2.68535900 0.508 7.428320e-04 0.0508839887 0.1017679775 Inhibited
-3   0.14039420 0.821 1.131312e-03 0.0516632252 0.1549896757 Activated
-4  -3.29767850 0.320 2.339543e-03 0.0801293411 0.3205173645 Inhibited
-5   0.63886550 0.552 3.134455e-03 0.0843101831 0.4294203963 Activated
-6  -3.38846958 0.223 3.776445e-03 0.0843101831 0.5173729580 Inhibited
-7  22.00835240 0.018 4.381136e-03 0.0843101831 0.6002156717 Activated
-8  -0.07045235 0.977 5.111940e-03 0.0843101831 0.7003358416 Inhibited
-9  -4.12392474 0.185 6.108373e-03 0.0843101831 0.8368471586 Inhibited
-10  2.88206442 0.578 6.154028e-03 0.0843101831 0.8431018308 Activated
-11 -7.14491710 0.051 7.051281e-03 0.0844021190 0.9660255137 Inhibited
-12 -5.85306921 0.017 7.392886e-03 0.0844021190 1.0000000000 Inhibited
-13 -0.28565758 0.945 8.952757e-03 0.0913882483 1.0000000000 Inhibited
-14  6.50476159 0.014 9.338945e-03 0.0913882483 1.0000000000 Activated
-15 -7.40641835 0.234 1.270050e-02 0.1124219731 1.0000000000 Inhibited
-16  8.95882802 0.030 1.312957e-02 0.1124219731 1.0000000000 Activated
-17  7.49673694 0.006 1.429906e-02 0.1129193776 1.0000000000 Activated
-18  9.11228085 0.093 1.483612e-02 0.1129193776 1.0000000000 Activated
-19 18.84748586 0.020 1.610715e-02 0.1161410145 1.0000000000 Activated
-20 -1.35210996 0.118 1.702923e-02 0.1166502561 1.0000000000 Inhibited
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               KEGGLINK
-1            http://www.genome.jp/dbget-bin/show_pathway?hsa05203+1739+5829+578+3661+5700+1108+3725+836+581+572+5366+7187+7188+1642+5594+10488+64764+90993+9586+6777+5291+5293+5966+1959+1019+55697+5902+2648+6850+3718+595+894+896+890+4193+28973+898+9134+1233+7419+3265+3845+4893+10971+7529+7531+7532+7534+6502+2965+1387+9114+1026+5315+3065+5922+998+387+81+88+2957+991+3665+3106+3107+3133+3134+5566+5567+2885+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370
-2                                                                                                                                                                                                                                                                                                          http://www.genome.jp/dbget-bin/show_pathway?hsa05130+10376+51807+7277+7846+84790+999+10971+7534+3875+1499+2017+6093+998+5578+9181+387+4691+10381+10383+203068+347733+10092+10093+10552+60+71
-3                                                                                      http://www.genome.jp/dbget-bin/show_pathway?hsa03013+11260+5901+7514+4686+1207+79760+3837+10073+9939+22794+22985+10482+56000+5411+10189+29107+55916+10762+4928+79902+81929+8480+23225+94026+9883+55706+5905+6612+10419+1917+51068+10209+10289+1964+8661+8662+8663+8666+8667+8668+10556+10775+10799+10940+84321+79228+132430+26986+80336+1968+8894+10605+1973+1974+1981+1982+8672+1983+1975+10460+8892+26999+9513
-4                                                                   http://www.genome.jp/dbget-bin/show_pathway?hsa05169+3113+3106+3107+3133+3134+9612+10971+7529+7531+7532+7534+3303+3304+3305+3306+3310+3312+3315+4609+3065+1387+890+6502+8737+7187+7188+9020+3654+960+5602+3725+3718+5291+5293+207+208+6850+5336+5432+5433+5434+5435+5436+5438+5439+5441+11128+171568+51728+55718+661+84265+3661+9451+7431+7514+5901+5566+5567+1457+1460+1026+4193+3588+5700+5701+5702+5704+5705+5707+5708+5709+5717
-5                                                                                                                                                                                                                                                              http://www.genome.jp/dbget-bin/show_pathway?hsa05322+720+717+3111+3113+3014+8329+8334+8336+92815+94239+9555+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+126961+3020+8357+554313+8360+8362+8367+8370+6628+6632+6634+81+88+6741
-6                                                                                                                                                                                      http://www.genome.jp/dbget-bin/show_pathway?hsa05012+120892+7332+9246+2861+11315+7345+4535+4536+4537+4538+4539+4540+4541+4697+4702+4706+4708+4713+4714+4715+4717+4718+4720+4725+4726+4728+4729+54539+6391+27089+440567+4519+1340+1349+4513+4514+9377+4508+4509+506+515+518+10105+293+7416+7419+7326+7327+842+836
-7                                                                                                                         http://www.genome.jp/dbget-bin/show_pathway?hsa04510+3693+22801+3655+3672+3675+3676+3678+2318+998+85366+10627+1729+5499+6093+207+208+5170+55742+7408+5291+5293+81+88+824+5829+5578+387+5923+1280+1288+1289+1292+1302+284217+3908+3909+3911+3912+3915+7058+7059+857+331+572+2002+5594+595+894+896+3265+2885+1956+3480+5156+5159+5154+5228+25759+1398+2889+5602+3725+1499+60+71
-8                                                                                                                                                                                                                                                                                     http://www.genome.jp/dbget-bin/show_pathway?hsa04115+1647+4616+472+898+9134+8493+7161+900+6241+1643+1026+64393+9538+355+51512+581+8795+842+4193+1019+595+894+896+64065+51246+143686+83667+85417+891+9133+836+5366
-9                                                                                                                                                                                                                                                                                                                                                 http://www.genome.jp/dbget-bin/show_pathway?hsa05219+3265+4313+5228+3576+1956+999+1026+4609+1612+4193+1869+1870+2261+1019+595+9252+5594+369+3845+4893
-10                                                                                                                                                                                          http://www.genome.jp/dbget-bin/show_pathway?hsa04110+51343+4171+4172+4173+4176+4998+51434+996+6500+8454+5347+472+10971+7529+7531+7532+7534+1026+4193+1387+6502+9088+9700+8243+1647+4616+8317+991+994+990+993+85417+891+9133+890+1019+902+898+9134+595+894+896+9126+10274+1874+4609+7709+7027+1869+1870+3065
-11                                                                                                                                                                                                                                                                                                     http://www.genome.jp/dbget-bin/show_pathway?hsa05220+2122+598+5781+3065+1487+4609+7048+7046+6777+4193+572+1026+2885+25759+9846+1398+1869+1870+1019+595+207+208+5291+5293+5594+369+3265+3845+4893
-12                                                                                                                                                                                                                                                                                                                                                                                              http://www.genome.jp/dbget-bin/show_pathway?hsa04710+79365+8553+1408+4862+9572+5187+8863+6500+8454+8945
-13 http://www.genome.jp/dbget-bin/show_pathway?hsa05166+6513+10725+4773+11261+5532+5534+3718+6777+3106+3107+3133+3134+4609+8295+10524+894+3265+3845+4893+6237+293+7416+7419+7514+5901+8498+107+113+5566+5567+467+7494+7046+7048+5425+5427+56655+1026+51434+996+991+9133+5902+55697+9020+115650+5602+3725+598+331+5156+5159+5154+5291+5293+207+208+11211+8322+1855+1857+1499+1739+1019+595+896+1869+1870+2002+2005+2353+1958+1959+8061+3111+3113+2648+1387+6929+581+4605+23373+64784+4488+7538+472+94241
-14                                                                                                                                                                                                                                                                                                              http://www.genome.jp/dbget-bin/show_pathway?hsa04512+284217+3908+3909+3911+3912+3915+1280+1288+1289+1292+1302+1605+7058+7059+3655+3676+3161+961+6382+6385+3693+22801+3678+3675+3672+960
-15                                                                                                                                                                                http://www.genome.jp/dbget-bin/show_pathway?hsa05034+5499+5566+10488+64764+90993+9586+814+3065+808+2771+2782+2786+2790+2792+2030+3265+3845+4893+369+5594+2354+3014+8329+8334+8336+92815+94239+9555+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370+126961+3020+8357+4915+25759+2885
-16                                                        http://www.genome.jp/dbget-bin/show_pathway?hsa04010+5923+11221+80824+5495+9448+5321+3925+9020+5594+8649+5578+5566+5567+9693+5922+3265+3845+4893+6237+10235+2768+2885+5156+5159+2261+2263+1956+4915+785+8912+8913+9254+5154+2247+2256+8074+994+9252+7867+4149+1649+2005+2002+5536+207+208+3315+1647+4616+1616+836+7046+7048+355+8550+998+23542+5602+1398+409+2122+3303+3304+3305+3306+3310+3312+3725+4773+11261+5532+5534+2318+2353+4609+8569
-17                                                                                                                                                                                                                                                http://www.genome.jp/dbget-bin/show_pathway?hsa04060+659+3588+8809+657+7046+7048+268+83729+3625+3624+60401+115650+3604+355+8744+970+53832+3815+1956+5159+5156+4254+1435+5154+7173+85480+3953+1271+9180+3589+1233+1235+6387+3576+27242+51330+8795+8793
-18                                                                                                                                                                                                                                                                                      http://www.genome.jp/dbget-bin/show_pathway?hsa05222+898+9134+595+3655+3675+9063+6257+5915+207+208+842+4149+4609+5291+5293+2272+1288+284217+3908+3909+3911+3912+3915+331+598+7187+7188+9618+1869+1870+1019+6502
-19                                                                                                                                   http://www.genome.jp/dbget-bin/show_pathway?hsa04810+7114+10092+10093+10552+5216+10163+55845+50649+10152+26999+10458+1072+3985+79837+8396+1729+81+88+4478+5962+5829+5499+10627+85366+6093+9459+998+387+9138+8826+5594+369+5291+5293+1398+22801+3655+3672+3675+3676+3678+3682+3693+3265+3845+4893+6237+2768+1956+2261+2263+5156+5159+2247+2256+5154+8074+2149+60+71
-20                                                                                                                                                                                                                                                                                                                                         http://www.genome.jp/dbget-bin/show_pathway?hsa05110+155066+23545+527+528+535+537+9114+9296+9550+5578+6558+5336+5566+5567+29927+55176+60+71+9601+10945+11014</code></pre>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>spia_result <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">View</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1d059a8a0b9e16336781" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1d059a8a0b9e16336781">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Viral carcinogenesis","Pathogenic Escherichia coli infection","RNA transport","Epstein-Barr virus infection","Systemic lupus erythematosus","Parkinson's disease","Focal adhesion","p53 signaling pathway","Bladder cancer","Cell cycle","Chronic myeloid leukemia","Circadian rhythm - mammal","HTLV-I infection","ECM-receptor interaction","Alcoholism","MAPK signaling pathway","Cytokine-cytokine receptor interaction","Small cell lung cancer","Regulation of actin cytoskeleton","Vibrio cholerae infection"],["05203","05130","03013","05169","05322","05012","04510","04115","05219","04110","05220","04710","05166","04512","05034","04010","04060","05222","04810","05110"],[179,47,145,182,74,120,182,66,40,121,70,21,226,70,124,224,122,80,180,48],[85,26,63,73,35,50,65,32,20,51,29,10,87,26,49,76,38,32,60,21],[1.105913307184825e-07,0.0001384416996809554,0.0001364787447475302,0.0007872926811527438,0.0006338993779994629,0.001935890918676009,0.02836833092405692,0.0006225200301889591,0.004025367878022939,0.001299369326163678,0.01719907297296627,0.05446311894016063,0.001219990807511928,0.08644145792288055,0.007371891291726017,0.05975551020260653,0.3298456991902052,0.02221126121258289,0.1136432786131475,0.0205523523630938],[1.06476367473333,-2.685358997871684,0.1403942011135629,-3.297678503750389,0.6388654985663476,-3.388469582398962,22.0083524029234,-0.07045234510832687,-4.123924740911558,2.882064422092763,-7.144917101721867,-5.85306921333127,-0.285657578624775,6.504761586803205,-7.406418348829409,8.958828015293863,7.49673693553036,9.112280854322192,18.84748585750268,-1.35210995994415],[0.106,0.508,0.821,0.32,0.552,0.223,0.018,0.977,0.185,0.578,0.051,0.017,0.945,0.014,0.234,0.03,0.006,0.093,0.02,0.118],[2.257992383567598e-07,0.0007428319524409488,0.00113131150147631,0.002339542806345891,0.003134455447330635,0.003776444949264112,0.004381136289666371,0.005111940449869044,0.006108373420613656,0.006154027962379365,0.007051281121764223,0.007392886331414527,0.008952757093278342,0.009338945083485728,0.01270050474705379,0.0131295735058098,0.01429906066436641,0.01483612260061345,0.01610714799143868,0.01702923446465096],[3.09344956548761e-05,0.050883988742205,0.05166322523408483,0.08012934111734676,0.0843101830845973,0.0843101830845973,0.0843101830845973,0.0843101830845973,0.0843101830845973,0.0843101830845973,0.08440211895031585,0.08440211895031585,0.09138824831696749,0.09138824831696749,0.1124219731434964,0.1124219731434964,0.1129193775713357,0.1129193775713357,0.1161410144645841,0.1166502560828591],[3.09344956548761e-05,0.10176797748441,0.1549896757022545,0.3205173644693871,0.429420396284297,0.5173729580491834,0.6002156716842928,0.700335841632059,0.8368471586240709,0.843101830845973,0.9660255136816985,1,1,1,1,1,1,1,1,1],["Activated","Inhibited","Activated","Inhibited","Activated","Inhibited","Activated","Inhibited","Inhibited","Activated","Inhibited","Inhibited","Inhibited","Activated","Inhibited","Activated","Activated","Activated","Activated","Inhibited"],["http://www.genome.jp/dbget-bin/show_pathway?hsa05203+1739+5829+578+3661+5700+1108+3725+836+581+572+5366+7187+7188+1642+5594+10488+64764+90993+9586+6777+5291+5293+5966+1959+1019+55697+5902+2648+6850+3718+595+894+896+890+4193+28973+898+9134+1233+7419+3265+3845+4893+10971+7529+7531+7532+7534+6502+2965+1387+9114+1026+5315+3065+5922+998+387+81+88+2957+991+3665+3106+3107+3133+3134+5566+5567+2885+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370","http://www.genome.jp/dbget-bin/show_pathway?hsa05130+10376+51807+7277+7846+84790+999+10971+7534+3875+1499+2017+6093+998+5578+9181+387+4691+10381+10383+203068+347733+10092+10093+10552+60+71","http://www.genome.jp/dbget-bin/show_pathway?hsa03013+11260+5901+7514+4686+1207+79760+3837+10073+9939+22794+22985+10482+56000+5411+10189+29107+55916+10762+4928+79902+81929+8480+23225+94026+9883+55706+5905+6612+10419+1917+51068+10209+10289+1964+8661+8662+8663+8666+8667+8668+10556+10775+10799+10940+84321+79228+132430+26986+80336+1968+8894+10605+1973+1974+1981+1982+8672+1983+1975+10460+8892+26999+9513","http://www.genome.jp/dbget-bin/show_pathway?hsa05169+3113+3106+3107+3133+3134+9612+10971+7529+7531+7532+7534+3303+3304+3305+3306+3310+3312+3315+4609+3065+1387+890+6502+8737+7187+7188+9020+3654+960+5602+3725+3718+5291+5293+207+208+6850+5336+5432+5433+5434+5435+5436+5438+5439+5441+11128+171568+51728+55718+661+84265+3661+9451+7431+7514+5901+5566+5567+1457+1460+1026+4193+3588+5700+5701+5702+5704+5705+5707+5708+5709+5717","http://www.genome.jp/dbget-bin/show_pathway?hsa05322+720+717+3111+3113+3014+8329+8334+8336+92815+94239+9555+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+126961+3020+8357+554313+8360+8362+8367+8370+6628+6632+6634+81+88+6741","http://www.genome.jp/dbget-bin/show_pathway?hsa05012+120892+7332+9246+2861+11315+7345+4535+4536+4537+4538+4539+4540+4541+4697+4702+4706+4708+4713+4714+4715+4717+4718+4720+4725+4726+4728+4729+54539+6391+27089+440567+4519+1340+1349+4513+4514+9377+4508+4509+506+515+518+10105+293+7416+7419+7326+7327+842+836","http://www.genome.jp/dbget-bin/show_pathway?hsa04510+3693+22801+3655+3672+3675+3676+3678+2318+998+85366+10627+1729+5499+6093+207+208+5170+55742+7408+5291+5293+81+88+824+5829+5578+387+5923+1280+1288+1289+1292+1302+284217+3908+3909+3911+3912+3915+7058+7059+857+331+572+2002+5594+595+894+896+3265+2885+1956+3480+5156+5159+5154+5228+25759+1398+2889+5602+3725+1499+60+71","http://www.genome.jp/dbget-bin/show_pathway?hsa04115+1647+4616+472+898+9134+8493+7161+900+6241+1643+1026+64393+9538+355+51512+581+8795+842+4193+1019+595+894+896+64065+51246+143686+83667+85417+891+9133+836+5366","http://www.genome.jp/dbget-bin/show_pathway?hsa05219+3265+4313+5228+3576+1956+999+1026+4609+1612+4193+1869+1870+2261+1019+595+9252+5594+369+3845+4893","http://www.genome.jp/dbget-bin/show_pathway?hsa04110+51343+4171+4172+4173+4176+4998+51434+996+6500+8454+5347+472+10971+7529+7531+7532+7534+1026+4193+1387+6502+9088+9700+8243+1647+4616+8317+991+994+990+993+85417+891+9133+890+1019+902+898+9134+595+894+896+9126+10274+1874+4609+7709+7027+1869+1870+3065","http://www.genome.jp/dbget-bin/show_pathway?hsa05220+2122+598+5781+3065+1487+4609+7048+7046+6777+4193+572+1026+2885+25759+9846+1398+1869+1870+1019+595+207+208+5291+5293+5594+369+3265+3845+4893","http://www.genome.jp/dbget-bin/show_pathway?hsa04710+79365+8553+1408+4862+9572+5187+8863+6500+8454+8945","http://www.genome.jp/dbget-bin/show_pathway?hsa05166+6513+10725+4773+11261+5532+5534+3718+6777+3106+3107+3133+3134+4609+8295+10524+894+3265+3845+4893+6237+293+7416+7419+7514+5901+8498+107+113+5566+5567+467+7494+7046+7048+5425+5427+56655+1026+51434+996+991+9133+5902+55697+9020+115650+5602+3725+598+331+5156+5159+5154+5291+5293+207+208+11211+8322+1855+1857+1499+1739+1019+595+896+1869+1870+2002+2005+2353+1958+1959+8061+3111+3113+2648+1387+6929+581+4605+23373+64784+4488+7538+472+94241","http://www.genome.jp/dbget-bin/show_pathway?hsa04512+284217+3908+3909+3911+3912+3915+1280+1288+1289+1292+1302+1605+7058+7059+3655+3676+3161+961+6382+6385+3693+22801+3678+3675+3672+960","http://www.genome.jp/dbget-bin/show_pathway?hsa05034+5499+5566+10488+64764+90993+9586+814+3065+808+2771+2782+2786+2790+2792+2030+3265+3845+4893+369+5594+2354+3014+8329+8334+8336+92815+94239+9555+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370+126961+3020+8357+4915+25759+2885","http://www.genome.jp/dbget-bin/show_pathway?hsa04010+5923+11221+80824+5495+9448+5321+3925+9020+5594+8649+5578+5566+5567+9693+5922+3265+3845+4893+6237+10235+2768+2885+5156+5159+2261+2263+1956+4915+785+8912+8913+9254+5154+2247+2256+8074+994+9252+7867+4149+1649+2005+2002+5536+207+208+3315+1647+4616+1616+836+7046+7048+355+8550+998+23542+5602+1398+409+2122+3303+3304+3305+3306+3310+3312+3725+4773+11261+5532+5534+2318+2353+4609+8569","http://www.genome.jp/dbget-bin/show_pathway?hsa04060+659+3588+8809+657+7046+7048+268+83729+3625+3624+60401+115650+3604+355+8744+970+53832+3815+1956+5159+5156+4254+1435+5154+7173+85480+3953+1271+9180+3589+1233+1235+6387+3576+27242+51330+8795+8793","http://www.genome.jp/dbget-bin/show_pathway?hsa05222+898+9134+595+3655+3675+9063+6257+5915+207+208+842+4149+4609+5291+5293+2272+1288+284217+3908+3909+3911+3912+3915+331+598+7187+7188+9618+1869+1870+1019+6502","http://www.genome.jp/dbget-bin/show_pathway?hsa04810+7114+10092+10093+10552+5216+10163+55845+50649+10152+26999+10458+1072+3985+79837+8396+1729+81+88+4478+5962+5829+5499+10627+85366+6093+9459+998+387+9138+8826+5594+369+5291+5293+1398+22801+3655+3672+3675+3676+3678+3682+3693+3265+3845+4893+6237+2768+1956+2261+2263+5156+5159+2247+2256+5154+8074+2149+60+71","http://www.genome.jp/dbget-bin/show_pathway?hsa05110+155066+23545+527+528+535+537+9114+9296+9550+5578+6558+5336+5566+5567+29927+55176+60+71+9601+10945+11014"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Name<\/th>\n      <th>ID<\/th>\n      <th>pSize<\/th>\n      <th>NDE<\/th>\n      <th>pNDE<\/th>\n      <th>tA<\/th>\n      <th>pPERT<\/th>\n      <th>pG<\/th>\n      <th>pGFdr<\/th>\n      <th>pGFWER<\/th>\n      <th>Status<\/th>\n      <th>KEGGLINK<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Name","targets":1},{"name":"ID","targets":2},{"name":"pSize","targets":3},{"name":"NDE","targets":4},{"name":"pNDE","targets":5},{"name":"tA","targets":6},{"name":"pPERT","targets":7},{"name":"pG","targets":8},{"name":"pGFdr","targets":9},{"name":"pGFWER","targets":10},{"name":"Status","targets":11},{"name":"KEGGLINK","targets":12}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[12]; $(this.api().cell(row, 12).node()).css({'white-space':'nowrap'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 <p>SPIA outputs a table showing significantly dysregulated pathways based on over-representation and signaling perturbations accumulation. The table shows the following information:</p>
@@ -421,11 +376,11 @@ Done pathway 139 : Viral myocarditis..</code></pre>
 </ul>
 <p>We can view the significantly dysregulated pathways by viewing the over-representation and perturbations for each pathway.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid an error, remove any rows where `pPERT` is NA</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> spia_result <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pPERT))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot significant pathways</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotP</span>(spia_result, <span class="at">threshold=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid an error, remove any rows where `pPERT` is NA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> spia_result <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pPERT))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot significant pathways</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotP</span>(spia_result, <span class="at">threshold=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -437,8 +392,8 @@ Done pathway 139 : Viral myocarditis..</code></pre>
 <p>In this plot, each pathway is a point and the coordinates are the log of pNDE (using a hypergeometric model) and the p-value from perturbations, pPERT. The oblique lines in the plot show the significance regions based on the combined evidence.</p>
 <p>If we choose to explore the significant genes from our dataset occurring in these pathways, we can subset our SPIA results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at pathway 05203 and view kegglink</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(spia_result, ID <span class="sc">==</span> <span class="st">"05203"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at pathway 05203 and view kegglink</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(spia_result, ID <span class="sc">==</span> <span class="st">"05203"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  Name    ID pSize NDE         pNDE       tA pPERT           pG
 1 Viral carcinogenesis 05203   179  85 1.105913e-07 1.064764 0.106 2.257992e-07
@@ -463,279 +418,293 @@ Done pathway 139 : Viral myocarditis..</code></pre>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -743,266 +712,253 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### SPIA</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data_setup}</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="in"># load libraries needed to render this lesson</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects needed to render this lesson</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="in">res_entrez &lt;- readRDS("./data/intermediate_res_entrez.RDS")</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">SPIA (Signaling Pathway Impact Analysis)</span><span class="co">](http://bioconductor.org/packages/release/bioc/html/SPIA.html)</span> tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. The blog post from <span class="co">[</span><span class="ot">Getting Genetics Done</span><span class="co">](https://gettinggeneticsdone.blogspot.com/2012/03/pathway-analysis-for-high-throughput.html)</span> provides a step-by-step procedure for using and understanding SPIA. </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r libraries}</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="in"># Install package (if needed)</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="in"># BiocManager::install("SPIA")</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="in"># Load package</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="in">library(SPIA)</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>To perform SPIA, we need a list of background genes and a list of significant genes. For our background dataset we will use all genes tested for differential expression (all genes in our results table). For our significant gene list we will use genes with p-adjusted values less than 0.05 (we could include a fold change threshold too if we have many DE genes).</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gene_lists}</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="in"># The background set is a vector of all the genes represented on the platform</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="in">background_entrez &lt;- res_entrez$entrezid</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="in"># Significant genes is a vector of fold changes where the names are ENTREZ gene IDs</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="in">sig_res_entrez &lt;- res_entrez[which(res_entrez$padj &lt; 0.05), ]</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="in">sig_entrez &lt;- sig_res_entrez$log2FoldChange</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="in">names(sig_entrez) &lt;- sig_res_entrez$entrezid</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="in"># Look at the significant gene list input</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="in">head(sig_entrez)</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>Now that we have our background and significant genes in the appropriate format, we can run SPIA (this will take a few minutes as it runs through all the pathways):</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia}</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="in"># Run SPIA</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="in">spia_result &lt;- spia(de=sig_entrez, all=background_entrez, organism="hsa")</span></span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="in"># Look at the results</span></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="in">head(spia_result, n=20)</span></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>SPIA outputs a table showing significantly dysregulated pathways based on over-representation and signaling perturbations accumulation. The table shows the following information: </span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pSize`</span>: the number of genes on the pathway</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`NDE`</span>: the number of DE genes per pathway</span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tA`</span>: the observed total perturbation accumulation in the pathway</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pNDE`</span>: the probability to observe at least NDE genes on the pathway using a hypergeometric model (similar to ORA)</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pPERT`</span>: the probability to observe a total accumulation more extreme than tA only by chance</span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pG`</span>: the p-value obtained by combining pNDE and pPERT</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pGFdr`</span> and <span class="in">`pGFWER`</span> are the False Discovery Rate and Bonferroni adjusted global p-values, respectively</span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Status`</span>: gives the direction in which the pathway is perturbed (activated or inhibited)</span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`KEGGLINK`</span> gives a web link to the KEGG website that **displays the pathway image** with the differentially expressed genes highlighted in red</span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>We can view the significantly dysregulated pathways by viewing the over-representation and perturbations for each pathway.</span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_plot}</span></span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="in"># To avoid an error, remove any rows where `pPERT` is NA</span></span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="in">spia_result &lt;- spia_result %&gt;% filter(!is.na(pPERT))</span></span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="in"># Plot significant pathways</span></span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="in">plotP(spia_result, threshold=0.05)</span></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>In this plot, each pathway is a point and the coordinates are the log of pNDE (using a hypergeometric model) and the p-value from perturbations, pPERT. The oblique lines in the plot show the significance regions based on the combined evidence.</span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>If we choose to explore the significant genes from our dataset occurring in these pathways, we can subset our SPIA results:</span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_results}</span></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="in"># Look at pathway 05203 and view kegglink</span></span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="in">subset(spia_result, ID == "05203")</span></span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>Then, if we click on the <span class="co">[</span><span class="ot">KEGGLINK</span><span class="co">](http://www.genome.jp/dbget-bin/show_pathway?hsa05203+1739+5829+578+3661+5700+1108+3725+836+581+572+5366+7187+7188+1642+5594+10488+64764+90993+9586+6777+5291+5293+5966+1959+1019+55697+5902+2648+6850+3718+595+894+896+890+4193+28973+898+9134+1233+7419+3265+3845+4893+10971+7529+7531+7532+7534+6502+2965+1387+9114+1026+5315+3065+5922+998+387+81+88+2957+991+3665+3106+3107+3133+3134+5566+5567+2885+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370)</span>, we can view the genes within our dataset from these perturbed pathways:</span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="al">![KEGG pathway with significant genes highlighted](../img/hsa05203_20250829_102935.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### SPIA</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data_setup}</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries needed to render this lesson</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># load objects needed to render this lesson</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>res_entrez <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/intermediate_res_entrez.RDS"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">SPIA (Signaling Pathway Impact Analysis)</span><span class="co">](http://bioconductor.org/packages/release/bioc/html/SPIA.html)</span> tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. The blog post from <span class="co">[</span><span class="ot">Getting Genetics Done</span><span class="co">](https://gettinggeneticsdone.blogspot.com/2012/03/pathway-analysis-for-high-throughput.html)</span> provides a step-by-step procedure for using and understanding SPIA. </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r libraries}</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Install package (if needed)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># BiocManager::install("SPIA")</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SPIA)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>To perform SPIA, we need a list of background genes and a list of significant genes. For our background dataset we will use all genes tested for differential expression (all genes in our results table). For our significant gene list we will use genes with p-adjusted values less than 0.05 (we could include a fold change threshold too if we have many DE genes).</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gene_lists}</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># The background set is a vector of all the genes represented on the platform</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>background_entrez <span class="ot">&lt;-</span> res_entrez<span class="sc">$</span>entrezid</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Significant genes is a vector of fold changes where the names are ENTREZ gene IDs</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>sig_res_entrez <span class="ot">&lt;-</span> res_entrez[<span class="fu">which</span>(res_entrez<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>), ]</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>sig_entrez <span class="ot">&lt;-</span> sig_res_entrez<span class="sc">$</span>log2FoldChange</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sig_entrez) <span class="ot">&lt;-</span> sig_res_entrez<span class="sc">$</span>entrezid</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the significant gene list input</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sig_entrez)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>Now that we have our background and significant genes in the appropriate format, we can run SPIA (this will take a few minutes as it runs through all the pathways):</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia}</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Run SPIA</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> <span class="fu">spia</span>(<span class="at">de =</span> sig_entrez, <span class="at">all =</span> background_entrez, <span class="at">organism =</span> <span class="st">"hsa"</span>)</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_code}</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the results</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>spia_result <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">View</span>()</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_render}</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the results (prevent "KEGGLINK" column from wrapping so the table is not incredibly long)</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>spia_result <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> DT<span class="sc">::</span><span class="fu">datatable</span>() <span class="sc">%&gt;%</span> DT<span class="sc">::</span><span class="fu">formatStyle</span>(<span class="st">"KEGGLINK"</span>, <span class="st">"white-space"</span> <span class="ot">=</span> <span class="st">"nowrap"</span>)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>SPIA outputs a table showing significantly dysregulated pathways based on over-representation and signaling perturbations accumulation. The table shows the following information: </span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pSize`</span>: the number of genes on the pathway</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`NDE`</span>: the number of DE genes per pathway</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tA`</span>: the observed total perturbation accumulation in the pathway</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pNDE`</span>: the probability to observe at least NDE genes on the pathway using a hypergeometric model (similar to ORA)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pPERT`</span>: the probability to observe a total accumulation more extreme than tA only by chance</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pG`</span>: the p-value obtained by combining pNDE and pPERT</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pGFdr`</span> and <span class="in">`pGFWER`</span> are the False Discovery Rate and Bonferroni adjusted global p-values, respectively</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Status`</span>: gives the direction in which the pathway is perturbed (activated or inhibited)</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`KEGGLINK`</span> gives a web link to the KEGG website that **displays the pathway image** with the differentially expressed genes highlighted in red</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>We can view the significantly dysregulated pathways by viewing the over-representation and perturbations for each pathway.</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_plot}</span></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid an error, remove any rows where `pPERT` is NA</span></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>spia_result <span class="ot">&lt;-</span> spia_result <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pPERT))</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot significant pathways</span></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="fu">plotP</span>(spia_result, <span class="at">threshold=</span><span class="fl">0.05</span>)</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>In this plot, each pathway is a point and the coordinates are the log of pNDE (using a hypergeometric model) and the p-value from perturbations, pPERT. The oblique lines in the plot show the significance regions based on the combined evidence.</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>If we choose to explore the significant genes from our dataset occurring in these pathways, we can subset our SPIA results:</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spia_results}</span></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at pathway 05203 and view kegglink</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(spia_result, ID <span class="sc">==</span> <span class="st">"05203"</span>)</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>Then, if we click on the <span class="co">[</span><span class="ot">KEGGLINK</span><span class="co">](http://www.genome.jp/dbget-bin/show_pathway?hsa05203+1739+5829+578+3661+5700+1108+3725+836+581+572+5366+7187+7188+1642+5594+10488+64764+90993+9586+6777+5291+5293+5966+1959+1019+55697+5902+2648+6850+3718+595+894+896+890+4193+28973+898+9134+1233+7419+3265+3845+4893+10971+7529+7531+7532+7534+6502+2965+1387+9114+1026+5315+3065+5922+998+387+81+88+2957+991+3665+3106+3107+3133+3134+5566+5567+2885+128312+3017+440689+8341+8343+8347+8348+8349+85236+8970+554313+8360+8362+8367+8370)</span>, we can view the genes within our dataset from these perturbed pathways:</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="al">![KEGG pathway with significant genes highlighted](../img/hsa05203_20250829_102935.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

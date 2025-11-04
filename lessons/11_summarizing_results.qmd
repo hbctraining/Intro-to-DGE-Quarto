@@ -59,9 +59,20 @@ Now we can subset that table to only keep the significant genes using our pre-de
 # Subset the tibble to keep only significant genes
 sigOE <- res_tableOE_tb %>%
   dplyr::filter(padj < padj.cutoff)
+```
 
-# Take a quick look at this tibble
-sigOE
+```{r results_sig_code}
+#| eval: false
+
+# Take a quick look at our top significant genes
+sigOE %>% head() %>% View()
+```
+
+```{r results_sig_render}
+#| echo: false
+
+# Take a quick look at our top significant genes
+sigOE %>% head() %>% DT::datatable()
 ```
 
 ::: callout-tip

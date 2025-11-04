@@ -90,6 +90,8 @@ normalized_counts %>% head() %>% DT::datatable()
 ::: callout-note
 # A possible alternative to the above:
 
+We can also perform all of the above data wrangling in a single line of code.
+
 ```{r add_gene_names_alternative}
 normalized_counts <- counts(dds, normalized = TRUE) %>% 
   data.frame() %>%
@@ -136,7 +138,7 @@ d
 
 :::callout-note
 # Why is the expression of MOV10 in the knockdown not 0?
-As discussed in the [Set up lesson](03_DGE_setup_and_overview.html), knockdown of Mov10 was achieved using siRNA. RNA interference is inefficient: some RNAs escape degradation, and thus some expression remains.
+As discussed in the [Set up lesson](03_DGE_setup_and_overview.html#review-of-the-dataset), knockdown of Mov10 was achieved using siRNA. RNA interference is inefficient: some RNAs escape degradation, and thus some expression remains.
 :::
 
 ```{r plot_one_gene_ggplot}
