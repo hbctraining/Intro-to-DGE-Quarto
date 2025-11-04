@@ -155,3 +155,9 @@ Once the QC has been performed on all the samples, we are ready to get started w
 <p align="center">
 <img src="../img/deseq_counts_overview.png" width="600">
 </p>
+
+***
+
+[Next Lesson](02_experimental_planning_considerations.qmd)
+
+***

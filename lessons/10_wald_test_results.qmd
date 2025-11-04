@@ -341,3 +341,9 @@ saveRDS(res_tableKD, "./data/intermediate_res_tableKD.RDS")
 ---
 
 *Some materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*
+
+***
+
+[Next Lesson](11_summarizing_results.qmd)
+
+***

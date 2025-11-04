@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../lessons/schedule.html"> 
+    <a class="nav-link" href="../schedule/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
 </ul>
@@ -479,8 +479,8 @@ low counts [2]     : 20580, 53%
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-c95aea8f192999742bcb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c95aea8f192999742bcb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000000003","ENSG00000000419","ENSG00000000460","ENSG00000001084","ENSG00000001167","ENSG00000002016"],[3525.883477863547,1478.251240526906,1159.776136458353,2560.548203994831,2501.411797387492,920.8664261821434],[-0.4197795831622199,0.3410359946056587,-0.2473066987434602,-0.2696719893814603,-0.2883367666059514,-0.2728536481268404],[0.07806831015364141,0.114722591617755,0.08082188588524164,0.09357643139039026,0.0649661144382697,0.1162816952425322],[1.534627118964897e-08,0.0007454537682931749,0.0009588318359206266,0.001442250088399173,3.300249729033437e-06,0.006603622095070085],[4.428391662691293e-07,0.004865528608963123,0.005993108451714337,0.008421258012572656,4.961221757819781e-05,0.02908359803305421]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gene<\/th>\n      <th>baseMean<\/th>\n      <th>log2FoldChange<\/th>\n      <th>lfcSE<\/th>\n      <th>pvalue<\/th>\n      <th>padj<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"gene","targets":1},{"name":"baseMean","targets":2},{"name":"log2FoldChange","targets":3},{"name":"lfcSE","targets":4},{"name":"pvalue","targets":5},{"name":"padj","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-20dfa75c79319ed8237c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-20dfa75c79319ed8237c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000000003","ENSG00000000419","ENSG00000000460","ENSG00000001084","ENSG00000001167","ENSG00000002016"],[3525.883477863547,1478.251240526906,1159.776136458353,2560.548203994831,2501.411797387492,920.8664261821434],[-0.4197795831580844,0.3410359946226851,-0.2473066987028071,-0.2696719893778967,-0.288336766574692,-0.272853648120637],[0.07806831015181918,0.1147225915909633,0.08082188593396808,0.09357643136894736,0.06496611447469265,0.1162816952415011],[1.534627117599013e-08,0.0007454537660855017,0.0009588318430804968,0.001442250084787556,3.300249770935733e-06,0.006603622094118959],[4.428391658749834e-07,0.004865528594553782,0.005993108496466584,0.008421258012572607,4.961221820810948e-05,0.02908359802886528]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gene<\/th>\n      <th>baseMean<\/th>\n      <th>log2FoldChange<\/th>\n      <th>lfcSE<\/th>\n      <th>pvalue<\/th>\n      <th>padj<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"gene","targets":1},{"name":"baseMean","targets":2},{"name":"log2FoldChange","targets":3},{"name":"lfcSE","targets":4},{"name":"pvalue","targets":5},{"name":"padj","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -503,6 +503,9 @@ low counts [2]     : 20580, 53%
 <p>Now that we have extracted the significant results, we are ready for visualization!</p>
 <hr>
 <p><em>Some materials and hands-on activities were adapted from <a href="http://www.bioconductor.org/help/workflows/rnaseqGene/#de">RNA-seq workflow</a> on the Bioconductor website</em></p>
+<hr>
+<p><a href="../lessons/12_DGE_visualizing_results.html">Next Lesson</a></p>
+<hr>
 
 
 <!-- -->
@@ -1073,7 +1076,13 @@ low counts [2]     : 20580, 53%
 <span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>*Some materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>*Some materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson</span><span class="co">](12_DGE_visualizing_results.qmd)</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>***</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

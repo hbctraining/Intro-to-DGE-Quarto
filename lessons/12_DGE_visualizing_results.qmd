@@ -317,3 +317,9 @@ saveRDS(normalized_counts, "./data/intermediate_normalized_counts_with_gene_name
 ---
 
 *Materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*
+
+***
+
+[Next Lesson](13_DGE_LRT_results.qmd)
+
+***

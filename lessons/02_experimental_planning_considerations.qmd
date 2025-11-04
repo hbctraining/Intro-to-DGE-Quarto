@@ -193,3 +193,9 @@ Your experiment has three different treatment groups, A, B, and C. Due to the le
 
 [Answer Key](https://www.dropbox.com/scl/fi/qifgipe1esic1avu3an7c/exp_design_table.xlsx?rlkey=9hq0834lzl6jnrfn58wfz1qh0&dl=1)
 :::
+
+***
+
+[Next Lesson](03_DGE_setup_and_overview.qmd)
+
+***

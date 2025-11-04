@@ -81,3 +81,9 @@ Depending on what type of shared expression profiles exist in your data, you can
 ---
 
 *Materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*
+
+***
+
+[Next Lesson](15_genomic_annotation.qmd)
+
+***

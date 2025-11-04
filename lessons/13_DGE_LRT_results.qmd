@@ -185,3 +185,9 @@ After extracting a group of genes, we can use annotation packages to obtain addi
 ---
 
 *Materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*
+
+***
+
+[Next Lesson](14_time_course_analyses.qmd)
+
+***

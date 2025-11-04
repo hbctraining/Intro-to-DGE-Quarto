@@ -173,3 +173,9 @@ How would the design formula be structured to perform the following analyses?
 # save objects needed to render future lessons
 saveRDS(dds, "./data/intermediate_dds_2_ran_deseq.RDS")
 ```
+
+***
+
+[Next Lesson](08_hypothesis_testing.qmd)
+
+***

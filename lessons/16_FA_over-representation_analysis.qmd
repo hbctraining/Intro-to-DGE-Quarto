@@ -328,3 +328,9 @@ cnetplot(ego2,
 # save objects needed to render future lessons
 saveRDS(res_ids, "./data/intermediate_res_ids.RDS")
 ```
+
+***
+
+[Next Lesson](17_FA_functional_class_scoring.qmd)
+
+***

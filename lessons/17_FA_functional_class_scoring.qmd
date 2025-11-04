@@ -313,3 +313,9 @@ The way the tools perform clustering is by taking the entire expression matrix a
 # save objects needed to render future lessons
 saveRDS(res_entrez, "./data/intermediate_res_entrez.RDS")
 ```
+
+***
+
+[Next Lesson](18_DGE_summarizing_workflow.qmd)
+
+***

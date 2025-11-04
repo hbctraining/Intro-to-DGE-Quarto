@@ -233,3 +233,9 @@ Given the dispersion plot below, would you have any concerns regarding the fit o
 ---
 
 *Some materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*
+
+***
+
+[Next Lesson](10_wald_test_results.qmd)
+
+***
