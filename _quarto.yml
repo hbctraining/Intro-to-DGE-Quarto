@@ -17,7 +17,7 @@ website:
   navbar:
     left:
       - text: "Schedule"
-        href: lessons/schedule.qmd
+        href: schedule/schedule.qmd
     right:
       - text: "HBC"
         href: https://bioinformatics.sph.harvard.edu/
@@ -35,8 +35,8 @@ website:
     contents:
       - section: "Pre-reading:"
         contents:
-        - lessons/01_RNAseq_processing_workflow.qmd
-        - lessons/02_experimental_planning_considerations.qmd
+          - lessons/01_RNAseq_processing_workflow.qmd
+          - lessons/02_experimental_planning_considerations.qmd
 
       - section: "Day 1:"
         contents:
