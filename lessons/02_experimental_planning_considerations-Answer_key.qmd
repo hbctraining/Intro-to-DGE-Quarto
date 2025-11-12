@@ -1,0 +1,65 @@
+---
+title: "Experimental design considerations - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-12"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Exercise 1
+
+Your experiment has three different treatment groups, A, B, and C. Due to the lengthy process of tissue extraction, you can only isolate the RNA from two samples at the same time. You plan to have 4 replicates per group. Your metadata table is as follows:
+
+  | sample | treatment | sex | replicate | RNA isolation |
+  | --- | --- | --- | --- | --- |
+  | sample1 | A | F | 1 | 
+  | sample2 | A | F | 2 |
+  | sample3 | A | M | 3 |
+  | sample4 | A | M | 4 |
+  | sample5 | B | F | 1 |
+  | sample6 | B | F | 2 |
+  | sample7 | B | M | 3 |
+  | sample8 | B | M | 4 |
+  | sample9 | C | F | 1 |
+  | sample10 | C | F | 2 |
+  | sample11 | C | M | 3 |
+  | sample12 | C | M | 4 |
+  
+  Click [here](https://www.dropbox.com/scl/fi/rkh53bwbvpo2n676vhmjc/exp_design_table.xlsx?rlkey=rk7m3dafqjjj68hwpno4gqysz&st=sgplctpa&dl=1) to download the above table as an **Excel file**.
+
+1. Fill in the `RNA isolation` column of the metadata table. Since we can only prepare 2 samples at a time and we have 12 samples total, you will need to isolate RNA in 6 batches. In the `RNA isolation` column, enter one of the following values for each sample: `group1`, `group2`, `group3`, `group4`, `group5`, `group6`. Make sure to fill in the table so as to avoid confounding by batch of `RNA isolation`. 
+
+  | sample | treatment | sex | replicate | RNA isolation |
+  | --- | --- | --- | --- | --- |
+  | sample1 | A | F | 1 | group1 |
+  | sample2 | A | F | 2 | group2 |
+  | sample3 | A | M | 3 | group3 |
+  | sample4 | A | M | 4 | group4 |
+  | sample5 | B | F | 1 | group3 |
+  | sample6 | B | F | 2 | group5 |
+  | sample7 | B | M | 3 | group1 |
+  | sample8 | B | M | 4 | group6 |
+  | sample9 | C | F | 1 | group4 |
+  | sample10 | C | F | 2 | group6 |
+  | sample11 | C | M | 3 | group2 |
+  | sample12 | C | M | 4 | group5 |
+
+2. **BONUS:** To perform the RNA isolations more quickly, you devote two researchers to perform the RNA isolations. Create a `researcher` column and fill in the researchers' initials for the samples they will prepare: use initials `AB` or `CD`.
+
+  | sample | treatment | sex | replicate | RNA isolation | Researcher |
+  | --- | --- | --- | --- | --- | --- |
+  | sample1 | A | F | 1 | group1 | AB |
+  | sample2 | A | F | 2 | group2 | CD |
+  | sample3 | A | M | 3 | group3 | AB |
+  | sample4 | A | M | 4 | group4 | CD |
+  | sample5 | B | F | 1 | group3 | AB |
+  | sample6 | B | F | 2 | group5 | CD |
+  | sample7 | B | M | 3 | group1 | AB |
+  | sample8 | B | M | 4 | group6 | CD |
+  | sample9 | C | F | 1 | group4 | CD |
+  | sample10 | C | F | 2 | group6 | AB |
+  | sample11 | C | M | 3 | group2 | CD |
+  | sample12 | C | M | 4 | group5 | AB |
