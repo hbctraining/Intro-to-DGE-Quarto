@@ -1,7 +1,26 @@
 ---
 title: "Experimental design considerations"
-author: "Mary Piper, Meeta Mistry, Radhika Khetani"
-date: "Thursday, June 20, 2019"
+description: |
+  This lesson explores the crucial factors involved in the experimental design of RNA-seq differential expression studies. Participants will examine the importance of replicates, sequencing depth, avoidance of confounding factors and batch effect management in planning robust, reproducible experiments. The lesson provides guidance on the types and recommended numbers of replicates, how to balance sequencing depth and biological variability, strategies for preventing confounding and best practices for identifying and accounting for batch effects in experimental and analytical workflows. Participants will develop the skills to design thoughtful, high-quality RNA-seq experiments that yield reliable results for downstream analysis.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2017-06-20"
+categories: 
+  - RNA-seq Analysis
+  - Experimental Design
+keywords:
+  - Replicates
+  - Batch effects
+  - Confounding
+  - Experimental planning
+  - Sequencing depth
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 50 minutes

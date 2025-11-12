@@ -1,7 +1,33 @@
 ---
 title: "From raw sequence reads to count matrix"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper"
-date: "June 9, 2020"
+description: |
+  This lesson provides an overview of the bulk RNA-seq data processing pipeline, detailing each major step required to convert raw sequencing reads into a gene expression count matrix suitable for downstream differential expression analysis. Participants will gain an understanding of RNA extraction and library preparation, next-generation sequencing technologies and the quality control measures necessary at each stage. The lesson will also cover popular tools for quantification (e.g., Salmon, Kallisto) and aggregation of quality metrics using MultiQC. By the end, participants will appreciate the importance of each quality control checkpoint and how choices in methodology and technology influence the accuracy of gene expression data.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2017-06-09"
+categories: 
+  - RNA-seq Analysis
+  - Transcriptomics
+  - Workflows
+  - Data Preprocessing and Quality Control
+keywords:
+  - RNA extraction
+  - Library preparation
+  - Sequencing
+  - Illumina
+  - Quality control
+  - FastQC
+  - Salmon
+  - Lightweight aligners
+  - Count matrix
+  - Quantification
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 40 minutes
@@ -10,7 +36,7 @@ Approximate time: 40 minutes
 
 * Understand the different steps of the RNA-seq workflow, from RNA extraction to assessing the expression levels of genes.
 
-# RNA-seq workflow
+## RNA-seq workflow
 
 To perform Differential Gene Expression analysis, we need to start with a matrix of counts representing the levels of gene expression. It is important to understand how the count matrix is generated, before diving into the statistical analysis. 
 
@@ -20,7 +46,7 @@ In this lesson we will briefly discuss the RNA-processing pipeline for bulk RNA-
 <img src="../img/workflow-salmon-DGE-alt2.png" width="600">
 </p>
 
-## 1. RNA extraction and library preparation
+### 1. RNA extraction and library preparation
 
 Before RNA can be sequenced, it must first be extracted and separated from its cellular environment and prepared into a cDNA library. There are a number of steps involved which are outlined in the figure below, and in parallel there are various quality checks implemented to make sure we have good quality RNA to move forward with. We briefly describe some of these steps below.
 
@@ -29,14 +55,14 @@ Before RNA can be sequenced, it must first be extracted and separated from its c
 Generally, ribosomal RNA represents the majority of the RNAs present in a cell, while messenger RNAs represent a small percentage of total RNA (~2% in humans). Therefore, if we want to study the protein-coding genes, we need to enrich for mRNA or deplete the rRNA. For differential gene expression analysis, it is best to enrich for Poly(A)+, unless you are aiming to obtain information about long non-coding RNAs, in which case ribosomal RNA depletion is recommended.
 
 ::: callout-note
-# RNA Quality check
+## RNA Quality check
 It is essential to check for the integrity of the extracted RNA prior to starting the cDNA library prepation. Traditionally, RNA integrity was assessed via gel electrophoresis by visual inspection of the ribosomal RNA bands, but that method is time-consuming and imprecise. The Bioanalyzer system from Agilent will rapidly assess RNA integrity and calculate an RNA Integrity Number (RIN), which facilitates the interpretation and reproducibility of RNA quality. RIN, essentially, provides a means by which RNA quality from different samples can be compared to each other in a standardized manner.
 :::
 
 **b. Fragmentation and size selection.** The remaining RNA molecules are then fragmented. This is done either via chemical, enzymatic (e.g., RNAses), or physical processes (e.g., chemical/mechanical shearing). These fragments then undergo size selection to retain only those fragments within a size range that Illumina sequencing machines can handle best, i.e., between 150 to 300 bp. 
 
 ::: callout-note
-# Fragment size quality check
+## Fragment size quality check
 After size selection/exclusion, the fragment size distribution should be assesed to ensure that it is unimodal and well-defined.
 :::
 
@@ -50,7 +76,7 @@ After size selection/exclusion, the fragment size distribution should be assesed
 
 *Image source: [Zeng W and Mortazavi A, 2012](https://pubmed.ncbi.nlm.nih.gov/22910383/)*
 
-## 2. Sequencing (Illumina)
+### 2. Sequencing (Illumina)
 
 Sequencing of the cDNA libraries will generate **reads**. Reads correspond to the nucleotide sequences of the ends of each of the cDNA fragements in the library. You will have the choice of sequencing either a single end of the cDNA fragments (single-end reads) or both ends of the fragments (paired-end reads).
 
@@ -64,7 +90,7 @@ Sequencing of the cDNA libraries will generate **reads**. Reads correspond to th
 
 Generally single-end sequencing is sufficient unless it is expected that the reads will match multiple locations on the genome (e.g. organisms with many paralogous genes), assemblies are being performed, or for splice isoform differentiation. Be aware that paired-end reads are generally 2x more expensive.
 
-### Sequencing-by-synthesis 
+#### Sequencing-by-synthesis 
 
 Illumina sequencing technology uses a sequencing-by-synthesis approach. **To explore sequencing by synthesis in more depth, please watch [this linked video on Illumina's YouTube channel](https://www.youtube.com/watch?v=fCd6B5HRaZ8).**
 
@@ -86,13 +112,13 @@ _**Base calling:**_ The Base calling program will then generate the sequence of 
 <img src="../img/illumina_sequencing_process.png" width="600">
 </p>
 
-## 3. Quality control of raw sequencing data (FastQC)
+### 3. Quality control of raw sequencing data (FastQC)
 
 The raw reads obtained from the sequencer are stored as **[FASTQ files](https://en.wikipedia.org/wiki/FASTQ_format)**. The FASTQ file format is the de facto file format for sequence reads generated from next-generation sequencing technologies.
 
 Each FASTQ file is a text file that represents sequence readouts for a sample. Each read is represented by 4 lines as shown below:
 
-```
+```text
 @HWI-ST330:304:H045HADXX:1:1101:1111:61397
 CACTTGTAAGGGCAGGCCCCCTTCACCCTCCCGCTCCTGGGGGANNNNNNNNNNANNNCGAGGCCCTGGGGTAGAGGGNNNNNNNNNNNNNNGATCTTGG
 +
@@ -114,7 +140,7 @@ The main functions include:
 * Summary graphs and tables to quickly assess your data
 * Export of results to an HTML-based permanent report
 
-## 4. Quantify expression
+### 4. Quantify expression
 
 Once we have explored the quality of our raw reads, we can move on to quantifying expression at the transcript level. The goal of this step is to **identify from which transcript each of the reads originated from and the total number of reads associated with each transcript**.
 
@@ -132,7 +158,7 @@ Each of the tools in the list above work slightly differently from one another. 
 <img src="../img/salmon.png" width="600">
 </p>
 
-## 5. Quality control of aligned sequence reads (STAR/Qualimap)
+### 5. Quality control of aligned sequence reads (STAR/Qualimap)
 
 As mentioned above, the differential gene expression analysis will use transcript/gene pseudocounts generated by Salmon. However, to perform some basic quality checks on the sequencing data, it is important to align the reads to the whole genome. Either STAR or HiSAT2 are able to perform this step and generate a [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) file that can be used for QC.
 
@@ -142,7 +168,7 @@ A tool called [Qualimap](http://qualimap.bioinfo.cipf.es/doc_html/intro.html) **
 * 5'-3' biases
 * Coverage biases
 
-## 6. Quality control: aggregating results with MultiQC
+### 6. Quality control: aggregating results with MultiQC
 
 Throughout the workflow we have performed various steps of quality checks on our data. You will need **to do this for every sample in your dataset**, making sure these metrics are consistent across the samples for a given experiment. Outlier samples should be flagged for further investigation and potential removal.
 
