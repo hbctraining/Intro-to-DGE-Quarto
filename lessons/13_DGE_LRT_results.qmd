@@ -182,6 +182,18 @@ group1 <- clusters$df %>%
 
 After extracting a group of genes, we can use annotation packages to obtain additional information. We can also use these lists of genes as input to downstream functional analysis tools to obtain more biological insight and see whether the groups of genes share a specific function. 
 
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
+
 ---
 
 *Materials and hands-on activities were adapted from [RNA-seq workflow](http://www.bioconductor.org/help/workflows/rnaseqGene/#de) on the Bioconductor website*

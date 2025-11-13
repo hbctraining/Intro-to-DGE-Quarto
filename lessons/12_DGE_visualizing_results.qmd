@@ -311,8 +311,20 @@ DEGreport::degPlotWide(dds = dds, genes = row.names(res)[1:5], group = "conditio
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(normalized_counts, "./data/intermediate_normalized_counts_with_gene_names.RDS")
+saveRDS(normalized_counts, "data/intermediate_normalized_counts_with_gene_names.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ---
 

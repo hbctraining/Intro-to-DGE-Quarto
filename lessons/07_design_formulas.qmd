@@ -171,8 +171,20 @@ How would the design formula be structured to perform the following analyses?
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds, "./data/intermediate_dds_2_ran_deseq.RDS")
+saveRDS(dds, "data/intermediate_dds_2_ran_deseq.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ***
 

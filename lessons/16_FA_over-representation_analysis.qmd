@@ -326,8 +326,20 @@ cnetplot(ego2,
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_ids, "./data/intermediate_res_ids.RDS")
+saveRDS(res_ids, "data/intermediate_res_ids.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ***
 

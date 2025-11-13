@@ -311,8 +311,20 @@ The way the tools perform clustering is by taking the entire expression matrix a
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_entrez, "./data/intermediate_res_entrez.RDS")
+saveRDS(res_entrez, "data/intermediate_res_entrez.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ***
 

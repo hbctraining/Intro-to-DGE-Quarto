@@ -153,8 +153,20 @@ By setting the FDR cutoff to < 0.05, we're saying that the proportion of false p
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds_lrt, "./data/intermediate_dds_lrt.RDS")
+saveRDS(dds_lrt, "data/intermediate_dds_lrt.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ---
 

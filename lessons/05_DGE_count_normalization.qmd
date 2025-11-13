@@ -1,12 +1,32 @@
 ---
 title: "Count normalization with DESeq2"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper, Jihe Liu"
-date: "May 20, 2020"
+description: |
+    This lesson introduces the concepts and practical steps of count normalization in RNA-seq differential expression analysis using DESeq2. Participants will investigate uninteresting factors affecting RNA-seq data, review common normalization methods (CPM, TPM, RPKM/FPKM, TMM, median of ratios) and apply DESeq2's median of ratios approach to real data. The lesson includes hands-on guidance in matching metadata, creating a `DESeqDataSet` object, and extracting normalized counts for quality control and downstream analysis.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+  - Jihe Liu
+date: "2020-05-20"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Data Normalization
+keywords:
+  - DESeq2
+  - Count Normalization
+  - Median of Ratios
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 60 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -14,8 +34,8 @@ library(ggplot2)
 library(DESeq2)
 
 # load objects needed to render this lesson
-txi  <- readRDS("./data/intermediate_txi.RDS")
-meta <- readRDS("./data/metadata.RDS")
+txi  <- readRDS("data/intermediate_txi.RDS")
+meta <- readRDS("data/metadata.RDS")
 ```
 
 ## Learning Objectives 
@@ -177,7 +197,8 @@ Now that we know the theory of count normalization, we will normalize the counts
 
 We should always make sure that we have sample names that match between the two files, and that the samples are in the same order. DESeq2 will output an error if this is not the case.
 
-```{r check_sample_names}
+```{r}
+#| label: check_sample_names
 # Check that sample names match in both files
 all(colnames(txi$counts) %in% rownames(meta))
 all(colnames(txi$counts) == rownames(meta))
@@ -186,7 +207,7 @@ all(colnames(txi$counts) == rownames(meta))
 If your data does not match, you could use the `match()` function to rearrange them.
 
 ::: callout-tip
-# [**Exercise 1**](05_DGE_count_normalization_Answers.html#exercise-1)
+# [**Exercise 1**](05_DGE_count_normalization-Answer_key.qmd#exercise-1)
 Suppose we have sample names matching in the counts matrix and metadata file, but they are in different order. Write the line(s) of code to create a new matrix with columns re-ordered such that they are identical to the row names of the metadata.
 :::
 
@@ -198,7 +219,8 @@ Let's start by creating the `DESeqDataSet` object, and then we can talk a bit mo
 
 **Our count matrix input is stored in the `txi` list object**. So we need to specify that using the `DESeqDataSetFromTximport()` function, which will extract the counts component and round the values to the nearest whole number.
 
-```{r create_dds}
+```{r}
+#| label: create_dds
 # Create DESeq2Dataset object
 dds <- DESeqDataSetFromTximport(txi, colData = meta, design = ~ sampletype)
 ```
@@ -211,7 +233,8 @@ Since we had created a `data` variable in the last lesson that contains the coun
 
 You can use DESeq-specific functions to access the different slots and retrieve information. For example, suppose we want to retrieve the original count matrix, we would use `counts()` function (*Note: we nest it within the `head()` function so that we can see just the first few lines of the matrix. You could also use the `View()` function to view the result in the script editor rather than in the console*):
 
-```{r view_dds_counts}
+```{r}
+#| label: view_dds_counts
 head(counts(dds))
 ```
 
@@ -225,45 +248,61 @@ The next step is to normalize the count data in order to make fair gene comparis
 
 To perform the **median of ratios method** of normalization, DESeq2 has a single `estimateSizeFactors()` function that will generate size factors. We will demonstrate this function in the example below, but **in a typical RNA-seq analysis, this step is automatically performed by the `DESeq()` function**, which we will discuss later. 
 
-```{r size_factors_run}
+```{r}
+#| label: size_factors_run
 # Estimate size factors
 dds <- estimateSizeFactors(dds)
 ```
 
 By assigning the results back to the `dds` object, we are filling in the slots of the `DESeqDataSet` object with the appropriate information. We can take a look at the normalization factors of each sample using:
 
-```{r size_factors_viz}
+```{r}
+#| label: size_factors_viz
 # Look at size factors
 sizeFactors(dds)
 ```
 
 Now, to retrieve the normalized counts matrix from `dds`, we use the `counts()` function and add the argument `normalized=TRUE`.
 
-```{r normalize}
+```{r}
+#| label: normalize
 # Get normalized counts matrix
 normalized_counts <- counts(dds, normalized=TRUE)
 ```
 
 We can save this normalized data matrix to file for later use:
 
-```{r save_normalized}
+```{r}
+#| label: save_normalized
 # Save normalized counts matrix
-write.table(normalized_counts, file="./data/normalized_counts.txt", sep="\t", quote=FALSE, col.names = NA)
+write.table(normalized_counts, file="data/normalized_counts.txt", sep="\t", quote=FALSE, col.names = NA)
 ```
 
 ::: callout-note
 DESeq2 doesn't actually use normalized counts; rather it uses the raw counts and models the normalization inside the Generalized Linear Model (GLM). These normalized counts will be useful for downstream visualization of results, but cannot be used as input to DESeq2 or any other tools that perform differential expression analysis that use the negative binomial model.
 :::
 
-```{r data_save}
+```{r}
+#| label: data_save
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(dds, "./data/intermediate_dds.RDS")
+saveRDS(dds, "data/intermediate_dds.RDS")
 ```
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+:::
 
 ***
 
-[Next Lesson](06_DGE_QC_analysis.html)
+[Next Lesson](06_DGE_QC_analysis.qmd)
 
 ***

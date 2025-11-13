@@ -126,7 +126,7 @@ ggplot(df) +
 3. For the genes with **low mean expression** we see quite a bit of scatter. We usually refer to this as **"heteroscedasticity"**. That is, for a given expression level in the low range we observe a lot of variability in the variance values.
 
 ::: callout-tip
-# [**Exercise 1**](04_RNAseq_count_distribution_Answers.html#exercise-1)
+# [**Exercise 1**](04_RNAseq_count_distribution-Answer_key.qmd#exercise-1)
 Evaluate the relationship between mean and variance for the control replicates (Irrel_kd samples). Note the differences or similarities in the plot compared to the one using the overexpression replicates.
 :::
 
@@ -220,11 +220,10 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ***
 
-[Next Lesson](05_DGE_count_normalization.html)
+[Next Lesson](05_DGE_count_normalization.qmd)
 
 ***

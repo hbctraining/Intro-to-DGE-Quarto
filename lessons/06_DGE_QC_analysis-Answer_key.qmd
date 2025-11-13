@@ -1,8 +1,16 @@
 ---
-title: "QC methods for DE analysis using DESeq2 - Answer key"
+title: "QC methods for DE analysis using DESeq2 - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -10,13 +18,14 @@ library(ggplot2)
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds  <- readRDS("./data/intermediate_dds.RDS")
-meta <- readRDS("./data/metadata.RDS")
+dds  <- readRDS("data/intermediate_dds.RDS")
+meta <- readRDS("data/metadata.RDS")
 ```
 
 # Exercise 1
 
-```{r pca_plot}
+```{r}
+#| label: pca_plot
 #| echo: false
 
 # Transform counts for data visualization

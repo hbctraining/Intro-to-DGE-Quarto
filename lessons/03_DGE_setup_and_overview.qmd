@@ -366,11 +366,10 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ***
 
-[Next Lesson](04_RNAseq_count_distribution.html)
+[Next Lesson](04_RNAseq_count_distribution.qmd)
 
 ***

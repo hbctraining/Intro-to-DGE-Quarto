@@ -1,14 +1,22 @@
 ---
-title: "Count normalization with DESeq2 - Answer key"
+title: "Count normalization with DESeq2 - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load objects needed to render this lesson
-txi  <- readRDS("./data/intermediate_txi.RDS")
-meta <- readRDS("./data/metadata.RDS")
-data <- readRDS("./data/intermediate_txi_counts.RDS")
+txi  <- readRDS("data/intermediate_txi.RDS")
+meta <- readRDS("data/metadata.RDS")
+data <- readRDS("data/intermediate_txi_counts.RDS")
 ```
 
 # Exercise 1
@@ -18,6 +26,7 @@ data <- readRDS("./data/intermediate_txi_counts.RDS")
 There are multiple ways to do this. For example:
 
 ```{r}
+#| label: reorder_columns_1
 idx <- match(rownames(meta), colnames(data))
 data_reordered <- data[, idx]
 ```
@@ -25,11 +34,13 @@ data_reordered <- data[, idx]
 OR
 
 ```{r}
+#| label: reorder_columns_2
 data_reordered <- data[, match(rownames(meta), colnames(data))]
 ```
 
 OR
 
 ```{r}
+#| label: reorder_columns_3
 txi$counts <- txi$counts[, match(rownames(meta), colnames(txi$counts))]
 ```
