@@ -81,7 +81,7 @@ The authors are investigating interactions between various genes involved in Fra
 
 ## RNA-seq workflow
 
-For this dataset, raw sequence reads were obtained from the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367). These reads were then processed using the RNA-seq workflow as detailed in the [pre-reading for this workshop](01_RNAseq_processing_workflow.html). All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://github.com/hbctraining/DGE_workshop_salmon_online/raw/master/data/multiqc_report_rnaseq.html.zip)** for you to peruse.
+For this dataset, raw sequence reads were obtained from the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367). These reads were then processed using the RNA-seq workflow as detailed in the [pre-reading for this workshop](01_RNAseq_processing_workflow.html). All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://www.dropbox.com/scl/fi/btv3itmk81z2omwijzyaz/multiqc_report_rnaseq.html?rlkey=w3zkxuy93szld0s9y2dq5cu8q&st=9oiwbrlq&dl=1)** for you to peruse.
 
 The directories of output from the mapping/quantification step of the workflow (Salmon) is the data that we will be using. These transcript abundance estimates, often referred to as **'pseudocounts', will be the starting point for our differential gene expression analysis**.
 
@@ -107,13 +107,13 @@ Now we need to grab the files that we will be working with for the analysis. The
 
 1. First we need the **Salmon results for the full dataset**. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory:*
 
-  - [Salmon data](https://www.dropbox.com/s/oz9yralwbtphw8u/data.zip?dl=1) for the Mov10 full dataset
+  - [Salmon data](https://www.dropbox.com/scl/fi/t2oirdy6qm0poy3uix5l6/data.zip?rlkey=xy39cwhjxectjp2y3txktcath&st=5i94dte0&dl=1) for the Mov10 full dataset
 
   Once you have the zip file downloaded you will want to decompress it. This will create a `data` directory with sub-directories that correspond to each of the samples in our dataset.
 
 2. Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html). For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into the `data` folder in your project directory.*
 
-  - [Annotation file](https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt)
+  - [Annotation file](https://www.dropbox.com/scl/fi/8qk2udv283l624ch6w3is/tx2gene_grch38_ens94.txt?rlkey=v47rdu1z11mlfvtvj1nzw2zy4&st=36yoijs1&dl=1)
 
 ### O2 Portal
 

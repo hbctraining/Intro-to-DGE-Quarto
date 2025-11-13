@@ -498,7 +498,7 @@ What is the purpose of these datasets? What does Mov10 do?
 </section>
 <section id="rna-seq-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="rna-seq-workflow">RNA-seq workflow</h2>
-<p>For this dataset, raw sequence reads were obtained from the <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367">Sequence Read Archive (SRA)</a>. These reads were then processed using the RNA-seq workflow as detailed in the <a href="01_RNAseq_processing_workflow.html">pre-reading for this workshop</a>. All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the <strong>MultiQC html report for this dataset <a href="https://github.com/hbctraining/DGE_workshop_salmon_online/raw/master/data/multiqc_report_rnaseq.html.zip">linked here</a></strong> for you to peruse.</p>
+<p>For this dataset, raw sequence reads were obtained from the <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367">Sequence Read Archive (SRA)</a>. These reads were then processed using the RNA-seq workflow as detailed in the <a href="01_RNAseq_processing_workflow.html">pre-reading for this workshop</a>. All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the <strong>MultiQC html report for this dataset <a href="https://www.dropbox.com/scl/fi/btv3itmk81z2omwijzyaz/multiqc_report_rnaseq.html?rlkey=w3zkxuy93szld0s9y2dq5cu8q&amp;st=9oiwbrlq&amp;dl=1">linked here</a></strong> for you to peruse.</p>
 <p>The directories of output from the mapping/quantification step of the workflow (Salmon) is the data that we will be using. These transcript abundance estimates, often referred to as <strong>‘pseudocounts’, will be the starting point for our differential gene expression analysis</strong>.</p>
 </section>
 <section id="setting-up" class="level2">
@@ -522,14 +522,14 @@ What is the purpose of these datasets? What does Mov10 do?
 <li>First we need the <strong>Salmon results for the full dataset</strong>. <em>Right click on the links below, and choose the “Save link as …” option to download directly into your project directory:</em></li>
 </ol>
 <ul>
-<li><a href="https://www.dropbox.com/s/oz9yralwbtphw8u/data.zip?dl=1">Salmon data</a> for the Mov10 full dataset</li>
+<li><a href="https://www.dropbox.com/scl/fi/t2oirdy6qm0poy3uix5l6/data.zip?rlkey=xy39cwhjxectjp2y3txktcath&amp;st=5i94dte0&amp;dl=1">Salmon data</a> for the Mov10 full dataset</li>
 </ul>
 <p>Once you have the zip file downloaded you will want to decompress it. This will create a <code>data</code> directory with sub-directories that correspond to each of the samples in our dataset.</p>
 <ol start="2" type="1">
 <li>Next, we need the <strong>annotation file</strong> that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package <a href="https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html">AnnotationHub</a>. For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. <em>Right click on the links below, and choose the “Save link as …” option to download directly into the <code>data</code> folder in your project directory.</em></li>
 </ol>
 <ul>
-<li><a href="https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt">Annotation file</a></li>
+<li><a href="https://www.dropbox.com/scl/fi/8qk2udv283l624ch6w3is/tx2gene_grch38_ens94.txt?rlkey=v47rdu1z11mlfvtvj1nzw2zy4&amp;st=36yoijs1&amp;dl=1">Annotation file</a></li>
 </ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
@@ -1359,7 +1359,7 @@ Note
 <span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## RNA-seq workflow</span></span>
 <span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>For this dataset, raw sequence reads were obtained from the <span class="co">[</span><span class="ot">Sequence Read Archive (SRA)</span><span class="co">](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367)</span>. These reads were then processed using the RNA-seq workflow as detailed in the <span class="co">[</span><span class="ot">pre-reading for this workshop</span><span class="co">](01_RNAseq_processing_workflow.html)</span>. All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://github.com/hbctraining/DGE_workshop_salmon_online/raw/master/data/multiqc_report_rnaseq.html.zip)** for you to peruse.</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>For this dataset, raw sequence reads were obtained from the <span class="co">[</span><span class="ot">Sequence Read Archive (SRA)</span><span class="co">](https://www.ncbi.nlm.nih.gov/sra/?term=SRP029367)</span>. These reads were then processed using the RNA-seq workflow as detailed in the <span class="co">[</span><span class="ot">pre-reading for this workshop</span><span class="co">](01_RNAseq_processing_workflow.html)</span>. All steps were performed on the command line (Linux/Unix), including a thorough quality control assessment. If you are interested, we have the **MultiQC html report for this dataset [linked here](https://www.dropbox.com/scl/fi/btv3itmk81z2omwijzyaz/multiqc_report_rnaseq.html?rlkey=w3zkxuy93szld0s9y2dq5cu8q&amp;st=9oiwbrlq&amp;dl=1)** for you to peruse.</span>
 <span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>The directories of output from the mapping/quantification step of the workflow (Salmon) is the data that we will be using. These transcript abundance estimates, often referred to as **'pseudocounts', will be the starting point for our differential gene expression analysis**.</span>
 <span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
@@ -1385,13 +1385,13 @@ Note
 <span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>First we need the **Salmon results for the full dataset**. *Right click on the links below, and choose the "Save link as ..." option to download directly into your project directory:*</span>
 <span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Salmon data</span><span class="co">](https://www.dropbox.com/s/oz9yralwbtphw8u/data.zip?dl=1)</span> for the Mov10 full dataset</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Salmon data</span><span class="co">](https://www.dropbox.com/scl/fi/t2oirdy6qm0poy3uix5l6/data.zip?rlkey=xy39cwhjxectjp2y3txktcath&amp;st=5i94dte0&amp;dl=1)</span> for the Mov10 full dataset</span>
 <span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>  Once you have the zip file downloaded you will want to decompress it. This will create a <span class="in">`data`</span> directory with sub-directories that correspond to each of the samples in our dataset.</span>
 <span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Next, we need the **annotation file** that maps our transcript identifiers to gene identifiers. We have created this file for you using the R Bioconductor package <span class="co">[</span><span class="ot">AnnotationHub</span><span class="co">](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html)</span>. For now, we will use it as is, but later in the workshop we will spend some time showing you how to create one for yourself. *Right click on the links below, and choose the "Save link as ..." option to download directly into the `data` folder in your project directory.*</span>
 <span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Annotation file</span><span class="co">](https://github.com/hbctraining/DGE_workshop_salmon/raw/master/data/tx2gene_grch38_ens94.txt)</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Annotation file</span><span class="co">](https://www.dropbox.com/scl/fi/8qk2udv283l624ch6w3is/tx2gene_grch38_ens94.txt?rlkey=v47rdu1z11mlfvtvj1nzw2zy4&amp;st=36yoijs1&amp;dl=1)</span></span>
 <span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### O2 Portal</span></span>
 <span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a></span>
