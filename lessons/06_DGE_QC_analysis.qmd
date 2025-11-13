@@ -42,10 +42,12 @@ meta <- readRDS("data/metadata.RDS")
 
 ## Learning Objectives 
 
-* Recognize the importance of methods for count data transformation
-* Describe the PCA (principal component analysis) technique
-* Interpret different examples of PCA plots
-* Evaluate sample quality using PCA and hierachical clustering 
+In this lesson, you will:
+
+- Recognize the importance of methods for count data transformation
+- Describe the PCA (principal component analysis) technique
+- Interpret different examples of PCA plots
+- Evaluate sample quality using PCA and hierachical clustering 
 
 # Quality Control
 

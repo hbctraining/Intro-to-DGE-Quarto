@@ -1,8 +1,16 @@
 ---
-title: "DGE analysis using LRT in DESeq2"
+title: "DGE analysis using LRT in DESeq2 - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -10,9 +18,9 @@ library(tidyverse)
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds_lrt <- readRDS("./data/intermediate_dds_lrt.RDS")
-sigOE   <- readRDS("./data/intermediate_res_sigOE.RDS")
-sigKD   <- readRDS("./data/intermediate_res_sigKD.RDS")
+dds_lrt <- readRDS("data/intermediate_dds_lrt.RDS")
+sigOE   <- readRDS("data/intermediate_res_sigOE.RDS")
+sigKD   <- readRDS("data/intermediate_res_sigKD.RDS")
 padj.cutoff <- 0.05
 
 # Extract results for LRT
@@ -31,18 +39,20 @@ sigLRT_genes <- res_LRT_tb %>%
 
 **Compare the resulting gene list from the LRT test to the gene lists from the Wald test comparisons.**
 
-**How many of the `sigLRT_genes` overlap with the significant genes in `sigOE`?**
+**1. How many of the `sigLRT_genes` overlap with the significant genes in `sigOE`?**
 
 ```{r}
-# find overlaps between sigLRT_genes and sigOE
+#| label: overlap_LRT_OE
+# Find overlaps between sigLRT_genes and sigOE
 overlap_LRT_OE <- sigLRT_genes %>% subset(gene %in% sigOE$gene)
 nrow(overlap_LRT_OE)
 ```
 
-**How many of the `sigLRT_genes` overlap with the significant genes in `sigKD`?**
+**2. How many of the `sigLRT_genes` overlap with the significant genes in `sigKD`?**
 
 ```{r}
-# find overlaps between sigLRT_genes and sigKD
+#| label: overlap_LRT_KD
+# Find overlaps between sigLRT_genes and sigKD
 overlap_LRT_KD <- sigLRT_genes %>% subset(gene %in% sigKD$gene)
 nrow(overlap_LRT_KD)
 ```

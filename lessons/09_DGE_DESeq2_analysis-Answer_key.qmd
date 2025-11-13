@@ -1,5 +1,12 @@
 ---
-title: "Gene-level differential expression analysis with DESeq2 - Answer key"
+title: "Gene-level differential expression analysis with DESeq2 - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Exercise 1

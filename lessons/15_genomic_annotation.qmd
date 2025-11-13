@@ -1,26 +1,50 @@
 ---
 title: "Genomic annotations"
-author: "Mary Piper"
-date: "Monday, March 4th, 2019"
+description: |
+  This lesson provides an overview of genomic annotation resources and demonstrates practical strategies for retrieving gene-level information to support RNA-seq and differential expression analyses. Participants will be introduced to various types of annotation databases (such as Ensembl, NCBI, Gene Ontology, and KEGG), consider the importance of genome builds and compare Bioconductor packages for querying and managing gene annotations. Participants will use AnnotationHub and ensembldb to facilitate gene ID conversion, annotation data extraction and techniques for integrating annotations with differential gene expression results.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2019-03-04"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Genomic Annotation
+keywords:
+  - DESeq2
+  - AnnotationHub
+  - Ensembl
+  - BiomaRt
+  - ensembldb
+  - Genome build
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 30 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+res_tableOE_tb <- readRDS("data/intermediate_res_tableOE_tb.RDS")
 ```
 
 ## Learning Objectives:
 
-* Discuss the available genomic annotation databases and the different types if information stored
-* Compare and contrast the tools available for accessing genomic annotation databases 
-* Apply various R packages for retrieval of genomic annotations
+In this lesson, you will:
+
+- Discuss the available genomic annotation databases and the different types if information stored
+- Compare and contrast the tools available for accessing genomic annotation databases 
+- Apply various R packages for retrieval of genomic annotations
 
 # Genomic annotations
 
@@ -86,7 +110,7 @@ These are both packages that can be used to create the `tx2gene` files we had yo
 
 AnnotationDbi is an R package that provides an interface for connecting and querying various annotation databases using SQLite data storage. The AnnotationDbi packages can query the *OrgDb*, *TxDb*, *EnsDb*, *Go.db*, and *BioMart* annotations. There is helpful [documentation](https://bioconductor.org/packages/release/bioc/vignettes/AnnotationDbi/inst/doc/IntroToAnnotationPackages.pdf) available to reference when extracting data from any of these databases.
 
-While AnnotationDbi is a popular tool, **we will not be walking through code to use this package**. However, if you are interested in more detail, we have [materials linked](Aside_AnnotationDbi_lesson.html) here with examples using our current dataset.
+While AnnotationDbi is a popular tool, **we will not be walking through code to use this package**. However, if you are interested in more detail, we have [materials linked](Aside_AnnotationDbi_lesson.qmd) here with examples using our current dataset.
 
 ## AnnotationHub
 
@@ -94,7 +118,8 @@ AnnotationHub is a wonderful resource for accessing genomic data or querying lar
 
 To get started with AnnotationHub, we first load the library and connect to the database:
 
-```{r AH_load}
+```{r}
+#| label: AH_load
 # Load libraries
 library(AnnotationHub)
 library(ensembldb)
@@ -113,7 +138,8 @@ The `AnnotationHub()` command creates a client that manages a local cache of the
 
 To see the types of information stored inside our database, we can just type the name of the object. Using the output, you can get an idea of the information that you can query within the AnnotationHub object:
 
-```{r AH_explore}
+```{r}
+#| label: AH_explore
 # Explore the AnnotationHub object
 ah
 ```
@@ -122,14 +148,16 @@ Notice the note on retrieving records with `object[[ID]]` - this will be how we 
   
 If you would like to see more information about any of the classes of data, you can extract that information as well. For example, if you wanted to **determine all species information available**, you could explore that within the AnnotationHub object:
   
-```{r AH_species}
+```{r}
+#| label: AH_species
 # Explore all species information available
 unique(ah$species) %>% head(n = 20)
 ```
 
 In addition to species information, there is also additional information about the type of Data Objects and the Data Providers:
 
-```{r AH_DO}
+```{r}
+#| label: AH_DO
 # Explore the types of Data Objects available
 unique(ah$rdataclass)
 
@@ -139,7 +167,8 @@ unique(ah$dataprovider) %>% head(n = 20)
   
 Now that we know the types of information available from AnnotationHub, we can query it for the information we want using the `query()` function. Let's say we would like to **return the Ensembl `EnsDb` information for Human**. To return the records available, we need to use the terms as they are output from the `ah` object to extract the desired data.
   
-```{r AH_query}
+```{r}
+#| label: AH_query
 # Query AnnotationHub for Human references
 human_ens <- query(ah, c("Homo sapiens", "EnsDb"))
 
@@ -151,60 +180,62 @@ The query retrieves all **hits for the `EnsDb` objects**, and you will see that 
 
 In our case, we are looking for the latest Ensembl release so that the annotations are the most up-to-date. To extract this information from AnnotationHub, we can use the AnnotationHub ID to **subset the object**:
 
-```{r AH_human_annotations}
+```{r}
+#| label: AH_human_annotations
 # Extract annotations of interest
 human_ens <- human_ens[["AH119325"]]
 ```
 
 Now we can use `ensembldb` functions to extract the information at the gene, transcript, or exon levels. We are interested in the gene-level annotations, so we can extract that information as follows:
 
-```{r AH_human_genes_code}
+```{r}
+#| label: AH_human_genes_code
 #| eval: false
-
 # Extract gene-level information
 genes(human_ens, return.type = "data.frame") %>% head() %>% View()
 ```
 
-```{r AH_human_genes_render}
+```{r}
+#| label: AH_human_genes_render
 #| echo: false
-
 # Extract gene-level information
 genes(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
 ```
 
 But note that it is just as easy to get the transcript- or exon-level information:
 
-```{r AH_human_tx_code}
+```{r}
+#| label: AH_human_tx_code
 #| eval: false
-
 # Extract transcript-level information
 transcripts(human_ens, return.type = "data.frame") %>% head() %>% View()
 ```
 
-```{r AH_human_tx_render}
+```{r}
+#| label: AH_human_tx_render
 #| echo: false
-
 # Extract transcript-level information
 transcripts(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
 ```
 
-```{r AH_human_ex_code}
+```{r}
+#| label: AH_human_ex_code
 #| eval: false
-
 # Extract exon-level information
 exons(human_ens, return.type = "data.frame") %>% head() %>% View()
 ```
 
-```{r AH_human_ex_render}
+```{r}
+#| label: AH_human_ex_render
 #| echo: false
-
 # Extract exon-level information
 exons(human_ens, return.type = "data.frame") %>% head() %>% DT::datatable()
 ```
 
 To **obtain an annotation data frame** using AnnotationHub, we'll use the `genes()` function, but only keep selected columns and filter out rows to keep those corresponding to our gene identifiers in our results file:
 
-```{r AH_human_genes_df}
+```{r}
+#| label: AH_human_genes_df
 # Create a gene-level dataframe 
 annotations_ahb <- genes(human_ens, return.type = "data.frame") %>%
   # Choose which columns to keep
@@ -215,7 +246,8 @@ annotations_ahb <- genes(human_ens, return.type = "data.frame") %>%
 
 This dataframe looks like it should be fine as it is, but we look a little closer we will notice that the column containing Entrez identifiers is a list, and in fact there are many Ensembl identifiers that map to more than one Entrez identifier!
 
-```{r multiple_IDs}
+```{r}
+#| label: multiple_IDs
 # Wait a second, we don't have one-to-one mappings!
 class(annotations_ahb$entrezid)
 which(map(annotations_ahb$entrezid, length) > 1) %>% head()
@@ -223,7 +255,8 @@ which(map(annotations_ahb$entrezid, length) > 1) %>% head()
 
 So what do we do here? And why do we have this problem? An answer from the [Ensembl Help Desk](https://www.biostars.org/p/16505/) is that this occurs when we cannot choose a perfect match; i.e., when we have two good matches, but one does not appear to match with a better percentage than the other. In that case, we assign both matches. What we will do is choose to **keep the first identifier for these multiple mapping cases**.
 
-```{r multiple_IDs_fix}
+```{r}
+#| label: multiple_IDs_fix
 # Only keep the first identifier in each list
 annotations_ahb$entrezid <- map(annotations_ahb$entrezid, 1) %>% unlist()
 ```
@@ -231,9 +264,9 @@ annotations_ahb$entrezid <- map(annotations_ahb$entrezid, 1) %>% unlist()
 ::: callout-note
 Not all databases handle multiple mappings in the same way. For example, if we used the OrgDb instead of the EnsDb:
 
-```{r OrgDb}
+```{r}
+#| label: OrgDb
 #| eval: false
-
 # Pull annotations from OrgDb
 human_orgdb <- query(ah, c("org.Hs.eg.db.sqlite"))
 human_orgdb <- human_orgdb[["AH116710"]]
@@ -245,7 +278,8 @@ We would find that multiple mapping entries would be automatically reduced to on
 
 Let's take a look and see how many of our Ensembl identifiers have an associated gene symbol, and how many of them are unique:
 
-```{r duplicated_genes}
+```{r}
+#| label: duplicated_genes
 # Total Ensembl IDs with associated gene symbols
 which(!is.na(annotations_ahb$gene_name)) %>% length()
 
@@ -255,7 +289,8 @@ which(duplicated(annotations_ahb$gene_name)) %>% length()
 
 Let's identify the non-duplicated genes and only keep the ones that are not duplicated:
 
-```{r duplicated_genes_remove}
+```{r}
+#| label: duplicated_genes_remove
 # Determine the indices for the non-duplicated genes
 non_duplicates_idx <- which(duplicated(annotations_ahb$gene_name) == FALSE)
 
@@ -271,7 +306,8 @@ annotations_ahb %>% nrow()
 
 Finally, it would be good to know **what proportion of the Ensembl identifiers do not map to an Entrez identifier**:
 
-```{r Entrez_IDs}
+```{r}
+#| label: Entrez_IDs
 # Determine how many of the Entrez column entries are NA
 which(is.na(annotations_ahb$entrezid)) %>% length()
 ```
@@ -282,11 +318,10 @@ That's almost half of our genes! If we plan on using Entrez ID results for downs
 
 To create our `tx2gene` file, we would need to use a combination of the methods above and merge two dataframes together. For example:
 
-```{r create_tx2gene}
+```{r}
+#| label: create_tx2gene
 #| eval: false
-
-## DO NOT RUN THIS CODE
-
+# DO NOT RUN
 # Create a transcript dataframe
 txdb <- transcripts(human_ens, return.type = "data.frame") %>%
   dplyr::select(tx_id, gene_id)
@@ -305,9 +340,9 @@ In this lesson our focus has been using annotation packages to extract informati
 ::: callout-note
 The *annotables* package is a super easy annotation package to use. It is not updated frequently, so it's not great for getting the most up-to-date information for the current builds and does not have information for other organisms than human and mouse, but is a quick way to get annotation information. 
 
-```{r annotables}
+```{r}
+#| label: annotables
 #| eval: false
-
 # Install package
 BiocManager::install("annotables")
 
@@ -319,7 +354,8 @@ grch38
 ```
 :::
 
-```{r data_save}
+```{r}
+#| label: data_save
 #| echo: false
 
 # save objects needed to render future lessons
@@ -335,7 +371,6 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ***

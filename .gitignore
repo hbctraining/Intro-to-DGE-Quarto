@@ -1,4 +1,4 @@
 /.quarto/
-/data
 .DS_Store
 lessons/.Rhistory
+lessons/data/

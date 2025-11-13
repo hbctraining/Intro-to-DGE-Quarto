@@ -1,8 +1,16 @@
 ---
-title: "Summarizing results from the Wald test - Answer key"
+title: "Summarizing results from the Wald test - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -10,8 +18,8 @@ library(tidyverse)
 library(DESeq2)
 
 # load objects needed to render this lesson
-res_tableOE <- readRDS("./data/intermediate_res_tableOE.RDS")
-res_tableKD <- readRDS("./data/intermediate_res_tableKD.RDS")
+res_tableOE <- readRDS("data/intermediate_res_tableOE.RDS")
+res_tableKD <- readRDS("data/intermediate_res_tableKD.RDS")
 padj.cutoff <- 0.05
 
 # Create a tibble of results
@@ -31,6 +39,7 @@ sigOE <- res_tableOE_tb %>%
 **Using the same p-adjusted threshold as above (`padj.cutoff < 0.05`), subset `res_tableKD` to report the number of genes that are up- and down-regulated in Mov10_knockdown compared to control.**
 
 ```{r}
+#| label: extract_results
 # Create a tibble of results
 res_tableKD_tb <- res_tableKD %>%
   data.frame() %>%
@@ -41,6 +50,7 @@ res_tableKD_tb <- res_tableKD %>%
 **How many genes are differentially expressed in the Knockdown compared to Control? How does this compare to the overexpression significant gene list (in terms of numbers)?**
 
 ```{r}
+#| label: subset_results
 # Subset the tibble to keep only significant genes
 sigKD <- res_tableKD_tb %>%
   dplyr::filter(padj < padj.cutoff)

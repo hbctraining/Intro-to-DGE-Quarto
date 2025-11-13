@@ -18,12 +18,14 @@ library(pathview)
 res_ids <- readRDS("./data/intermediate_res_ids.RDS")
 ```
 
-Learning Objectives:
+## Learning Objectives
 
-*  Discuss functional class scoring and pathway topology methods
-*  Construct a GSEA analysis using GO and KEGG gene sets
-*  Examine results of a GSEA using pathview package
-*  List other tools and resources for identifying genes of novel pathways or networks
+In this lesson, you will:
+
+- Discuss functional class scoring and pathway topology methods
+- Construct a GSEA analysis using GO and KEGG gene sets
+- Examine results of a GSEA using pathview package
+- List other tools and resources for identifying genes of novel pathways or networks
 
 ## Functional analysis using functional class scoring 
 

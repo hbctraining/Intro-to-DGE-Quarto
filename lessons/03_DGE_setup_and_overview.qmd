@@ -29,7 +29,7 @@ Approximate time: 60 minutes
 
 ## Learning Objectives 
 
-In this lessons, you will:
+In this lesson, you will:
 
 - Describe the RNA-seq and differential gene expression analysis workflows
 - Explain the experiment and its objectives

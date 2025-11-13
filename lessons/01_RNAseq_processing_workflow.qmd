@@ -34,7 +34,9 @@ Approximate time: 40 minutes
 
 ## Learning Objectives
 
-* Understand the different steps of the RNA-seq workflow, from RNA extraction to assessing the expression levels of genes.
+In this lesson, you will:
+
+- Describe the different steps of the RNA-seq workflow, from RNA extraction to assessing the expression levels of genes.
 
 ## RNA-seq workflow
 

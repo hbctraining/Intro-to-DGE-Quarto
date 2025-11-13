@@ -1,33 +1,56 @@
 ---
 title: "Gene-level differential expression analysis with DESeq2"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper"
-date: "Wednesday, May 27th, 2020"
+description: |
+  This lesson explores the steps and statistical considerations underlying gene-level differential expression analysis with the DESeq2 package. Participants will investigate how DESeq2 estimates normalization size factors, gene-wise dispersion values and fits curves to correct for variance across genes. The importance of dispersion modeling and shrinkage in controlling false positives and ensuring robust results is highlighted, along with practice in interpreting diagnostic plots and evaluating model fit for high-throughput RNA-seq datasets.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2020-05-27"
+categories: 
+  - RNA-seq
+  - Differential Expression
+keywords:
+  - DESeq2
+  - Size Factors
+  - Dispersion Estimation
+  - Shrinkage
+  - Normalization
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 60 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(DESeq2)
 
 # load objects needed to render this lesson
-dds  <- readRDS("./data/intermediate_dds_2_ran_deseq.RDS")
+dds  <- readRDS("data/intermediate_dds_2_ran_deseq.RDS")
 ```
 
 ## Learning Objectives 
 
-* Explain the different steps involved in running `DESeq()`
-* Examine size factors and understand the source of differences
-* Inspect gene-level dispersion estimates 
-* Recognize the importance of dispersion during differential expression analysis
+In this lesson, you will:
+
+- Explain the different steps involved in running `DESeq()`
+- Examine size factors and understand the source of differences
+- Inspect gene-level dispersion estimates 
+- Recognize the importance of dispersion during differential expression analysis
 
 ## DESeq2 differential gene expression analysis workflow
 
 Previously, we created the DESeq2 object using the appropriate design formula and running DESeq2 using the two lines of code:
 
-```{r deseq2}
+```{r}
+#| label: deseq2
 #| eval: false
 
 ## DO NOT RUN THIS CODE
@@ -63,14 +86,16 @@ To normalize the count data, DESeq2 calculates size factors for each sample usin
 
 Let's take a quick look at size factor values we have for each sample:
 
-```{r size_factors}
+```{r}
+#| label: size_factors
 # Check the size factors
 sizeFactors(dds)
 ```
  
 These numbers should be identical to those we generated initially when we had run the function `estimateSizeFactors(dds)`. Take a look at the total number of reads for each sample:
 
-```{r total_counts_raw}
+```{r}
+#| label: total_counts_raw
 # Total number of raw counts per sample
 colSums(counts(dds))
 ```
@@ -81,7 +106,8 @@ We see that the larger size factors correspond to the samples with higher sequen
 
 Now take a look at the total depth after normalization using:
 
-```{r total_counts_norm}
+```{r}
+#| label: total_counts_norm
 # Total number of normalized counts per sample
 colSums(counts(dds, normalized=T))
 ```
@@ -179,7 +205,8 @@ The **strength of the shrinkage for each gene depends on**:
 
 To create this plot with your data, you use the function:
 
-```{r plot_dispersion_1}
+```{r}
+#| label: plot_dispersion_1
 # Plot dispersion estimates
 plotDispEsts(dds)
 ```
@@ -208,7 +235,8 @@ The next plot shows the dispersion values initially decreasing, then increasing 
 
 Let's take a look at the dispersion estimates for our MOV10 data:
 
-```{r plot_dispersion_2}
+```{r}
+#| label: plot_dispersion_2
 # Plot dispersion estimates
 plotDispEsts(dds)
 ```
@@ -218,7 +246,7 @@ plotDispEsts(dds)
 We see a nice decrease in dispersion with increasing mean expression, which is good. We also see the dispersion estimates generally surround the curve, which is also expected. Overall, this plot looks good. We do see strong shrinkage, which is likely due to the fact that we have only two replicates for one of our sample groups. The more replicates we have, the less shrinkage is applied to the dispersion estimates, and the more DE genes are able to be identified. We would generally recommend having at least 4 biological replicates per condition for better estimation of variation.
 
 ::: callout-tip
-# [**Exercise 1**](09_DGE_DESeq2_analysis_Answers.html#exercise-1)
+# [**Exercise 1**](09_DGE_DESeq2_analysis-Answer_key.qmd#exercise-1)
 
 Given the dispersion plot below, would you have any concerns regarding the fit of your data to the model? 
 	
@@ -239,7 +267,6 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ---

@@ -1,5 +1,12 @@
 ---
-title: "Exploring DESeq2 results from the Wald test - Answer key"
+title: "Exploring DESeq2 results from the Wald test - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-13"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Exercise 1
@@ -11,6 +18,7 @@ Now that we have results for the overexpression results, do the same for the Con
 **Create a contrast vector called contrast_kd.**
 
 ```{r}
+#| label: set_contrasts
 #| eval: false
 
 # Define contrasts for MOV10 knockdown
@@ -20,6 +28,7 @@ contrast_kd <- c("sampletype", "MOV10_knockdown", "control")
 **Use contrast vector in the results() to extract a results table and store that to a variable called res_tableKD.**
 
 ```{r}
+#| label: extract_results
 #| eval: false
 
 # Extract results for MOV10 knockdown vs control
@@ -29,6 +38,7 @@ res_tableKD <- results(dds, contrast=contrast_kd, alpha = 0.05)
 **Shrink the LFC estimates using lfcShrink() and assign it back to res_tableKD.**
 
 ```{r}
+#| label: apply_fold_change
 #| eval: false
 
 # Apply fold change shrinkage

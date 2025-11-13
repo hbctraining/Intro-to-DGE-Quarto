@@ -1,12 +1,34 @@
 ---
 title: "Summarizing results from the Wald test"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper"
-date: "June 1, 2020"
+description: |
+  This lesson covers how to summarize and extract results from the Wald test for gene-level differential expression analysis using DESeq2. Participants will evaluate the number of significant differentially expressed genes, apply significance thresholds, generate summary statistics and construct filtered gene lists for downstream analysis and visualization. Practical examples demonstrate the use of DESeq2 and tidyverse tools to facilitate reproducible workflows in RNA-seq analysis.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2020-06-01"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Data Summarization
+keywords:
+  - DESeq2
+  - Wald test
+  - Differential gene expression
+  - Summary statistics
+  - Gene lists
+  - Adjusted p-value
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 20 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -14,20 +36,23 @@ library(tidyverse)
 library(DESeq2)
 
 # load objects needed to render this lesson
-res_tableOE <- readRDS("./data/intermediate_res_tableOE.RDS")
-res_tableKD <- readRDS("./data/intermediate_res_tableKD.RDS")
+res_tableOE <- readRDS("data/intermediate_res_tableOE.RDS")
+res_tableKD <- readRDS("data/intermediate_res_tableKD.RDS")
 ```
 
 ## Learning Objectives
 
-* Evaluate the number of differentially expressed genes produced for each comparison
-* Construct R objects containing significant genes from each comparison
+In this lesson, you will:
+
+- Evaluate the number of differentially expressed genes produced for each comparison
+- Construct R objects containing significant genes from each comparison
 
 ## Summarizing results
 
 To summarize the results table, a handy function in DESeq2 is `summary()`. Confusingly it has the same name as the function used to inspect data frames. This function, when called with a DESeq results table as input, will summarize the results using a default threshold of padj < 0.1. However, since we had set the `alpha` argument to 0.05 when creating our results table, the `summary()` function should also use the threshold FDR < 0.05. (Note that padj/FDR is used even though the output says `p-value < 0.05`.) Let's start with the OE vs control results:
 
-```{r results_summary}
+```{r}
+#| label: results_summary
 # Summarize results
 summary(res_tableOE, alpha = 0.05)
 ```
@@ -38,14 +63,16 @@ In addition to the number of genes up- and down-regulated at the default thresho
 
 Let's first create variables that contain our threshold criteria. We will only be using the adjusted p-values in our criteria:
 
-```{r results_thresholds}
+```{r}
+#| label: results_thresholds
 # Set thresholds
 padj.cutoff <- 0.05
 ```
 
 We can easily subset the results table to only include those that are significant using the `filter()` function, but first we will convert the results table into a tibble:
 
-```{r results_tibble}
+```{r}
+#| label: results_tibble
 # Create a tibble of results
 res_tableOE_tb <- res_tableOE %>%
   data.frame() %>%
@@ -55,28 +82,29 @@ res_tableOE_tb <- res_tableOE %>%
 
 Now we can subset that table to only keep the significant genes using our pre-defined thresholds:
 
-```{r results_sig}
+```{r}
+#| label: results_sig
 # Subset the tibble to keep only significant genes
 sigOE <- res_tableOE_tb %>%
   dplyr::filter(padj < padj.cutoff)
 ```
 
-```{r results_sig_code}
+```{r}
+#| label: results_sig_code
 #| eval: false
-
 # Take a quick look at our top significant genes
 sigOE %>% head() %>% View()
 ```
 
-```{r results_sig_render}
+```{r}
+#| label: results_sig_render
 #| echo: false
-
 # Take a quick look at our top significant genes
 sigOE %>% head() %>% DT::datatable()
 ```
 
 ::: callout-tip
-# [**Exercise 1**](11_summarizing_results_Answers.html#exercise-1)
+# [**Exercise 1**](11_summarizing_results-Answer_key.qmd#exercise-1)
 
 **MOV10 Differential Expression Analysis: Control versus Knockdown**
 
@@ -84,9 +112,9 @@ sigOE %>% head() %>% DT::datatable()
 2. How many genes are differentially expressed in the Knockdown compared to Control? How does this compare to the overexpression significant gene list (in terms of numbers)?
 :::
 
-```{r exercise}
+```{r}
+#| label: exercise
 #| echo: false
-
 # Create a tibble of results
 res_tableKD_tb <- res_tableKD %>%
   data.frame() %>%
@@ -100,13 +128,14 @@ sigKD <- res_tableKD_tb %>%
 
 Now that we have extracted the significant results, we are ready for visualization!
 
-```{r data_save}
+```{r}
+#| label: data_save
 #| echo: false
 
 # save objects needed to render future lessons
-saveRDS(res_tableOE_tb, "./data/intermediate_res_tableOE_tb.RDS")
-saveRDS(sigOE,          "./data/intermediate_res_sigOE.RDS")
-saveRDS(sigKD,          "./data/intermediate_res_sigKD.RDS")
+saveRDS(res_tableOE_tb, "data/intermediate_res_tableOE_tb.RDS")
+saveRDS(sigOE,          "data/intermediate_res_sigOE.RDS")
+saveRDS(sigKD,          "data/intermediate_res_sigKD.RDS")
 ```
 
 :::{.callout-note}
@@ -118,7 +147,6 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ---

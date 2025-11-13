@@ -27,9 +27,11 @@ Approximate time: 50 minutes
 
 ## Learning Objectives:
 
-* Describe the importance of replicates for RNA-seq differential expression experiments
-* Explain the relationship between the number of biological replicates, sequencing depth, and the differentially expressed genes identified
-* Demonstrate how to design an RNA-seq experiment that avoids confounding and batch effects
+In this lesson, you will:
+
+- Describe the importance of replicates for RNA-seq differential expression experiments
+- Explain the relationship between the number of biological replicates, sequencing depth, and the differentially expressed genes identified
+- Demonstrate how to design an RNA-seq experiment that avoids confounding and batch effects
 
 # Experimental planning considerations
 

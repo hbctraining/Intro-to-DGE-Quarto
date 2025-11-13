@@ -1,14 +1,34 @@
 ---
 title: "Time course analysis with DESeq2"
-author: "Meeta Mistry and Mary Piper"
-date: "June 17, 2020"
+description: |
+  This lesson introduces time course analysis of RNA-seq data using DESeq2, focusing on the application of the Likelihood Ratio Test (LRT) to identify genes with significant expression changes across multiple time points and treatment conditions. Participants will explore experimental design strategies, construct appropriate full and reduced models, interpret example expression patterns and discover how to cluster differentially expressed genes based on shared temporal profiles for downstream biological interpretation.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2020-06-17"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Time Course Analysis
+keywords:
+  - DESeq2
+  - Longitudinal expression
+  - Likelihood Ratio Test
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 20 minutes
 
 ## Learning Objectives 
 
-* Discuss time course analyses with DESeq2
+In this lesson, you will:
+
+- Discuss time course analyses with DESeq2
 
 ## Time course analyses with LRT
 
@@ -20,31 +40,28 @@ For example, suppose we have an experiment looking at the effect of treatment ov
 This is just example code for our hypothetical experiment. You **should not run this code**.
 :::
 
-```{r example_model_full}
+```{r}
+#| label: example_model_full
 #| eval: false
-
-## DO NOT RUN THIS CODE
-
+# DO NOT RUN
 full_model <- ~ genotype + treatment + time + treatment:time
 ```
 
 To perform the LRT test, we also need to provide a reduced model, that is the full model without the `treatment:time` term:
 
-```{r example_model_reduced}
+```{r}
+#| label: example_model_reduced
 #| eval: false
-
-## DO NOT RUN THIS CODE
-
+# DO NOT RUN
 reduced_model <- ~ genotype + treatment + time
 ```
 
 Then, we could run the LRT by using the following code:
 
-```{r example_model}
+```{r}
+#| label: example_model
 #| eval: false
-
-## DO NOT RUN THIS CODE
-
+# DO NOT RUN
 dds <- DESeqDataSetFromMatrix(countData = raw_counts,
                               colData = metadata,
                               design = ~ genotype + treatment + time + treatment:time)
@@ -68,27 +85,14 @@ The type of **gene expression patterns we do expect** the LRT to return are thos
 
 Continuing with our example dataset, after running the LRT we can determine the set of significant genes using a threshold of `padj` < 0.05. The next step would be to sort those genes into groups based on shared expression patterns, and we could do this using `degPatterns()`. Here, you will notice that we make use of the `col` argument since we have two groups that we are comparing to one another.
 
-```{r example_clusters}
+```{r}
+#| label: example_clusters
 #| eval: false
-
-## DO NOT RUN THIS CODE
-
+# DO NOT RUN
 clusters <- degPatterns(cluster_rlog, metadata = meta, time = "time", col = "treatment")
 ```
 
 Depending on what type of shared expression profiles exist in your data, you can then extract the groups of genes associated with the patterns of interest and move on to functional analysis for each of the gene groups of interest.
-
-:::{.callout-note}
-If you are working on the O2 Portal, we recommend that you save your environment with the following command:
-
-```{r}
-#| label: save_environment
-#| eval: false
-# Save your environment on O2
-save.image("DEanalysis.Rdata")
-```
-
-:::
 
 ---
 
