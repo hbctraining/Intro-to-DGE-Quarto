@@ -1,19 +1,41 @@
 ---
 title: "RNA-seq count data distribution"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper"
-date: "May 15, 2020"
+description: |
+  This lesson introduces the statistical properties of RNA-seq count data and explores appropriate statistical models for their analysis. Participants will visualize raw count distributions, understand why RNA-seq data differ from normally distributed data and compare the suitability of binomial, Poisson and negative binomial models. The lesson emphasizes the importance of biological replicates in estimating variance, detecting differential expression and minimizing false positives. By the end of this session, participants will understand why the negative binomial model is typically used for RNA-seq analysis and how tools like DESeq2 apply these concepts.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2020-05-15"
+categories: 
+  - RNA-seq Analysis
+  - Statistical Analysis
+keywords:
+  - Count data
+  - Data distribution
+  - Negative binomial distribution
+  - Poisson distribution
+  - Biological replicates
+  - DESeq2
+  - Data modeling
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 60 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(ggplot2)
 
 # load objects needed to render this lesson
-data <- readRDS("./data/intermediate_txi_counts.RDS")
+data <- readRDS("data/intermediate_txi_counts.RDS")
 ```
 
 ## Learning Objectives 
@@ -23,9 +45,9 @@ data <- readRDS("./data/intermediate_txi_counts.RDS")
 * Identify the most appropriate model for RNA-seq count data 
 * Explain the benefits of biological replicates for identifying true differences between sample groups
 
-# Exploring RNA-seq count data
+## Exploring RNA-seq count data
 
-## Count matrix
+### Count matrix
 
 When we start our differential gene expression analysis we begin with a **matrix summarizing the gene-level expression in each sample of your dataset**. The rows in the matrix correspond to genes, and the columns correspond to samples. In each position of the matrix you will have an integer value representing the total number of sequence reads that originated from a particular gene in a sample.
 
@@ -35,11 +57,12 @@ When we start our differential gene expression analysis we begin with a **matrix
 
 The higher the number of counts indicates more reads are associated with that gene and suggests a higher level of expression of that gene. However, this is not necessarily true and we will delve deeper into this later in this lesson and in the course.
 
-## Characteristics of RNA-seq count data
+### Characteristics of RNA-seq count data
 
 To get an idea about how RNA-seq counts are distributed, let's plot a histogram of the counts for a single sample, 'Mov10_oe_1':
 
-```{r count_distribution}
+```{r}
+#| label: count_distribution
 # Plot the distribution of counts for Mov10_oe_1
 ggplot(data) +
   geom_histogram(aes(x = Mov10_oe_1), stat = "bin", bins = 200) +
@@ -55,7 +78,7 @@ This plot illustrates some **common features** of RNA-seq count data:
 
 Looking at the shape of the histogram, we see that it is _not normally distributed_. For RNA-seq data this will always be the case. Moreover, the underlying data, as we observed earlier, is integer counts instead rather than continuous measurements. We need to take these characteristics into account when deciding on what statistical model to use.
 
-## Modeling count data
+### Modeling count data
 
 Count data in general can be modeled with various distributions:
 
@@ -71,11 +94,12 @@ Count data in general can be modeled with various distributions:
 
 With RNA-Seq data, **a very large number of RNAs are represented and the probability of pulling out a particular transcript is very small**. This scenario is most similar to the lottery described above, suggesting that perhaps the Poisson distribution is most appropriate. However, this **will depend on the relationship between mean and variance in our data**.
 
-### Mean versus variance
+#### Mean versus variance
 
 To assess the properties of the data we are working with, we can use the three samples corresponding to the 'Mov10 overexpression' replicates. First compute a vector of mean values, then compute a vector of variance values. Finally, plot these values against each other to evaluate the relationship between them.
 
-```{r mean_vs_variance_calculate}
+```{r}
+#| label: mean_vs_variance_calculate
 # Calculate the mean and variance for each gene for the Mov10 overexpression replicates
 # The second argument '1' of 'apply' function indicates the function being applied to rows
 #     Use '2' if applied to columns
@@ -86,7 +110,8 @@ df <- data.frame(mean_counts, variance_counts)
 
 Your plot should look like the scatterplot below. Each data point represents a gene and the red line represents x = y.
 
-```{r mean_vs_variance_plot}
+```{r}
+#| label: mean_vs_variance_plot
 # Plot the mean vs variance
 ggplot(df) +
   geom_point(aes(x = mean_counts, y = variance_counts)) + 
@@ -185,6 +210,18 @@ We will be using [DESeq2](https://genomebiology.biomedcentral.com/articles/10.11
 </p>
 
 We will go in-depth into each of these steps in the following lessons, but additional details and helpful suggestions regarding DESeq2 can be found in the [DESeq2 vignette](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html).
+
+:::{.callout-note}
+If you are working on the O2 Portal, we recommend that you save your environment with the following command:
+
+```{r}
+#| label: save_environment
+#| eval: false
+# Save your environment on O2
+save.image("DEanalysis.Rdata")
+```
+
+:::
 
 ***
 

@@ -1,8 +1,16 @@
 ---
-title: "RNA-seq count data distribution - Answer key"
+title: "RNA-seq count data distribution - Answer Key"
+author:
+  - Will Gammerdinger
+date: "2025-11-12"
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
@@ -17,6 +25,7 @@ data <- readRDS("./data/intermediate_txi_counts.RDS")
 **Evaluate the relationship between mean and variance for the control replicates (Irrel_kd samples). Note the differences or similarities in the plot compared to the one using the overexpression replicates.**
 
 ```{r}
+#| label: mean_variance_answer
 mean_counts_ctrl     <- apply(data[,1:3], 1, mean) # select column 1 to 3, which correspond to Irrel_kd samples
 variance_counts_ctrl <- apply(data[,1:3], 1, var)
 df_ctrl <- data.frame(mean_counts_ctrl, variance_counts_ctrl)
