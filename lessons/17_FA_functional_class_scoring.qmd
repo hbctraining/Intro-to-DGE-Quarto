@@ -1,21 +1,45 @@
 ---
 title: "Functional Analysis for RNA-seq: Functional class scoring"
-author: "Mary Piper, Radhika Khetani"
-date: "Wednesday, June 3rd, 2020"
+description: |
+  This lesson introduces functional class scoring approaches for functional enrichment analysis in RNA-seq experiments, emphasizing Gene Set Enrichment Analysis (GSEA). Participants will explore the rationale behind functional class scoring, perform GSEA with GO and KEGG gene sets using clusterProfiler and interpret pathway-level results when only modest gene-level changes are observed. The lesson also covers available resources for advanced enrichment and network-based analyses and discusses complementary approaches such as co-expression clustering to identify patterns of functional gene modules.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Jihe Liu
+  - Will Gammerdinger
+date: "2020-06-03"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Functional Annotation
+keywords:
+  - DESeq2
+  - Functional enrichment
+  - Enrichment analysis
+  - Functional class scoring
+  - Gene Set Enrichment Analysis
+  - clusterProfiler
+  - KEGG
+  - GO terms
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 40 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
-
-# load libraries needed to render this lesson
+# Load libraries needed to render this lesson
 library(tidyverse)
 library(clusterProfiler)
 library(pathview)
 
-# load objects needed to render this lesson
-res_ids <- readRDS("./data/intermediate_res_ids.RDS")
+# Load objects needed to render this lesson
+res_ids <- readRDS("data/intermediate_res_ids.RDS")
 ```
 
 ## Learning Objectives
@@ -49,7 +73,8 @@ Gene sets are pre-defined groups of genes that are functionally related. Commonl
 
 The clusterProfiler package offers several functions to perform GSEA using different genes sets, including but not limited to GO, KEGG, and MSigDb. We will use the KEGG gene sets in our examples below. The KEGG gene sets are defined using the Entrez identifiers, thus to perform the analysis we will need to acquire the corresponding Entrez IDs for our genes. We will also need to remove any genes that do not have an Entrez ID (`NA` values) and any duplicates (due to gene ID conversion) that may exist:
 
-```{r prep_gene_list}
+```{r}
+#| label: prep_gene_list
 # Remove any NA values (reduces the data by quite a bit)
 res_entrez <- dplyr::filter(res_ids, entrezid != "NA")
 
@@ -59,7 +84,8 @@ res_entrez <- res_entrez[which(duplicated(res_entrez$entrezid) == F), ]
 
 GSEA will use the log2 fold changes obtained from the differential expression analysis for every gene to perform the analysis. We will obtain a vector of fold changes for input to clusterProfiler, in addition to the associated Entrez IDs:
 
-```{r prep_fc}
+```{r}
+#| label: prep_fc
 # Extract the foldchanges
 foldchanges <- res_entrez$log2FoldChange
 
@@ -69,7 +95,8 @@ names(foldchanges) <- res_entrez$entrezid
 
 Next we need to order the fold changes in decreasing order. To do this we'll use the `sort()` function, which takes a vector as input. This is in contrast to Tidyverse's `arrange()`, which requires a data frame.
 
-```{r prep_fc_sort}
+```{r}
+#| label: prep_fc_sort
 # Sort fold changes in decreasing order
 foldchanges <- sort(foldchanges, decreasing = TRUE)
 
@@ -107,7 +134,8 @@ The GSEA output will yield the core genes in the gene sets that most highly cont
 
 First, we will set the seed so that we all obtain the same result:
 
-```{r seed}
+```{r}
+#| label: seed
 set.seed(123456)
 ```
 
@@ -117,7 +145,8 @@ The permutations are performed using random reordering, so every time we run the
 
 To perform the GSEA using KEGG gene sets with clusterProfiler, we can use the `gseKEGG()` function. _The organisms with available KEGG pathway information are listed [here](http://www.genome.jp/kegg/catalog/org_list.html)._
 
-```{r gsea}
+```{r}
+#| label: gsea
 # Run GSEA using gene sets from KEGG pathways
 gseaKEGG <- gseKEGG(
   geneList = foldchanges, # ordered named vector of fold changes (Entrez IDs are the associated names)
@@ -130,39 +159,39 @@ gseaKEGG <- gseKEGG(
 gseaKEGG_results <- gseaKEGG@result
 ```
 
-```{r gsea_save}
+```{r}
+#| label: gsea_save
 #| eval: false
-
 # Write results to file
 write.csv(gseaKEGG_results, "results/gseaOE_kegg.csv", quote = FALSE)
 ```
 
 **How many pathways are enriched?** _NOTE: The results may look slightly different for you._ 
 
-```{r gsea_results_code}
+```{r}
+#| label: gsea_results_code
 #| eval: false
-
 # Look at GSEA results
 gseaKEGG_results %>% View()
 ```
 
-```{r gsea_results_render}
+```{r}
+#| label: gsea_results_render
 #| echo: false
-
 # Look at GSEA results (prevent "core_enrichment" column from wrapping so the table is not incredibly long)
 gseaKEGG_results %>% DT::datatable() %>% DT::formatStyle("core_enrichment", "white-space" = "nowrap")
 ```
 
-* The first few columns of the results table identify the pathway information
-* The following columns include the associated statistics
-* The last column will report which genes are part of the 'core enrichment'. These are the genes associated with the pathway which contributed to the observed enrichment score (i.e., in the extremes of the ranking). The genes are listed by EntrezID.
+- The first few columns of the results table identify the pathway information
+- The following columns include the associated statistics
+- The last column will report which genes are part of the 'core enrichment'. These are the genes associated with the pathway which contributed to the observed enrichment score (i.e., in the extremes of the ranking). The genes are listed by EntrezID.
 
 ::: callout-note
 The DOSE package has a handy function which allows us to easily convert the list of Entrez identifiers into gene symbols. This is possible if and only if there is an OrgDb available for your organism. The function takes the gseaKEGG object as input and returns the same object with the gene symbols in the 'core enrichment' column.
 
-```{r gsea_convert_symbols}
+```{r}
+#| label: gsea_convert_symbols
 #| eval: false
-
 # Example code
 gseaKEGG_geneSymbol <- setReadable(gseaKEGG, OrgDb = org.Hs.eg.db, keyType = "ENTREZID")
 ```
@@ -170,7 +199,8 @@ gseaKEGG_geneSymbol <- setReadable(gseaKEGG, OrgDb = org.Hs.eg.db, keyType = "EN
 
 Let's explore the GSEA plot of enrichment of one of the pathways in the ranked list:
 
-```{r gsea_plot}
+```{r}
+#| label: gsea_plot
 # Plot the GSEA plot for a single enriched pathway, `hsa03008`
 gseaplot(gseaKEGG, geneSetID = 'hsa03008')
 ```
@@ -179,9 +209,9 @@ In this plot, the lines in plot represent the genes in the gene set 'hsa03008', 
 
 Use the [Pathview R package](http://bioconductor.org/packages/release/bioc/html/pathview.html) to integrate the KEGG pathway data from clusterProfiler into pathway images:
 
-```{r pathview}
+```{r}
+#| label: pathview
 #| eval: false
-
 # First unload dplyr to avoid conflicts
 detach("package:dplyr", unload = TRUE)
 
@@ -205,13 +235,12 @@ Pathview may not display in your R Plots window. Instead, you may see a message 
 <img src="../img/hsa03008.pathview.png" width="800">
 </p>
 
-
 ::: callout-note
 Printing out Pathview images for all significant pathways can be easily performed as follows:
 
-```{r pathview_all}
+```{r}
+#| label: pathview_all
 #| eval: false
-
 # Output images for all significant KEGG pathways
 
 # Make a function to plot a single pathway
@@ -245,11 +274,10 @@ The Molecular Signatures Database (also known as [MSigDB](http://software.broadi
 
 Users can download GMT files from Broad Institute and use the read.gmt() function to parse the files. Alternatively, there is an R package that already packed the MSigDB gene sets in tidy data format that can be used directly with clusterProfiler. The `msigdbr` package supports several species and some example code is provided below:
 
-```{r msigdbr}
+```{r}
+#| label: msigdbr
 #| eval: false
-
-# DO NOT RUN THIS CODE
-
+# DO NOT RUN
 # Load library
 library(msigdbr)
 
@@ -282,7 +310,7 @@ msig_GSEA <- GSEA(foldchanges, TERM2GENE = m_t2g, verbose = FALSE)
 
 The last main type of functional analysis technique is pathway topology analysis. Pathway topology analysis often takes into account gene interaction information along with the fold changes and adjusted p-values from differential expression analysis to identify dysregulated pathways. Depending on the tool, pathway topology tools explore how genes interact with each other (e.g., activation, inhibition, phosphorylation, ubiquitination, etc.) to determine the pathway-level statistics. Pathway topology-based methods utilize the number and type of interactions between gene product (our DE genes) and other gene products to infer gene function or pathway association. 
 
-For instance, the [SPIA (Signaling Pathway Impact Analysis)](http://bioconductor.org/packages/release/bioc/html/SPIA.html) tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. We have [step-by-step materials for using SPIA available](Aside_pathway_topology.html).
+For instance, the [SPIA (Signaling Pathway Impact Analysis)](http://bioconductor.org/packages/release/bioc/html/SPIA.html) tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. We have [step-by-step materials for using SPIA available](Aside_pathway_topology.qmd).
 
 ## Other Tools for Functional Analysis
 
@@ -309,10 +337,10 @@ The way the tools perform clustering is by taking the entire expression matrix a
 * SPIA - https://www.bioconductor.org/packages/release/bioc/html/SPIA.html
 * GAGE/Pathview - http://www.bioconductor.org/packages/release/bioc/html/gage.html
 
-```{r data_save}
+```{r}
+#| label: data_save
 #| echo: false
-
-# save objects needed to render future lessons
+# Save objects needed to render future lessons
 saveRDS(res_entrez, "data/intermediate_res_entrez.RDS")
 ```
 
@@ -325,7 +353,6 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ***

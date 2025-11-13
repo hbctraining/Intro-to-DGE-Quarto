@@ -1,7 +1,27 @@
 ---
 title: "Summary of DGE workflow"
-author: "Mary Piper"
-date: "June 8, 2017"
+description: |
+  This lesson provides a concise summary of the complete differential gene expression (DGE) analysis workflow using DESeq2. Participants will review the essential R code steps, from importing quantification data and creating the DESeq2 dataset object, through exploratory data analysis and quality control, to running differential expression testing, visualizing results and extracting significant genes for downstream functional analysis. The lesson acts as a reference and checklist for performing robust and reproducible RNA-seq DGE analysis.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Jihe Liu
+  - Will Gammerdinger
+date: "2017-06-08"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Analysis Workflow
+keywords:
+  - DESeq2
+  - Gene expression analysis
+  - Functional enrichment
+  - Reproducibility
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 15 minutes
@@ -18,9 +38,9 @@ We have detailed the various steps in a differential expression analysis workflo
 
 1. Obtaining gene-level counts from Salmon using tximport
 
-```{r run_tximport}
+```{r}
+#| label: run_tximport
 #| eval: false
-
 # Run tximport
 txi <- tximport(files, 
                 type = "salmon", 
@@ -33,9 +53,9 @@ txi <- tximport(files,
 
 2. Creating the dds object:
 
-```{r create_dds}
+```{r}
+#| label: create_dds
 #| eval: false
-
 # Check that the row names of the metadata equal the column names of the **raw counts** data
 all(colnames(txi$counts) == rownames(metadata))
 
@@ -47,9 +67,9 @@ dds <- DESeqDataSetFromTximport(txi,
 
 3. Exploratory data analysis (PCA & hierarchical clustering) - identifying outliers and sources of variation in the data:
 
-```{r exploration}
+```{r}
+#| label: exploration
 #| eval: false
-
 # Transform counts for data visualization
 rld <- rlog(dds, 
             blind = TRUE)
@@ -69,9 +89,9 @@ pheatmap(rld_cor,
 
 4. Run DESeq2:
 
-```{r deseq2}
+```{r}
+#| label: deseq2
 #| eval: false
-
 # **Optional step** - Re-create DESeq2 dataset if the design formula has changed after QC analysis in include other sources of variation
 # dds <- DESeqDataSetFromTximport(txi, colData = metadata, design = ~ covariate + condition)
 
@@ -84,18 +104,18 @@ dds <- DESeq(dds)
 
 5. Check the fit of the dispersion estimates:
 
-```{r dispersion}
+```{r}
+#| label: dispersion
 #| eval: false
-
 # Plot dispersion estimates
 plotDispEsts(dds)
 ``` 
 
 6. Create contrasts to perform Wald testing on the shrunken log2 foldchanges between specific conditions:
 
-```{r contrasts}
+```{r}
+#| label: contrasts
 #| eval: false
-
 # Specify contrast for comparison of interest
 contrast <- c("condition", "level_to_compare", "base_level")
 
@@ -113,9 +133,9 @@ res <- lfcShrink(dds,
 
 7. Output significant results:
 
-```{r results}
+```{r}
+#| label: results
 #| eval: false
-
 # Set thresholds
 padj.cutoff < - 0.05
 
@@ -137,9 +157,10 @@ sig_res <- dplyr::filter(res_tbl,
 10. Make sure to output the versions of all tools used in the DE analysis:
 
 ```{r}
+#| label: sessionInfo
 #| eval: false
-
+# Print sessionInfo()
 sessionInfo()
 ```
 
-For better reproducibility, it can help to create **RMarkdown reports**, which save all code, results, and visualizations as nicely formatted html reports. We have a very basic example of a report [linked here](https://www.dropbox.com/s/4bq0chxze6dogba/workshop-example.html?dl=0). To create these reports we have [additional materials](https://hbctraining.github.io/Training-modules/Rmarkdown/) available.
+For better reproducibility, it can help to create **RMarkdown reports**, which save all code, results, and visualizations as nicely formatted html reports. To create these reports we have [additional materials](https://hbctraining.github.io/Training-modules/Rmarkdown/) available.
