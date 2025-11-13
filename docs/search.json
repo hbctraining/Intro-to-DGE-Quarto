@@ -3128,7 +3128,7 @@
     "href": "lessons/07_design_formulas.html#learning-objectives",
     "title": "Design formulas for differential expression analysis in DESeq2",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nDemonstrate the use of the design formula with simple and complex designs\nConstruct R code to execute the differential expression analysis workflow with DESeq2",
+    "text": "Learning Objectives\nIn this lesson, you will:\n\nDemonstrate the use of the design formula with simple and complex designs\nConstruct R code to execute the differential expression analysis workflow with DESeq2",
     "crumbs": [
       "Day 2:",
       "Design formulas for differential expression analysis in DESeq2"
@@ -3376,5 +3376,12 @@
     "title": "QC methods for DE analysis using DESeq2 - Answer Key",
     "section": "",
     "text": "Exercise 1\n\n\n\n\n\n\n\n\n\nWhat does the above plot tell you about the similarity of samples?\nSamples from different experimental groups are different, while replicates within the same group are similar.\nDoes it fit the expectation from the experimental design?\nYes, it does.\nWhat do you think the %variance information (in the axes titles) tell you about the data in the context of the PCA?\nPC1 is associated with 37% of the variance in the data, and PC2 is associated with 16%.\n\n\n\n\n\n\nNote\n\n\n\nYou won’t see the %variance information when you make PCA plots without the plotPCA() function. But there are tools that let you explore this.\n\n\n\n\n\n\n\n\nReuseCC-BY-4.0"
+  },
+  {
+    "objectID": "lessons/07_design_formulas-Answer_key.html",
+    "href": "lessons/07_design_formulas-Answer_key.html",
+    "title": "Design formulas for differential expression analysis in DESeq2 - Answer Key",
+    "section": "",
+    "text": "Exercise 1\nSuppose you wanted to study the expression differences between the two age groups in the metadata shown above, and major sources of variation were sex and treatment, how would the design formula be written?\ndesign = ~ sex + treatment + age\nBased on our Mov10 metadata dataframe, which factors could we include in our design formula?\ndesign = ~ sampletype\nWhat would you do if you wanted to include a factor in your design formula that is not in your metadata?\nAdd that factor into your metadata.\n\n\nExercise 2\nHow would the design formula be structured to perform the following analyses?\nTest for the effect of treatment.\ndesign = ~ treatment\nTest for the effect of genotype, while regressing out the variation due to treatment.\ndesign = ~ treatment + genotype\nTest for the effect of genotype on the treatment effects.\ndesign = ~ genotype + treatment + genotype:treatment\n\n\n\n\n\n\nReuseCC-BY-4.0"
   }
 ]

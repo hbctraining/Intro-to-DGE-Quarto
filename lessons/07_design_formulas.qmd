@@ -1,27 +1,46 @@
 ---
 title: "Design formulas for differential expression analysis in DESeq2"
-author: "Meeta Mistry, Radhika Khetani, Mary Piper"
-date: "Wednesday, May 27th, 2020"
+description: |
+  This lesson explains the importance and implementation of design formulas in DESeq2 for differential expression analysis of RNA-seq data. Participants will understand how to specify simple and complex experimental designs, including multiple covariates and interaction terms, within the DESeq2 framework. Guidance demonstrating the best practices for constructing design formulas and running the full DESeq2 analysis pipeline, ensuring accurate detection of differentially expressed genes while accounting for sources of variation inherent in experimental data.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Will Gammerdinger
+date: "2020-05-27"
+categories: 
+  - RNA-seq
+  - Differential Expression
+keywords:
+  - DESeq2
+  - Design Formula
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 Approximate time: 30 minutes
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(DESeq2)
 
 # load or re-create objects needed to render this lesson
-txi  <- readRDS("./data/intermediate_txi.RDS")
-meta <- readRDS("./data/metadata.RDS")
+txi  <- readRDS("data/intermediate_txi.RDS")
+meta <- readRDS("data/metadata.RDS")
 sampletype <- meta$sampletype
 ```
 
 ## Learning Objectives 
 
-* Demonstrate the use of the design formula with simple and complex designs
-* Construct R code to execute the differential expression analysis workflow with DESeq2
+In this lesson, you will:
+
+- Demonstrate the use of the design formula with simple and complex designs
+- Construct R code to execute the differential expression analysis workflow with DESeq2
 
 # Differential expression analysis with DESeq2
 
@@ -73,9 +92,12 @@ In short, the order of variables in your design formula will not change the fina
 :::
 
 ::: callout-tip
-# [**Exercise 1**](07_design_formulas_Answers.html#exercise-1)
+# [**Exercise 1**](07_design_formulas-Answer_key.html#exercise-1)
+
 1. Suppose you wanted to study the expression differences between the two age groups in the metadata shown above, and major sources of variation were `sex` and `treatment`, how would the design formula be written?
+
 2. Based on our **Mov10** `metadata` dataframe, which factors could we include in our design formula?
+
 3. What would you do if you wanted to include a factor in your design formula that is not in your metadata? 
 :::
 
@@ -99,16 +121,17 @@ Now that we know how to specify the model to DESeq2, we can run the differential
 
 First we create a DESeqDataSet as we did in the ['Count normalization'](05_DGE_count_normalization.html#create-deseq2-object) lesson and specify the `txi` object that contains our raw counts, the metadata variable, and provide our design formula:
 
-```{r create_dds}
+```{r}
+#| label: create_dds
 # Create DESeq2Dataset object
 dds <- DESeqDataSetFromTximport(txi, colData = meta, design = ~ sampletype)
 ```
 
 Then, to run the actual differential expression analysis, we use a single call to the function `DESeq()`. 
 
-```{r run_deseq}
+```{r}
+#| label: run_deseq
 #| eval: false
-
 # Run analysis
 dds <- DESeq(dds)
 ```
@@ -121,7 +144,8 @@ By re-assigning the results of the function back to the same variable name (`dds
 
 **Everything from normalization to linear modeling was carried out by the use of a single function!** This function will print out a message for the various steps it performs: 
 
-```{r run_deseq_silently}
+```{r}
+#| label: run_deseq_silently
 #| echo: false
 #| message: true
 
@@ -135,7 +159,7 @@ There are individual functions available in DESeq2 that would allow us to carry 
 :::
 
 ::: callout-tip
-# [**Exercise 2**](07_design_formulas_Answers.html#exercise-2)
+# [**Exercise 2**](07_design_formulas-Answer_key.html#exercise-2)
 
 Let's suppose our experiment has the following metadata:
 
@@ -167,7 +191,8 @@ How would the design formula be structured to perform the following analyses?
 3. Test for the effect of `genotype` on the `treatment` effects.
 :::
 
-```{r data_save}
+```{r}
+#| label: data_save
 #| echo: false
 
 # save objects needed to render future lessons
@@ -183,7 +208,6 @@ If you are working on the O2 Portal, we recommend that you save your environment
 # Save your environment on O2
 save.image("DEanalysis.Rdata")
 ```
-
 :::
 
 ***

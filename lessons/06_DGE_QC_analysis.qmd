@@ -1,7 +1,7 @@
 ---
 title: "QC methods for DE analysis using DESeq2"
 description: |
-    This lesson introduces the concepts and practical steps of count normalization in RNA-seq differential expression analysis using DESeq2. Participants will investigate uninteresting factors affecting RNA-seq data, review common normalization methods (CPM, TPM, RPKM/FPKM, TMM, median of ratios) and apply DESeq2's median of ratios approach to real data. The lesson includes hands-on guidance in matching metadata, creating a `DESeqDataSet` object, and extracting normalized counts for quality control and downstream analysis.
+  This lesson covers quality control (QC) methods for RNA-seq differential expression analysis using DESeq2 in R. It introduces the importance of data transformation, principal component analysis (PCA) and hierarchical clustering for evaluating sample quality and detecting outliers before downstream analysis. Particiants will apply `rlog` or `vst` transformations, interpret PCA plots, generate clustering heatmaps and assess whether sources of variation and replicate similarity align with experimental design.
 author:
   - Meeta Mistry
   - Radhika Khetani
@@ -11,12 +11,14 @@ author:
 date: "2019-10-18"
 categories: 
   - RNA-seq
-  - Differential Expression
-  - Data Normalization
+  - Quality Control
 keywords:
   - DESeq2
-  - Count Normalization
-  - Median of Ratios
+  - Principal Component Analysis
+  - rlog
+  - vst
+  - Hierarchical Clustering
+  - Sample similarity
 license: "CC-BY-4.0"
 editor_options: 
   markdown: 
