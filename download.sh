@@ -7,7 +7,7 @@
 # curl -L "https://www.dropbox.com/scl/fi/8qk2udv283l624ch6w3is/tx2gene_grch38_ens94.txt?rlkey=v47rdu1z11mlfvtvj1nzw2zy4&st=36yoijs1&dl=1" -o "lessons/data/tx2gene_grch38_ens94.txt"
 
 # Salmon data, annotation file, and all intermediate files for instructors
-URL="https://www.dropbox.com/scl/fi/yw929s2oxdlds1utrd5kb/data.zip?rlkey=8u3il5tjsn1l0fvb8onrlgxez&st=xvo15iyf&dl=1"
+URL="https://www.dropbox.com/scl/fi/7mjfcw0mf4wmwrh0oqcv6/data.zip?rlkey=q80hyukcucd982p80cih8c7tf&st=nd59jqfk&dl=1"
 ZIPFILE="data.zip"
 
 # Download the file
@@ -17,7 +17,7 @@ curl -L "$URL" -o "$ZIPFILE"
 unzip "$ZIPFILE"
 
 # Move data folder
-mv data/ lessons/
+mv data/ lessons/data/
 
 # Remove the zip file after extraction
 rm "$ZIPFILE"
