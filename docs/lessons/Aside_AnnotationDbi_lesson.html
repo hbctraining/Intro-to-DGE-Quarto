@@ -193,15 +193,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 | DBSCHEMA: HUMAN_DB
 | ORGANISM: Homo sapiens
 | SPECIES: Human
-| EGSOURCEDATE: 2025-Feb22
+| EGSOURCEDATE: 2024-Sep20
 | EGSOURCENAME: Entrez Gene
 | EGSOURCEURL: ftp://ftp.ncbi.nlm.nih.gov/gene/DATA
 | CENTRALID: EG
 | TAXID: 9606
-| GOSOURCENAME: Gene Ontology
-| GOSOURCEURL: http://current.geneontology.org/ontology/go-basic.obo
-| GOSOURCEDATE: 2025-02-06
-| GOEGSOURCEDATE: 2025-Feb22
+| GOSOURCENAME: 
+| GOSOURCEURL: 
+| GOSOURCEDATE: 
+| GOEGSOURCEDATE: 2024-Sep20
 | GOEGSOURCENAME: Entrez Gene
 | GOEGSOURCEURL: ftp://ftp.ncbi.nlm.nih.gov/gene/DATA
 | KEGGSOURCENAME: KEGG GENOME
@@ -209,13 +209,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 | KEGGSOURCEDATE: 2011-Mar15
 | GPSOURCENAME: UCSC Genome Bioinformatics (Homo sapiens)
 | GPSOURCEURL: ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/database
-| GPSOURCEDATE: UTC-Mar1
-| ENSOURCEDATE: 2024-Oct17
+| GPSOURCEDATE: 2024-Sep22
+| ENSOURCEDATE: 2024-May14
 | ENSOURCENAME: Ensembl
 | ENSOURCEURL: ftp://ftp.ensembl.org/pub/current_fasta
 | UPSOURCENAME: Uniprot
 | UPSOURCEURL: http://www.UniProt.org/
-| UPSOURCEDATE: Sat Mar  1 19:14:02 2025</code></pre>
+| UPSOURCEDATE: Mon Sep 23 15:46:45 2024</code></pre>
 </div>
 </div>
 <p>We can see the metadata for the database by just typing the name of the database, including the species, last updates for the different source information, and the source urls. Note the KEGG data from this database was last updated in 2011, so may not be the best site for KEGG pathway information.</p>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many Ensembl IDs have NOT been linked to gene names (symbols)?</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">is.na</span>(annotations_orgDb<span class="sc">$</span>SYMBOL)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21824</code></pre>
+<pre><code>[1] 22125</code></pre>
 </div>
 </div>
 <p>Looks like about half of the input genes did not return any annotations. This is because the OrgDb family of database are primarily based on mapping using Entrez Gene identifiers. If you look at some of the Ensembl IDs from our query that returned NA, these map to pseudogenes (e.g., <a href="https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000265439;r=6:44209766-44210063;t=ENST00000580735">ENSG00000265439</a>) or non-coding RNAs (e.g., <a href="http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000265425;r=18:68427030-68436918;t=ENST00000577835">ENSG00000265425</a>). The difference is due to the fact that each database implements different computational approaches for generating the gene builds. Let’s get rid of those <code>NA</code> entries:</p>
