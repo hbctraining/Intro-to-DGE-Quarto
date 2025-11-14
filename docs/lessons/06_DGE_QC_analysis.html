@@ -477,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>To explore the similarity of our samples, we will be performing sample-level QC using Principal Component Analysis (PCA) and hierarchical clustering methods. These methods/tools allow us to check <strong>how well similar the replicates are to each other</strong> (clustering) and <strong>to make sure that the experimental condition is the major source of variation</strong> in the data. Sample-level QC can also help identify any samples behaving like outliers; we can further explore any potential outliers to determine whether they need to be removed prior to DE analysis.</p>
 <p align="center">
-<img src="../img/sample_qc.png" width="700">
+<img src="../img/Combined_PCA_heatmap_example.png" width="700">
 </p>
 <p>These unsupervised clustering methods are run using <strong>log2 transformed normalized counts</strong>. The log2 transformation <strong>improves the distances/clustering for visualization</strong>. Instead of using an ordinary log2 transform, we will be using <strong>regularized log transform</strong> (rlog), to avoid any bias from the abundance of low-count genes; <a href="#nte-rlog" class="quarto-xref">Note&nbsp;1</a> below explains this in more detail.</p>
 <p align="center">
@@ -553,7 +553,7 @@ Note
 <h3 class="anchored" data-anchor-id="hierarchical-clustering-heatmap">Hierarchical Clustering Heatmap</h3>
 <p>Similar to PCA, hierarchical clustering is another, complementary, method for identifying strong patterns in a dataset and potential outliers. The heatmap displays <strong>the correlation of gene expression for all pairwise combinations of samples</strong> in the dataset. Since the majority of genes are not differentially expressed, samples generally have high correlations with each other (values higher than 0.80). Samples below 0.80 may indicate an outlier in your data and/or sample contamination.</p>
 <p>The hierarchical tree along the axes indicates which samples are more similar to each other, i.e., cluster together. The color blocks at the top indicate substructure in the data, and you would expect to see your replicates cluster together as a block for each sample group. Our expectation would be that the samples cluster together similar to the groupings we’ve observed in the PCA plot.</p>
-<p><strong>In the plot below, we would be quite concerned about ‘Wt_3’ and ‘KD_3’ samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.</strong></p>
+<p><strong>In the plot below, we would be quite concerned about samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.</strong></p>
 <p align="center">
 <img src="../img/heatmap_example.png" width="500">
 </p>
@@ -685,19 +685,19 @@ Note
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rld_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Irrel_kd_1 Irrel_kd_2 Irrel_kd_3 Mov10_kd_2 Mov10_kd_3 Mov10_oe_1
-Irrel_kd_1  1.0000000  0.9997740  0.9997525  0.9996005  0.9996334  0.9995372
+Irrel_kd_1  1.0000000  0.9997740  0.9997525  0.9996005  0.9996334  0.9995373
 Irrel_kd_2  0.9997740  1.0000000  0.9997564  0.9995701  0.9996137  0.9995441
 Irrel_kd_3  0.9997525  0.9997564  1.0000000  0.9995460  0.9996014  0.9995541
-Mov10_kd_2  0.9996005  0.9995701  0.9995460  1.0000000  0.9997927  0.9993895
-Mov10_kd_3  0.9996334  0.9996137  0.9996014  0.9997927  1.0000000  0.9994757
-Mov10_oe_1  0.9995372  0.9995441  0.9995541  0.9993895  0.9994757  1.0000000
+Mov10_kd_2  0.9996005  0.9995701  0.9995460  1.0000000  0.9997927  0.9993896
+Mov10_kd_3  0.9996334  0.9996137  0.9996014  0.9997927  1.0000000  0.9994758
+Mov10_oe_1  0.9995373  0.9995441  0.9995541  0.9993896  0.9994758  1.0000000
            Mov10_oe_2 Mov10_oe_3
 Irrel_kd_1  0.9995326  0.9994112
-Irrel_kd_2  0.9995407  0.9994279
-Irrel_kd_3  0.9995620  0.9994254
-Mov10_kd_2  0.9993608  0.9992364
-Mov10_kd_3  0.9994457  0.9993479
-Mov10_oe_1  0.9997794  0.9996902</code></pre>
+Irrel_kd_2  0.9995408  0.9994280
+Irrel_kd_3  0.9995620  0.9994255
+Mov10_kd_2  0.9993609  0.9992365
+Mov10_kd_3  0.9994457  0.9993480
+Mov10_oe_1  0.9997794  0.9996903</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1303,7 +1303,7 @@ Note
 <span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>To explore the similarity of our samples, we will be performing sample-level QC using Principal Component Analysis (PCA) and hierarchical clustering methods. These methods/tools allow us to check **how well similar the replicates are to each other** (clustering) and **to make sure that the experimental condition is the major source of variation** in the data. Sample-level QC can also help identify any samples behaving like outliers; we can further explore any potential outliers to determine whether they need to be removed prior to DE analysis. </span>
 <span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/sample_qc.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Combined_PCA_heatmap_example.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
 <span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>These unsupervised clustering methods are run using **log2 transformed normalized counts**. The log2 transformation **improves the distances/clustering for visualization**. Instead of using an ordinary log2 transform, we will be using **regularized log transform** (rlog), to avoid any bias from the abundance of low-count genes; @nte-rlog below explains this in more detail.</span>
@@ -1386,7 +1386,7 @@ Note
 <span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a>The hierarchical tree along the axes indicates which samples are more similar to each other, i.e., cluster together. The color blocks at the top indicate substructure in the data, and you would expect to see your replicates cluster together as a block for each sample group. Our expectation would be that the samples cluster together similar to the groupings we've observed in the PCA plot.</span>
 <span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a>**In the plot below, we would be quite concerned about 'Wt_3' and 'KD_3' samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.**</span>
+<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a>**In the plot below, we would be quite concerned about samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.**</span>
 <span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
 <span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/heatmap_example.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"500"</span><span class="dt">&gt;</span></span>

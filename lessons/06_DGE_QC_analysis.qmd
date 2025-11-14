@@ -68,7 +68,7 @@ A useful initial step in an RNA-seq analysis is often to assess overall similari
 To explore the similarity of our samples, we will be performing sample-level QC using Principal Component Analysis (PCA) and hierarchical clustering methods. These methods/tools allow us to check **how well similar the replicates are to each other** (clustering) and **to make sure that the experimental condition is the major source of variation** in the data. Sample-level QC can also help identify any samples behaving like outliers; we can further explore any potential outliers to determine whether they need to be removed prior to DE analysis. 
 
 <p align="center">
-<img src="../img/sample_qc.png" width="700">
+<img src="../img/Combined_PCA_heatmap_example.png" width="700">
 </p>
 
 These unsupervised clustering methods are run using **log2 transformed normalized counts**. The log2 transformation **improves the distances/clustering for visualization**. Instead of using an ordinary log2 transform, we will be using **regularized log transform** (rlog), to avoid any bias from the abundance of low-count genes; @nte-rlog below explains this in more detail.
@@ -151,7 +151,7 @@ Similar to PCA, hierarchical clustering is another, complementary, method for id
 
 The hierarchical tree along the axes indicates which samples are more similar to each other, i.e., cluster together. The color blocks at the top indicate substructure in the data, and you would expect to see your replicates cluster together as a block for each sample group. Our expectation would be that the samples cluster together similar to the groupings we've observed in the PCA plot.
 
-**In the plot below, we would be quite concerned about 'Wt_3' and 'KD_3' samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.**
+**In the plot below, we would be quite concerned about samples not clustering with the other replicates. We would want to explore the PCA to see if we see the same clustering of samples.**
 
 <p align="center">
 <img src="../img/heatmap_example.png" width="500">
