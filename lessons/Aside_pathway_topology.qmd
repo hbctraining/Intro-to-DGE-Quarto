@@ -1,18 +1,44 @@
-### SPIA
+---
+title: "SPIA"
+description: |
+  This lesson provides an introduction to SPIA (Signaling Pathway Impact Analysis), a method for pathway enrichment analysis that incorporates both over-representation and pathway topology using differentially expressed gene data. Participants will go through the required data preparation steps, SPIA analysis, interpretation of the results and visualization of significantly perturbed pathways.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Jihe Liu
+  - Will Gammerdinger
+date: "2017-06-08"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Pathway Analysis
+keywords:
+  - SPIA
+  - pathway analysis
+  - pathway enrichment
+  - pathway topology
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_entrez <- readRDS("./data/intermediate_res_entrez.RDS")
+res_entrez <- readRDS("data/intermediate_res_entrez.RDS")
 ```
 
 The [SPIA (Signaling Pathway Impact Analysis)](http://bioconductor.org/packages/release/bioc/html/SPIA.html) tool can be used to integrate the lists of differentially expressed genes, their fold changes, and pathway topology to identify affected pathways. The blog post from [Getting Genetics Done](https://gettinggeneticsdone.blogspot.com/2012/03/pathway-analysis-for-high-throughput.html) provides a step-by-step procedure for using and understanding SPIA. 
 
-```{r libraries}
+```{r}
+#| label: libraries
 # Install package (if needed)
 # BiocManager::install("SPIA")
 
@@ -22,7 +48,8 @@ library(SPIA)
 
 To perform SPIA, we need a list of background genes and a list of significant genes. For our background dataset we will use all genes tested for differential expression (all genes in our results table). For our significant gene list we will use genes with p-adjusted values less than 0.05 (we could include a fold change threshold too if we have many DE genes).
 
-```{r gene_lists}
+```{r}
+#| label: gene_lists
 # The background set is a vector of all the genes represented on the platform
 background_entrez <- res_entrez$entrezid
 
@@ -37,19 +64,22 @@ head(sig_entrez)
 
 Now that we have our background and significant genes in the appropriate format, we can run SPIA (this will take a few minutes as it runs through all the pathways):
 
-```{r spia}
+```{r}
+#| label: spia
 # Run SPIA
 spia_result <- spia(de = sig_entrez, all = background_entrez, organism = "hsa")
 ```
 
-```{r spia_code}
+```{r}
+#| label: spia_code
 #| eval: false
 
 # Look at the results
 spia_result %>% head(n = 20) %>% View()
 ```
 
-```{r spia_render}
+```{r}
+#| label: spia_render
 #| echo: false
 
 # Look at the results (prevent "KEGGLINK" column from wrapping so the table is not incredibly long)
@@ -70,7 +100,8 @@ SPIA outputs a table showing significantly dysregulated pathways based on over-r
 
 We can view the significantly dysregulated pathways by viewing the over-representation and perturbations for each pathway.
 
-```{r spia_plot}
+```{r}
+#| label: spia_plot
 # To avoid an error, remove any rows where `pPERT` is NA
 spia_result <- spia_result %>% filter(!is.na(pPERT))
 
@@ -82,7 +113,8 @@ In this plot, each pathway is a point and the coordinates are the log of pNDE (u
 
 If we choose to explore the significant genes from our dataset occurring in these pathways, we can subset our SPIA results:
 
-```{r spia_results}
+```{r}
+#| label: spia_results
 # Look at pathway 05203 and view kegglink
 subset(spia_result, ID == "05203")
 ```

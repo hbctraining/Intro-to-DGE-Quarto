@@ -1,15 +1,39 @@
-### Using `ggplot2` to plot multiple genes (e.g. top 20)
+---
+title: "Using `ggplot2` to plot multiple genes (e.g. top 20)"
+description: |
+  This lesson will demonstrate how to visualize the expression of multiple top-ranked genes. Participants will practice data wrangling with `tidyverse` tools to prepare count data for plotting, merge with sample metadata and create informative visualization highlighting sample groups and gene expression patterns.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Jihe Liu
+  - Will Gammerdinger
+date: "2017-06-08"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Data Visualization
+keywords:
+  - ggplot2
+  - tidyverse
+  - data wrangling
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb    <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+res_tableOE_tb    <- readRDS("data/intermediate_res_tableOE_tb.RDS")
 normalized_counts <- readRDS("./data/intermediate_normalized_counts_with_gene_names.RDS")
-meta              <- readRDS("./data/metadata.RDS")
+meta              <- readRDS("data/metadata.RDS")
 mov10_meta <- meta %>% rownames_to_column(var="samplename") %>% as_tibble()
 ```
 
@@ -18,7 +42,8 @@ Often it is helpful to check the expression of multiple genes of interest at the
 We are going to plot the normalized count values for the **top 20 differentially expressed genes (by padj values)**. 
 To do this, we first need to determine the gene names of our top 20 genes by ordering our results and extracting the top 20 genes (by padj values):
 
-```{r order_results}
+```{r}
+#| label: order_results
 # Order results by padj values
 top20_sigOE_genes <- res_tableOE_tb %>% 
   arrange(padj) %>%	# Arrange rows by padj values
@@ -28,7 +53,8 @@ top20_sigOE_genes <- res_tableOE_tb %>%
 
 Then, we can extract the normalized count values for these top 20 genes:
 
-```{r extract_norm_exp}
+```{r}
+#| label: extract_norm_exp
 # Get normalized counts for top 20 significant genes
 top20_sigOE_norm <- normalized_counts %>%
   filter(gene %in% top20_sigOE_genes)
@@ -40,7 +66,8 @@ The `gather()` function in the **tidyr** package will perform this operation and
 
 <img src="../img/melt_wide_to_long_format.png" width="800">
 
-```{r wrangle_data}
+```{r}
+#| label: wrangle_data
 # Gathering the columns to have normalized counts to a single column
 gathered_top20_sigOE <- top20_sigOE_norm %>%
   gather(colnames(top20_sigOE_norm)[2:9], key = "samplename", value = "normalized_counts")
@@ -51,7 +78,8 @@ head(gathered_top20_sigOE)
 
 Now, if we want our counts colored by sample group, then we need to combine the metadata information with the melted normalized counts data into the same data frame for input to `ggplot()`:
 
-```{r add_metadata}
+```{r}
+#| label: add_metadata
 # Add metadata
 gathered_top20_sigOE <- inner_join(mov10_meta, gathered_top20_sigOE)
 ```
@@ -60,7 +88,8 @@ The `inner_join()` will merge 2 data frames with respect to any column with the 
 
 Now that we have a data frame in a format that can be utilized by ggplot easily, let's plot! 
 
-```{r plot_genes}
+```{r}
+#| label: plot_genes
 # Plot using ggplot2
 ggplot(gathered_top20_sigOE) +
   geom_point(aes(x = symbol, y = normalized_counts, color = sampletype)) +

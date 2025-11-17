@@ -1,13 +1,40 @@
-## AnnotationDbi
+---
+title: "AnnotationDbi"
+description: |
+  This lesson introduces the AnnotationDbi package and demonstrates how to use it to access and query annotation databases for gene identifier conversion and functional data retrieval. It covers the use of organism-specific databases such as `org.Hs.eg.db` and `EnsDb.Hsapiens.v86`, illustrates key functions (like select, columns, keys, and keytypes) and discusses strategies for handling database mapping issues, such as missing and duplicate annotation results, in RNA-seq and differential expression analyses.
+author:
+  - Meeta Mistry
+  - Radhika Khetani
+  - Mary Piper
+  - Jihe Liu
+  - Will Gammerdinger
+date: "2017-06-08"
+categories: 
+  - RNA-seq
+  - Differential Expression
+  - Functional Annotation
+keywords:
+  - gene identifiers
+  - AnnotationDbi
+  - gene annotation
+  - org.Hs.eg.db
+  - Ensembl
+  - Entrez
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
-```{r data_setup}
+```{r}
+#| label: data_setup
 #| echo: false
 
 # load libraries needed to render this lesson
 library(tidyverse)
 
 # load objects needed to render this lesson
-res_tableOE_tb <- readRDS("./data/intermediate_res_tableOE_tb.RDS")
+res_tableOE_tb <- readRDS("data/intermediate_res_tableOE_tb.RDS")
 ```
 
 AnnotationDbi is an R package that provides an interface for connecting and querying various annotation databases using SQLite data storage. The AnnotationDbi packages can query the *OrgDb*, *TxDb*, *EnsDb*, *Go.db*, and *BioMart* annotations. There is helpful [documentation](https://bioconductor.org/packages/release/bioc/vignettes/AnnotationDbi/inst/doc/IntroToAnnotationPackages.pdf) available to reference when extracting data from any of these databases.
@@ -16,7 +43,8 @@ AnnotationDbi is an R package that provides an interface for connecting and quer
 
 There are a plethora of organism-specific *orgDb* packages, such as `org.Hs.eg.db` for human and `org.Mm.eg.db` for mouse, and a list of organism databases can be found [here](https://www.bioconductor.org/packages/release/BiocViews.html#___OrgDb). These databases are best for converting gene IDs or obtaining GO information for current genome builds, but not for older genome builds. These packages provide the current builds corresponding to the release date of the package, and update every 6 months. If a package is not available for your organism of interest, you can create your own using *AnnotationHub*.
 
-```{r orgHs_view}
+```{r}
+#| label: orgHs_view
 # Load libraries
 library(org.Hs.eg.db)
 library(AnnotationDbi)
@@ -29,7 +57,8 @@ We can see the metadata for the database by just typing the name of the database
 
 We can easily extract information from this database using *AnnotationDbi* with the methods: `columns`, `keys`, `keytypes`, and `select`. For example, we will use our `org.Hs.eg.db` database to acquire information, but know that the same methods work for the *TxDb*, *Go.db*, *EnsDb*, and *BioMart* annotations.
 
-```{r orgHs_query}
+```{r}
+#| label: orgHs_query
 # Return the Ensembl IDs for a set of genes
 annotations_orgDb <- AnnotationDbi::select(
   org.Hs.eg.db, # database
@@ -40,14 +69,16 @@ annotations_orgDb <- AnnotationDbi::select(
 
 We started from at about 57K genes in our results table, and the dimensions of our resulting annotation data frame also look quite similar. Let's take a peek to see if we actually returned annotations for each individual Ensembl gene ID that went in to the query:
 
-```{r orgHs_symbols_count}
+```{r}
+#| label: orgHs_symbols_count
 # How many Ensembl IDs have NOT been linked to gene names (symbols)?
 length(which(is.na(annotations_orgDb$SYMBOL)))
 ```
 
 Looks like about half of the input genes did not return any annotations. This is because the OrgDb family of database are primarily based on mapping using Entrez Gene identifiers. If you look at some of the Ensembl IDs from our query that returned NA, these map to pseudogenes (e.g., [ENSG00000265439](https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000265439;r=6:44209766-44210063;t=ENST00000580735)) or non-coding RNAs (e.g., [ENSG00000265425](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000265425;r=18:68427030-68436918;t=ENST00000577835)). The difference is due to the fact that each database implements different computational approaches for generating the gene builds. Let's get rid of those `NA` entries:
 
-```{r orgHs_symbols_remove_NA}
+```{r}
+#| label: orgHs_symbols_remove_NA
 # Determine the indices for the non-NA genes
 non_na_idx <- which(is.na(annotations_orgDb$SYMBOL) == FALSE)
 
@@ -57,7 +88,8 @@ annotations_orgDb <- annotations_orgDb[non_na_idx, ]
 
 You may have also noted the *warning* returned: *'select()' returned 1:many mapping between keys and columns*. This is always going to happen with converting between different gene IDs (i.e., one geneID can map to more than one identifier in another databse) . Unless we would like to keep multiple mappings for a single gene, then we probably want to de-duplicate our data before using it.
 
-```{r orgHs_symbols_remove_duplicates}
+```{r}
+#| label: orgHs_symbols_remove_duplicates
 # Determine the indices for the non-duplicated genes
 non_duplicates_idx <- which(duplicated(annotations_orgDb$SYMBOL) == FALSE)
 
@@ -71,7 +103,8 @@ To generate the Ensembl annotations, the *EnsDb* database can also be easily que
 
 Since we are using *AnnotationDbi* to query the database, we can use the same functions that we used previously:
 
-```{r EnsDb_view}
+```{r}
+#| label: EnsDb_view
 # Install the library
 # BiocManager::install("EnsDb.Hsapiens.v86")
 
@@ -87,7 +120,8 @@ keytypes(EnsDb.Hsapiens.v86)
 
 Now we can return all gene IDs for our gene list:
 
-```{r EnsDb_query}
+```{r}
+#| label: EnsDb_query
 # Return the Ensembl IDs for a set of genes
 annotations_edb <- AnnotationDbi::select(
   EnsDb.Hsapiens.v86, # database
@@ -98,13 +132,15 @@ annotations_edb <- AnnotationDbi::select(
 
 We can check for `NA` entries, and find that there are none:
 
-```{r EnsDb_symbols}
+```{r}
+#| label: EnsDb_symbols
 length(which(is.na(annotations_edb$SYMBOL)))
 ```
 
 Then we can again deduplicate, to remove the gene symbols which appear more than once:
 
-```{r EnsDb_symbols_remove_duplicates}
+```{r}
+#| label: EnsDb_symbols_remove_duplicates
 # Determine the indices for the non-duplicated genes
 non_duplicates_idx <- which(duplicated(annotations_edb$SYMBOL) == FALSE)
 
@@ -112,6 +148,6 @@ non_duplicates_idx <- which(duplicated(annotations_edb$SYMBOL) == FALSE)
 annotations_edb <- annotations_edb[non_duplicates_idx, ]
 ```
 
-::: callout-note
+::: {.callout-note}
 In this case we used the same build but a slightly older release, and we found little discrepancy. If your analysis was conducted using an older genome build (e.g., hg19), but used a newer build for annotation, some genes may be found to be not annotated (`NA`). Some of the genes have changed names in between versions (due to updates and patches), so may not be present in the newer version of the database.
 :::
